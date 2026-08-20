@@ -1,33 +1,29 @@
 /**
- * KALIM & ROSHNI - WEDDING INVITATION JAVASCRIPT
- * Features:
- * - Particle & Golden Petal Ambient Animation
- * - Royal Envelope Unseal Experience
- * - Live Wedding Countdown Timer (Sept 27, 2026, 11:30 AM IST)
- * - 100% Mobile & Desktop Navigation + Drawer Controller
- * - Smooth Window Slide Navigation & "Next" Button Transitions
- * - Real-Time Active Underline Tracking
- * - Add to Calendar (.ics & Google Calendar)
- * - Directions & Address Copy helper
+ * KALEEM & ROSHNI — WEDDING INVITATION
+ * Balanced Desktop & Mobile Interaction Engine
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initParticles();
+  // Prevent browser jumping on refresh
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  initAmbientParticles();
   initUnsealCover();
-  initCountdown();
-  initWeddingMusic();
   initNavigation();
-  initSmoothScrollLinks();
-  initScrollAnimations();
+  initCountdownTimer();
+  initWeddingAudio();
 });
 
 /* ==========================================================================
-   1. PARTICLE & GOLDEN PETAL CANVAS
+   1. AMBIENT PARTICLES (GPU Optimized Canvas)
    ========================================================================== */
-function initParticles() {
-  const canvas = document.getElementById('particle-canvas');
+function initAmbientParticles() {
+  const canvas = document.getElementById('ambient-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
 
@@ -37,20 +33,17 @@ function initParticles() {
   });
 
   const particles = [];
-  const particleCount = window.innerWidth < 768 ? 30 : 65;
+  const count = window.innerWidth < 768 ? 25 : 55;
 
-  for (let i = 0; i < particleCount; i++) {
+  for (let i = 0; i < count; i++) {
     particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: Math.random() * 3 + 1,
-      speedX: (Math.random() - 0.5) * 0.5,
-      speedY: Math.random() * 0.7 + 0.3,
-      opacity: Math.random() * 0.7 + 0.2,
-      isPetal: Math.random() > 0.6,
-      rotation: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 1.5,
-      color: Math.random() > 0.4 ? 'rgba(212, 175, 55,' : 'rgba(240, 200, 140,'
+      size: Math.random() * 2.2 + 0.8,
+      speedX: (Math.random() - 0.5) * 0.4,
+      speedY: Math.random() * 0.5 + 0.2,
+      opacity: Math.random() * 0.6 + 0.2,
+      color: Math.random() > 0.4 ? 'rgba(212, 175, 55,' : 'rgba(250, 226, 156,'
     });
   }
 
@@ -60,7 +53,6 @@ function initParticles() {
     for (let p of particles) {
       p.x += p.speedX;
       p.y += p.speedY;
-      p.rotation += p.rotSpeed;
 
       if (p.y > height) {
         p.y = -10;
@@ -70,22 +62,12 @@ function initParticles() {
       if (p.x < 0) p.x = width;
 
       ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate((p.rotation * Math.PI) / 180);
-
-      if (p.isPetal) {
-        ctx.fillStyle = `rgba(180, 45, 70, ${p.opacity * 0.7})`;
-        ctx.beginPath();
-        ctx.ellipse(0, 0, p.size * 2.2, p.size, 0, 0, Math.PI * 2);
-        ctx.fill();
-      } else {
-        ctx.fillStyle = `${p.color} ${p.opacity})`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = '#d4af37';
-        ctx.beginPath();
-        ctx.arc(0, 0, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      ctx.fillStyle = `${p.color} ${p.opacity})`;
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = '#d4af37';
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
       ctx.restore();
     }
 
@@ -95,254 +77,114 @@ function initParticles() {
   render();
 }
 
-// Ensure browser starts at the top and doesn't auto-jump to cached scroll or hashes
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
-}
-
 /* ==========================================================================
-   2. ROYAL ENVELOPE UNSEAL EXPERIENCE
+   2. ROYAL ENVELOPE UNSEAL OVERLAY
    ========================================================================== */
 function initUnsealCover() {
   const cover = document.getElementById('invitationCover');
-  const btnUnseal = document.getElementById('btnUnseal');
-  if (!cover || !btnUnseal) return;
+  const btn = document.getElementById('btnUnseal');
+  if (!cover || !btn) return;
 
-  // Ensure scroll is at 0 initially
-  window.scrollTo(0, 0);
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-
-  btnUnseal.addEventListener('click', () => {
+  btn.addEventListener('click', () => {
     cover.classList.add('opened');
     
-    // Clear any hash if present in URL
     if (window.location.hash) {
       history.replaceState(null, null, window.location.pathname);
     }
-    
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    window.scrollTo({ top: 0, behavior: 'instant' });
 
-    const hero = document.getElementById('hero');
-    if (hero) {
-      hero.scrollIntoView({ behavior: 'instant', block: 'start' });
-    }
+    // Initialize audio synchronously on direct user gesture
+    playWeddingMusic();
 
     setTimeout(() => {
       cover.style.display = 'none';
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      if (hero) {
-        hero.scrollIntoView({ behavior: 'instant', block: 'start' });
-      }
-
-      // Explicitly highlight Home
-      const allNavLinks = document.querySelectorAll('#desktopNavLinks a, .drawer-links a');
-      allNavLinks.forEach((link) => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#hero') {
-          link.classList.add('active');
-        }
-      });
-
-      // Start celebration melody
-      startWeddingMelody();
-    }, 600);
+    }, 650);
   });
 }
 
 /* ==========================================================================
-   3. TRADITIONAL WEDDING SHEHNAI & TANPURA MELODY (Web Audio API)
+   3. NAVIGATION & MOBILE DRAWER
    ========================================================================== */
-let audioCtx = null;
-let isMusicPlaying = false;
-let shehnaiSequenceTimer = null;
-let droneNodes = [];
+function initNavigation() {
+  const mobileToggle = document.getElementById('mobileToggle');
+  const mobileClose = document.getElementById('mobileClose');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const navBackdrop = document.getElementById('navBackdrop');
+  const navLinks = document.querySelectorAll('#navMenu a, .drawer-links a');
 
-function initWeddingMusic() {
-  const toggleBtn = document.getElementById('musicToggle');
-  if (!toggleBtn) return;
+  function openDrawer() {
+    mobileDrawer.classList.add('active');
+    navBackdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
-  toggleBtn.addEventListener('click', () => {
-    if (isMusicPlaying) {
-      stopWeddingMelody();
-    } else {
-      startWeddingMelody();
-    }
-  });
-}
+  function closeDrawer() {
+    mobileDrawer.classList.remove('active');
+    navBackdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
 
-function startWeddingMelody() {
-  const toggleBtn = document.getElementById('musicToggle');
-  try {
-    if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
+  if (mobileToggle) mobileToggle.addEventListener('click', openDrawer);
+  if (mobileClose) mobileClose.addEventListener('click', closeDrawer);
+  if (navBackdrop) navBackdrop.addEventListener('click', closeDrawer);
 
-    isMusicPlaying = true;
-    if (toggleBtn) {
-      toggleBtn.classList.add('playing');
-      toggleBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
-      toggleBtn.title = 'Mute Wedding Music';
-    }
-
-    // Start Tanpura Drone
-    startTanpuraDrone();
-
-    // Traditional Auspicious Wedding Shehnai Raga Phrases
-    const weddingPhrases = [
-      [ { f: 277.18, d: 0.4 }, { f: 329.63, d: 0.4 }, { f: 369.99, d: 0.6 }, { f: 329.63, d: 0.4 }, { f: 293.66, d: 0.9 } ],
-      [ { f: 369.99, d: 0.35 }, { f: 415.30, d: 0.35 }, { f: 493.88, d: 0.5 }, { f: 440.00, d: 0.4 }, { f: 369.99, d: 0.35 }, { f: 329.63, d: 0.35 }, { f: 293.66, d: 0.9 } ],
-      [ { f: 440.00, d: 0.4 }, { f: 493.88, d: 0.4 }, { f: 554.37, d: 0.5 }, { f: 587.33, d: 0.8 }, { f: 554.37, d: 0.4 }, { f: 493.88, d: 0.4 }, { f: 440.00, d: 0.8 } ],
-      [ { f: 369.99, d: 0.3 }, { f: 440.00, d: 0.3 }, { f: 493.88, d: 0.4 }, { f: 554.37, d: 0.4 }, { f: 493.88, d: 0.35 }, { f: 440.00, d: 0.35 }, { f: 369.99, d: 0.35 }, { f: 329.63, d: 0.35 }, { f: 293.66, d: 1.1 } ]
-    ];
-
-    let currentPhraseIdx = 0;
-    let noteIdx = 0;
-
-    function playNextWeddingNote() {
-      if (!isMusicPlaying || !audioCtx) return;
-
-      const phrase = weddingPhrases[currentPhraseIdx];
-      const note = phrase[noteIdx];
-
-      playShehnaiNote(note.f, note.d);
-
-      noteIdx++;
-      if (noteIdx >= phrase.length) {
-        noteIdx = 0;
-        currentPhraseIdx = (currentPhraseIdx + 1) % weddingPhrases.length;
-        shehnaiSequenceTimer = setTimeout(playNextWeddingNote, (note.d * 1000) + 600);
-      } else {
-        shehnaiSequenceTimer = setTimeout(playNextWeddingNote, (note.d * 1000) + 60);
+  // Smooth scroll and active state tracking with navbar offset
+  navLinks.forEach((link) => {
+    link.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href').substring(1);
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        closeDrawer();
+        const navbarHeight = document.querySelector('.main-navbar')?.offsetHeight || 75;
+        const targetPosition = targetEl.offsetTop - navbarHeight;
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: 'smooth'
+        });
       }
-    }
-
-    playNextWeddingNote();
-
-  } catch (e) {
-    console.log('Audio autoplay policy:', e);
-  }
-}
-
-function stopWeddingMelody() {
-  isMusicPlaying = false;
-  if (shehnaiSequenceTimer) clearTimeout(shehnaiSequenceTimer);
-
-  stopTanpuraDrone();
-
-  if (audioCtx && audioCtx.state === 'running') {
-    audioCtx.suspend();
-  }
-  const toggleBtn = document.getElementById('musicToggle');
-  if (toggleBtn) {
-    toggleBtn.classList.remove('playing');
-    toggleBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-    toggleBtn.title = 'Play Wedding Music';
-  }
-}
-
-function startTanpuraDrone() {
-  if (!audioCtx) return;
-  stopTanpuraDrone();
-
-  const droneFreqs = [146.83, 220.00, 293.66];
-
-  droneFreqs.forEach((freq, idx) => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-
-    osc.type = idx === 0 ? 'sine' : 'triangle';
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    gain.gain.setValueAtTime(0.012 / (idx + 1), audioCtx.currentTime);
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    droneNodes.push({ osc, gain });
+    });
   });
-}
 
-function stopTanpuraDrone() {
-  droneNodes.forEach(({ osc, gain }) => {
-    try {
-      gain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.3);
-      osc.stop(audioCtx.currentTime + 0.3);
-    } catch (e) {}
-  });
-  droneNodes = [];
-}
+  // ScrollSpy for Desktop Navbar
+  const sections = document.querySelectorAll('section.section-block');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    const scrollPosition = window.pageYOffset + 150;
 
-function playShehnaiNote(freq, duration) {
-  if (!audioCtx || audioCtx.state !== 'running') return;
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
 
-  const now = audioCtx.currentTime;
-  const osc1 = audioCtx.createOscillator();
-  const osc2 = audioCtx.createOscillator();
-  const vibrato = audioCtx.createOscillator();
-  const vibratoGain = audioCtx.createGain();
-
-  const mainGain = audioCtx.createGain();
-  const biquadFilter = audioCtx.createBiquadFilter();
-
-  osc1.type = 'sawtooth';
-  osc2.type = 'triangle';
-
-  osc1.frequency.setValueAtTime(freq, now);
-  osc2.frequency.setValueAtTime(freq * 1.002, now);
-
-  vibrato.frequency.setValueAtTime(5.5, now);
-  vibratoGain.gain.setValueAtTime(freq * 0.015, now);
-
-  vibrato.connect(osc1.frequency);
-  vibrato.connect(osc2.frequency);
-
-  biquadFilter.type = 'bandpass';
-  biquadFilter.frequency.setValueAtTime(freq * 2.2, now);
-  biquadFilter.Q.setValueAtTime(2.5, now);
-
-  mainGain.gain.setValueAtTime(0.0001, now);
-  mainGain.gain.linearRampToValueAtTime(0.045, now + 0.08);
-  mainGain.gain.setValueAtTime(0.045, now + duration - 0.1);
-  mainGain.gain.exponentialRampToValueAtTime(0.0001, now + duration + 0.15);
-
-  osc1.connect(biquadFilter);
-  osc2.connect(biquadFilter);
-  biquadFilter.connect(mainGain);
-  mainGain.connect(audioCtx.destination);
-
-  vibrato.start(now);
-  osc1.start(now);
-  osc2.start(now);
-
-  vibrato.stop(now + duration + 0.2);
-  osc1.stop(now + duration + 0.2);
-  osc2.stop(now + duration + 0.2);
+    navLinks.forEach((link) => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  }, { passive: true });
 }
 
 /* ==========================================================================
-   3. WEDDING COUNTDOWN TIMER (Sept 27, 2026, 11:30 AM IST)
+   4. COUNTDOWN TIMER (Sept 27, 2026, 11:30 AM IST)
    ========================================================================== */
-function initCountdown() {
-  const weddingDate = new Date('2026-09-27T11:30:00+05:30').getTime();
+function initCountdownTimer() {
+  const targetDate = new Date('2026-09-27T11:30:00+05:30').getTime();
 
-  const daysEl = document.getElementById('cd-days');
-  const hoursEl = document.getElementById('cd-hours');
-  const minsEl = document.getElementById('cd-mins');
-  const secsEl = document.getElementById('cd-secs');
+  const daysEl = document.getElementById('t-days');
+  const hoursEl = document.getElementById('t-hours');
+  const minsEl = document.getElementById('t-mins');
+  const secsEl = document.getElementById('t-secs');
 
   if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
 
-  function updateCountdown() {
+  function update() {
     const now = new Date().getTime();
-    const distance = weddingDate - now;
+    const distance = targetDate - now;
 
     if (distance < 0) {
       daysEl.textContent = '00';
@@ -354,204 +196,319 @@ function initCountdown() {
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((distance % (1000 * 60)) / 1000);
 
     daysEl.textContent = days < 10 ? '0' + days : days;
     hoursEl.textContent = hours < 10 ? '0' + hours : hours;
-    minsEl.textContent = minutes < 10 ? '0' + minutes : minutes;
-    secsEl.textContent = seconds < 10 ? '0' + seconds : seconds;
+    minsEl.textContent = mins < 10 ? '0' + mins : mins;
+    secsEl.textContent = secs < 10 ? '0' + secs : secs;
   }
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  update();
+  setInterval(update, 1000);
 }
 
 /* ==========================================================================
-   4. NAVIGATION & REAL-TIME ACTIVE TRACKER (DESKTOP & MOBILE)
+   5. WEDDING MUSIC: JASHN-E-BAHAARAA (Jodhaa Akbar Melody)
    ========================================================================== */
-function initNavigation() {
-  const navbar = document.getElementById('mainNavbar');
-  const mobileToggle = document.getElementById('mobileToggle');
-  const mobileClose = document.getElementById('mobileClose');
-  const mobileDrawer = document.getElementById('mobileDrawer');
-  const navBackdrop = document.getElementById('navBackdrop');
-  
-  const allNavLinks = document.querySelectorAll('#desktopNavLinks a, .drawer-links a');
-  const sections = document.querySelectorAll('.window-slide');
+let isAudioPlaying = false;
+let audioCtx = null;
+let melodyTimer = null;
+let droneOscs = [];
 
-  function updateActiveNav(activeId) {
-    if (!activeId) activeId = 'hero';
-    allNavLinks.forEach((link) => {
-      link.classList.remove('active');
-      const href = link.getAttribute('href');
-      if (href === `#${activeId}`) {
-        link.classList.add('active');
-      }
-    });
+function setMusicUIState(playing) {
+  isAudioPlaying = playing;
+  const toggleBtn = document.getElementById('audioToggle');
+  if (!toggleBtn) return;
+  if (playing) {
+    toggleBtn.classList.add('playing');
+    toggleBtn.title = 'Mute Jashn-E-Bahaaraa';
+    toggleBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+  } else {
+    toggleBtn.classList.remove('playing');
+    toggleBtn.title = 'Play Jashn-E-Bahaaraa';
+    toggleBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
   }
+}
 
-  // Force default to Home on load
-  updateActiveNav('hero');
+function initWeddingAudio() {
+  const toggleBtn = document.getElementById('audioToggle');
+  if (!toggleBtn) return;
 
-  function determineActiveSection() {
-    if (window.scrollY > 30) {
-      navbar.classList.add('scrolled');
+  toggleBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (isAudioPlaying) {
+      pauseWeddingMusic();
     } else {
-      navbar.classList.remove('scrolled');
+      playWeddingMusic();
+    }
+  });
+}
+
+function playWeddingMusic() {
+  // Send postMessage to YouTube IFrame
+  const ytIframe = document.getElementById('ytIframe');
+  if (ytIframe && ytIframe.contentWindow) {
+    try {
+      ytIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    } catch (e) {}
+  }
+
+  startSynthesizedJashnEBahaaraa();
+}
+
+function pauseWeddingMusic() {
+  const ytIframe = document.getElementById('ytIframe');
+  if (ytIframe && ytIframe.contentWindow) {
+    try {
+      ytIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+    } catch (e) {}
+  }
+
+  stopSynthesizedMelody();
+  setMusicUIState(false);
+}
+
+/* Authentic Jashn-E-Bahaaraa Royal Melody Synthesis */
+function startSynthesizedJashnEBahaaraa() {
+  try {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
     }
 
-    // If near the top, always make Home active
-    if (window.scrollY < 150) {
-      updateActiveNav('hero');
-      return;
+    setMusicUIState(true);
+    startDrone();
+
+    // The iconic melody phrases of Jashn-E-Bahaaraa (A.R. Rahman)
+    const jashnPhrases = [
+      // "Kehne Ko Jashn-E-Bahaaraa Hai..."
+      [ { f: 440.00, d: 0.55 }, { f: 369.99, d: 0.38 }, { f: 329.63, d: 0.38 }, { f: 293.66, d: 0.45 }, { f: 329.63, d: 0.38 }, { f: 369.99, d: 0.55 }, { f: 293.66, d: 0.85 } ],
+      // "Ishq Yeh Dekhke Hairaan Hai..."
+      [ { f: 440.00, d: 0.38 }, { f: 493.88, d: 0.38 }, { f: 587.33, d: 0.55 }, { f: 554.37, d: 0.38 }, { f: 493.88, d: 0.38 }, { f: 440.00, d: 0.45 }, { f: 369.99, d: 0.85 } ],
+      // "Phool Se Khushboo Khafaa Khafaa..."
+      [ { f: 440.00, d: 0.55 }, { f: 369.99, d: 0.38 }, { f: 329.63, d: 0.38 }, { f: 293.66, d: 0.45 }, { f: 329.63, d: 0.38 }, { f: 369.99, d: 0.55 }, { f: 293.66, d: 0.85 } ],
+      // "Baagh Mein Jaise Sabaa Sabaa..."
+      [ { f: 329.63, d: 0.35 }, { f: 369.99, d: 0.35 }, { f: 392.00, d: 0.48 }, { f: 369.99, d: 0.35 }, { f: 329.63, d: 0.38 }, { f: 293.66, d: 0.35 }, { f: 277.18, d: 0.38 }, { f: 293.66, d: 1.0 } ],
+      // Royal Instrumental Flute & Sitar Interlude
+      [ { f: 587.33, d: 0.35 }, { f: 659.25, d: 0.35 }, { f: 739.99, d: 0.55 }, { f: 659.25, d: 0.35 }, { f: 587.33, d: 0.38 }, { f: 554.37, d: 0.35 }, { f: 493.88, d: 0.35 }, { f: 440.00, d: 0.48 }, { f: 493.88, d: 0.38 }, { f: 554.37, d: 0.38 }, { f: 587.33, d: 0.95 } ]
+    ];
+
+    let pIdx = 0;
+    let nIdx = 0;
+
+    function playNote() {
+      if (!isAudioPlaying || !audioCtx) return;
+      const p = jashnPhrases[pIdx];
+      const note = p[nIdx];
+      playAcousticInstrument(note.f, note.d);
+
+      nIdx++;
+      if (nIdx >= p.length) {
+        nIdx = 0;
+        pIdx = (pIdx + 1) % jashnPhrases.length;
+        melodyTimer = setTimeout(playNote, (note.d * 1000) + 500);
+      } else {
+        melodyTimer = setTimeout(playNote, (note.d * 1000) + 50);
+      }
     }
 
-    let currentSectionId = 'hero';
-    const scrollMiddle = window.scrollY + (window.innerHeight / 2);
-
-    sections.forEach((section) => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      if (scrollMiddle >= top && scrollMiddle < top + height) {
-        currentSectionId = section.getAttribute('id');
-      }
-    });
-
-    updateActiveNav(currentSectionId);
+    playNote();
+  } catch (e) {
+    console.log(e);
   }
+}
 
-  window.addEventListener('scroll', determineActiveSection, { passive: true });
-  window.addEventListener('resize', determineActiveSection, { passive: true });
+function stopSynthesizedMelody() {
+  if (melodyTimer) clearTimeout(melodyTimer);
+  stopDrone();
 
-  // Mobile Menu Drawer Handlers
-  function openMobileDrawer(e) {
-    if (e) e.stopPropagation();
-    if (mobileDrawer) mobileDrawer.classList.add('active');
-    if (navBackdrop) navBackdrop.classList.add('active');
+  if (audioCtx && audioCtx.state === 'running') {
+    audioCtx.suspend();
   }
+}
 
-  function closeMobileDrawer(e) {
-    if (e) e.stopPropagation();
-    if (mobileDrawer) mobileDrawer.classList.remove('active');
-    if (navBackdrop) navBackdrop.classList.remove('active');
-  }
-
-  if (mobileToggle) {
-    mobileToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      openMobileDrawer(e);
-    });
-  }
-
-  if (mobileClose) {
-    mobileClose.addEventListener('click', (e) => {
-      e.preventDefault();
-      closeMobileDrawer(e);
-    });
-  }
-
-  if (navBackdrop) {
-    navBackdrop.addEventListener('click', (e) => {
-      e.preventDefault();
-      closeMobileDrawer(e);
-    });
-  }
-
-  // Close drawer on clicking any drawer link & smooth scroll
-  document.querySelectorAll('.drawer-links a').forEach((link) => {
-    link.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href').replace('#', '');
-      closeMobileDrawer(e);
-      updateActiveNav(targetId);
-
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        e.preventDefault();
-        targetEl.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
+function startDrone() {
+  if (!audioCtx) return;
+  stopDrone();
+  [146.83, 220.00, 293.66].forEach((freq, idx) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = idx === 0 ? 'sine' : 'triangle';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.012 / (idx + 1), audioCtx.currentTime);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    droneOscs.push({ osc, gain });
   });
 }
 
-/* ==========================================================================
-   5. SMOOTH SCROLL FOR ALL ANCHOR LINKS ("NEXT", "SCROLL", NAV)
-   ========================================================================== */
-function initSmoothScrollLinks() {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href').substring(1);
-      if (!targetId) return;
+function stopDrone() {
+  droneOscs.forEach(({ osc, gain }) => {
+    try {
+      gain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
+      osc.stop(audioCtx.currentTime + 0.2);
+    } catch (e) {}
+  });
+  droneOscs = [];
+}
 
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        e.preventDefault();
-        targetEl.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
+function playAcousticInstrument(freq, duration) {
+  if (!audioCtx || audioCtx.state !== 'running') return;
+  const now = audioCtx.currentTime;
+
+  const osc1 = audioCtx.createOscillator();
+  const osc2 = audioCtx.createOscillator();
+  const vib = audioCtx.createOscillator();
+  const vibGain = audioCtx.createGain();
+  const gain = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+
+  osc1.type = 'sawtooth';
+  osc2.type = 'sine';
+  osc1.frequency.setValueAtTime(freq, now);
+  osc2.frequency.setValueAtTime(freq * 1.002, now);
+
+  vib.frequency.setValueAtTime(5.2, now);
+  vibGain.gain.setValueAtTime(freq * 0.012, now);
+  vib.connect(osc1.frequency);
+  vib.connect(osc2.frequency);
+
+  filter.type = 'lowpass';
+  filter.frequency.setValueAtTime(freq * 3.2, now);
+  filter.Q.setValueAtTime(2.2, now);
+
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.linearRampToValueAtTime(0.048, now + 0.07);
+  gain.gain.setValueAtTime(0.048, now + duration - 0.08);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration + 0.12);
+
+  osc1.connect(filter);
+  osc2.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  vib.start(now);
+  osc1.start(now);
+  osc2.start(now);
+
+  vib.stop(now + duration + 0.18);
+  osc1.stop(now + duration + 0.18);
+  osc2.stop(now + duration + 0.18);
+}
+
+function startDrone() {
+  if (!audioCtx) return;
+  stopDrone();
+  [146.83, 220.00, 293.66].forEach((freq, idx) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = idx === 0 ? 'sine' : 'triangle';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.012 / (idx + 1), audioCtx.currentTime);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    droneOscs.push({ osc, gain });
   });
 }
 
-/* ==========================================================================
-   6. SCROLL REVEAL ANIMATIONS
-   ========================================================================== */
-function initScrollAnimations() {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-
-  document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
-    observer.observe(el);
+function stopDrone() {
+  droneOscs.forEach(({ osc, gain }) => {
+    try {
+      gain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
+      osc.stop(audioCtx.currentTime + 0.2);
+    } catch (e) {}
   });
+  droneOscs = [];
+}
+
+function playShehnaiSound(freq, duration) {
+  if (!audioCtx || audioCtx.state !== 'running') return;
+  const now = audioCtx.currentTime;
+
+  const osc1 = audioCtx.createOscillator();
+  const osc2 = audioCtx.createOscillator();
+  const vib = audioCtx.createOscillator();
+  const vibGain = audioCtx.createGain();
+  const gain = audioCtx.createGain();
+  const filter = audioCtx.createBiquadFilter();
+
+  osc1.type = 'sawtooth';
+  osc2.type = 'triangle';
+  osc1.frequency.setValueAtTime(freq, now);
+  osc2.frequency.setValueAtTime(freq * 1.002, now);
+
+  vib.frequency.setValueAtTime(5.5, now);
+  vibGain.gain.setValueAtTime(freq * 0.015, now);
+  vib.connect(osc1.frequency);
+  vib.connect(osc2.frequency);
+
+  filter.type = 'bandpass';
+  filter.frequency.setValueAtTime(freq * 2.2, now);
+  filter.Q.setValueAtTime(2.5, now);
+
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.linearRampToValueAtTime(0.045, now + 0.08);
+  gain.gain.setValueAtTime(0.045, now + duration - 0.1);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration + 0.15);
+
+  osc1.connect(filter);
+  osc2.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  vib.start(now);
+  osc1.start(now);
+  osc2.start(now);
+
+  vib.stop(now + duration + 0.2);
+  osc1.stop(now + duration + 0.2);
+  osc2.stop(now + duration + 0.2);
 }
 
 /* ==========================================================================
-   7. UTILITIES: ADDRESS COPY & CALENDAR EXPORT
+   6. UTILITIES: TOAST, SHARE, COPY & CALENDAR
    ========================================================================== */
-function showToast(message) {
-  let toast = document.getElementById('toastAlert');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'toastAlert';
-    toast.className = 'toast-alert';
-    document.body.appendChild(toast);
-  }
-  toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>${message}</span>`;
+function showToast(msg) {
+  const toast = document.getElementById('toastAlert');
+  if (!toast) return;
+  toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #d4af37;"></i> <span>${msg}</span>`;
   toast.classList.add('show');
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 3500);
+  setTimeout(() => toast.classList.remove('show'), 3200);
+}
+
+function shareInvitation() {
+  const title = 'Wedding Invitation: Kaleem & Roshni';
+  const text = 'You are cordially invited to celebrate the wedding union of Shaik Mannur Kaleem & Shaik Roshni on September 26 & 27, 2026 at PVR Function Hall, Gudur.\n\nView Invitation: ';
+  const url = window.location.href;
+
+  if (navigator.share) {
+    navigator.share({ title, text, url }).catch(() => {});
+  } else {
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + url)}`, '_blank');
+  }
 }
 
 function copyAddress() {
-  const addressText = 'PVR Function Hall, Near RTC Bus Stand, New Balaji Nagar, East Gudur Rural, Andhra Pradesh - 524101';
-  navigator.clipboard.writeText(addressText).then(
-    () => showToast('Venue Address copied to clipboard!'),
-    () => showToast('PVR Function Hall, Gudur (524101)')
+  const address = 'PVR Function Hall, Near RTC Bus Stand, New Balaji Nagar, East Gudur Rural, Andhra Pradesh – 524101';
+  navigator.clipboard.writeText(address).then(
+    () => showToast('Address copied to clipboard!'),
+    () => showToast('PVR Function Hall, Gudur')
   );
 }
 
 function openGoogleCalendar() {
-  const title = encodeURIComponent('Shaik Mannur Kaleem & Shaik Roshni - Wedding Ceremony');
-  const details = encodeURIComponent('Wedding Ceremony (Nikah & Muhurtham) of Shaik Mannur Kaleem & Shaik Roshni at PVR Function Hall, Gudur.');
+  const title = encodeURIComponent('Shaik Mannur Kaleem & Shaik Roshni Wedding');
+  const details = encodeURIComponent('Wedding Ceremony (Nikah) of Kaleem & Roshni at PVR Function Hall, Gudur.');
   const location = encodeURIComponent('PVR Function Hall, Near RTC Bus Stand, New Balaji Nagar, East Gudur Rural, Andhra Pradesh 524101');
   const dates = '20260927T060000Z/20260927T090000Z';
-
-  const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`;
-  window.open(googleUrl, '_blank');
+  window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&location=${location}&dates=${dates}`, '_blank');
 }
 
 function downloadICS() {
@@ -567,7 +524,7 @@ function downloadICS() {
     'DTSTART:20260927T060000Z',
     'DTEND:20260927T090000Z',
     'SUMMARY:Shaik Mannur Kaleem & Shaik Roshni Wedding Ceremony',
-    'DESCRIPTION:Wedding Ceremony (Nikah & Muhurtham) of Kaleem & Roshni at PVR Function Hall, Gudur.',
+    'DESCRIPTION:Wedding Ceremony (Nikah) of Kaleem & Roshni at PVR Function Hall, Gudur.',
     'LOCATION:PVR Function Hall, Near RTC Bus Stand, New Balaji Nagar, East Gudur Rural, Andhra Pradesh 524101',
     'STATUS:CONFIRMED',
     'END:VEVENT',
@@ -583,5 +540,5 @@ function downloadICS() {
   a.click();
   document.body.removeChild(a);
   window.URL.revokeObjectURL(url);
-  showToast('Calendar event downloaded (.ics)!');
+  showToast('Calendar event downloaded (.ics)');
 }

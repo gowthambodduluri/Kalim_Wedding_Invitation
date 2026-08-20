@@ -15,16 +15,16 @@
 .shimmer-text {
   background: linear-gradient(
     90deg,
-    #d4af37 0%,
-    #fff2cc 25%,
+    #ffffff 0%,
+    #fae29c 25%,
     #d4af37 50%,
-    #fbe8a6 75%,
+    #ffffff 75%,
     #d4af37 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: goldShimmer 5s linear infinite;
+  animation: goldShimmer 6s linear infinite;
 }
 
 /* Floating animation for subtle elements */
@@ -33,7 +33,7 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-5px);
   }
 }
 
@@ -55,43 +55,11 @@
   animation: pulseGlow 3s infinite ease-in-out;
 }
 
-/* Fade in up animation */
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.reveal-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Toast notification */
-.toast-alert {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  max-width: calc(100% - 40px);
-  background: linear-gradient(135deg, #0e302a, #071c18);
-  border: 1px solid var(--gold-primary);
-  color: var(--gold-light);
-  padding: 10px 20px;
-  border-radius: 50px;
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transform: translateY(100px);
-  opacity: 0;
-  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.toast-alert.show {
-  transform: translateY(0);
-  opacity: 1;
+/* Active Button Tap Micro-Interaction */
+button:active,
+.btn-royal-primary:active,
+.btn-royal-secondary:active,
+.btn-royal-share:active,
+.btn-unseal-action:active {
+  transform: scale(0.98);
 }

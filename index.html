@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+  <title>Shaik Mannur Kaleem &amp; Shaik Roshni | Wedding Celebration</title>
+  <meta name="description"
+    content="Join us in celebrating the wedding of Shaik Mannur Kaleem & Shaik Roshni on September 26th & 27th, 2026 at PVR Function Hall, Gudur.">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Shaik Mannur Kaleem &amp; Shaik Roshni | Wedding Celebration">
+  <meta property="og:description"
+    content="Celebrate the union of Kaleem & Roshni on September 26 & 27, 2026 at PVR Function Hall, Gudur.">
+  <meta property="og:image" content="assets/images/couple.jpg">
+  <meta name="theme-color" content="#041210">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+  <!-- Particle / Golden Petal Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Mobile Nav Backdrop -->
+  <div class="nav-backdrop" id="navBackdrop"></div>
+
+  <!-- ==========================================
+       1. ROYAL INVITATION COVER OVERLAY
+       ========================================== -->
+  <div class="invitation-cover" id="invitationCover">
+    <div class="cover-card">
+      <div class="cover-icon-motif">
+        <i class="fa-solid fa-gem"></i>
+      </div>
+      <p class="cover-sub">Together with their families</p>
+
+      <h2 class="cover-title">WEDDING CELEBRATION</h2>
+
+      <p class="cover-hosts">
+        Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam<br>
+        <span>cordially invite you to grace the auspicious occasion of the marriage of their beloved son</span>
+      </p>
+
+      <h1 class="cover-names">
+        <span>Kaleem</span> <span class="amp">&amp;</span> <span>Roshni</span>
+      </h1>
+
+      <p class="cover-date">
+        <i class="fa-solid fa-calendar-check" style="color: var(--gold-primary); margin-right: 6px;"></i>
+        SEPTEMBER 26 &amp; 27, 2026
+      </p>
+
+      <button class="btn-unseal" id="btnUnseal">
+        <i class="fa-solid fa-envelope-open-text"></i> UNSEAL INVITATION
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       2. NAVIGATION BAR
+       ========================================== -->
+  <nav class="navbar" id="mainNavbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo">
+        <i class="fa-solid fa-infinity"></i>
+        <span>Kaleem &amp; Roshni</span>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <button class="mobile-close" id="mobileClose" aria-label="Close Navigation Menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <li><a href="#hero" class="active">Home</a></li>
+        <li><a href="#countdown">Countdown</a></li>
+        <li><a href="#couple">The Couple</a></li>
+        <li><a href="#schedule">Celebrations</a></li>
+        <li><a href="#venue">Venue</a></li>
+        <li><a href="#family">Compliments</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ==========================================
+       WINDOW 1: HERO SECTION
+       ========================================== -->
+  <section class="window-slide" id="hero">
+    <div class="slide-content-box">
+
+      <div class="hero-frame">
+        <div class="hero-invitation-badge">Wedding Celebration</div>
+
+        <p class="hero-hosts">
+          Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam<br>
+          <span>cordially invite you to grace the auspicious occasion of the marriage of their beloved son</span>
+        </p>
+
+        <h1 class="hero-names">
+          <span class="gold-text shimmer-text">Shaik Mannur Kaleem</span>
+          <span class="amp">&amp;</span>
+          <span class="gold-text shimmer-text">Shaik Roshni</span>
+        </h1>
+
+        <p class="hero-tagline">"Two hearts united by love, embarking on a beautiful lifelong journey together"</p>
+
+        <div class="hero-date-badge float-slow">
+          <i class="fa-solid fa-calendar-check" style="color: var(--gold-primary);"></i>
+          <span>SATURDAY 26TH &amp; SUNDAY 27TH SEPTEMBER 2026</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#schedule" class="btn-primary">
+            <i class="fa-solid fa-calendar-days"></i> Event Itinerary
+          </a>
+          <a href="#venue" class="btn-secondary">
+            <i class="fa-solid fa-location-dot"></i> View Venue &amp; Map
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="#countdown" class="slide-down-hint" aria-label="Scroll to next section">
+      <span>Next</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- ==========================================
+       WINDOW 2: COUNTDOWN SECTION
+       ========================================== -->
+  <section class="window-slide" id="countdown">
+    <div class="slide-content-box">
+
+      <div class="countdown-frame">
+        <div class="slide-header">
+          <span class="slide-eyebrow">The Auspicious Moment</span>
+          <h2 class="slide-title">Wedding Countdown</h2>
+          <div class="slide-divider">
+            <span class="line"></span>
+            <i class="fa-solid fa-clock"></i>
+            <span class="line"></span>
+          </div>
+          <p class="slide-subtitle">Sunday, 27th September 2026 • 11:30 A.M. (Muhurtham)</p>
+        </div>
+
+        <div class="countdown-grid">
+          <div class="countdown-box">
+            <div class="countdown-number" id="cd-days">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-box">
+            <div class="countdown-number" id="cd-hours">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-box">
+            <div class="countdown-number" id="cd-mins">00</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-box">
+            <div class="countdown-number" id="cd-secs">00</div>
+            <div class="countdown-label">Seconds</div>
+          </div>
+        </div>
+
+        <div class="countdown-btn-group">
+          <button class="btn-calendar" onclick="openGoogleCalendar()">
+            <i class="fa-brands fa-google"></i> Google Calendar
+          </button>
+          <button class="btn-calendar" onclick="downloadICS()">
+            <i class="fa-solid fa-calendar-plus"></i> Apple / Outlook (.ics)
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="#couple" class="slide-down-hint" aria-label="Scroll to next section">
+      <span>Next</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- ==========================================
+       WINDOW 3: THE COUPLE SECTION
+       ========================================== -->
+  <section class="window-slide" id="couple">
+    <div class="slide-content-box">
+
+      <div class="slide-header">
+        <span class="slide-eyebrow">A Celebration of Love</span>
+        <h2 class="slide-title">The Bride &amp; Groom</h2>
+        <div class="slide-divider">
+          <span class="line"></span>
+          <i class="fa-solid fa-heart"></i>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <div class="couple-grid-layout">
+        <!-- Photo -->
+        <div class="couple-photo-wrapper glow-box">
+          <img src="assets/images/couple.jpg" alt="Shaik Mannur Kaleem & Shaik Roshni" loading="lazy">
+          <div class="couple-photo-tag">Kaleem &amp; Roshni</div>
+        </div>
+
+        <!-- Bios -->
+        <div class="couple-bios-col">
+          <!-- Groom -->
+          <div class="bio-card">
+            <div class="bio-header">
+              <div class="bio-icon"><i class="fa-solid fa-user-tie"></i></div>
+              <div>
+                <span class="bio-role">The Groom</span>
+                <h3 class="bio-name gold-text">Shaik Mannur Kaleem</h3>
+              </div>
+            </div>
+            <p class="bio-parents">Younger Son of Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam</p>
+            <p class="bio-detail">
+              <strong>Co-founder</strong>, Dream House Constructions &amp; Interiors
+              <span class="bio-locations">• Nellore • Gudur • Naidupeta • Sullurpeta</span>
+            </p>
+          </div>
+
+          <!-- Bride -->
+          <div class="bio-card">
+            <div class="bio-header">
+              <div class="bio-icon"><i class="fa-solid fa-heart"></i></div>
+              <div>
+                <span class="bio-role">The Bride</span>
+                <h3 class="bio-name gold-text">Shaik Roshni</h3>
+              </div>
+            </div>
+            <p class="bio-parents">Daughter of Mr. Shaik Gouse Basha &amp; Mrs. Shaik Shakeela</p>
+            <p class="bio-detail">
+              <strong>Family:</strong> RTC Conductor
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="couple-quote-bar">
+        <p>"Two souls with but a single thought, two hearts that beat as one."</p>
+      </div>
+
+    </div>
+
+    <a href="#schedule" class="slide-down-hint" aria-label="Scroll to next section">
+      <span>Next</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- ==========================================
+       WINDOW 4: CELEBRATION ITINERARY
+       ========================================== -->
+  <section class="window-slide" id="schedule">
+    <div class="slide-content-box">
+
+      <div class="slide-header">
+        <span class="slide-eyebrow">Program of Events</span>
+        <h2 class="slide-title">Wedding Itinerary</h2>
+        <div class="slide-divider">
+          <span class="line"></span>
+          <i class="fa-solid fa-star"></i>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <div class="itinerary-3col-grid">
+        <!-- Event 1 -->
+        <div class="itinerary-card">
+          <div>
+            <div class="itinerary-icon-row">
+              <div class="itinerary-badge"><i class="fa-solid fa-sun"></i></div>
+              <div>
+                <span class="itinerary-tag">EVENING CELEBRATION</span>
+                <h3 class="itinerary-event-title">Haldi &amp; Dinner</h3>
+              </div>
+            </div>
+            <ul class="itinerary-list">
+              <li><i class="fa-solid fa-calendar-day"></i> <strong>Date:</strong> Saturday, 26th Sept 2026</li>
+              <li><i class="fa-solid fa-clock"></i> <strong>Time:</strong> 8:30 P.M.</li>
+              <li><i class="fa-solid fa-location-dot"></i> <strong>Venue:</strong> PVR Function Hall</li>
+            </ul>
+          </div>
+          <p class="itinerary-note">"An evening of traditional Haldi ceremonies, melodies, and banquet."</p>
+        </div>
+
+        <!-- Event 2 (Featured) -->
+        <div class="itinerary-card featured">
+          <div>
+            <div class="itinerary-icon-row">
+              <div class="itinerary-badge"><i class="fa-solid fa-ring"></i></div>
+              <div>
+                <span class="main-event-badge"><i class="fa-solid fa-crown"></i> MAIN EVENT</span>
+                <h3 class="itinerary-event-title gold-text">Nikah &amp; Muhurtham</h3>
+              </div>
+            </div>
+            <ul class="itinerary-list">
+              <li><i class="fa-solid fa-calendar-day"></i> <strong>Date:</strong> Sunday, 27th Sept 2026</li>
+              <li><i class="fa-solid fa-clock"></i> <strong>Muhurtham:</strong> 11:30 A.M.</li>
+              <li><i class="fa-solid fa-location-dot"></i> <strong>Venue:</strong> PVR Function Hall</li>
+            </ul>
+          </div>
+          <p class="itinerary-note">"The sacred wedding union embarking on eternal companionship."</p>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="itinerary-card">
+          <div>
+            <div class="itinerary-icon-row">
+              <div class="itinerary-badge"><i class="fa-solid fa-utensils"></i></div>
+              <div>
+                <span class="itinerary-tag">CELEBRATION FEAST</span>
+                <h3 class="itinerary-event-title">Grand Lunch</h3>
+              </div>
+            </div>
+            <ul class="itinerary-list">
+              <li><i class="fa-solid fa-calendar-day"></i> <strong>Date:</strong> Sunday, 27th Sept 2026</li>
+              <li><i class="fa-solid fa-clock"></i> <strong>Time:</strong> 12:30 P.M.</li>
+              <li><i class="fa-solid fa-location-dot"></i> <strong>Venue:</strong> PVR Function Hall</li>
+            </ul>
+          </div>
+          <p class="itinerary-note">"Celebratory feast featuring delicious cuisine with family &amp; friends."</p>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="#venue" class="slide-down-hint" aria-label="Scroll to next section">
+      <span>Next</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- ==========================================
+       WINDOW 5: VENUE & LOCATION
+       ========================================== -->
+  <section class="window-slide" id="venue">
+    <div class="slide-content-box">
+
+      <div class="slide-header">
+        <span class="slide-eyebrow">Destination</span>
+        <h2 class="slide-title">Venue &amp; Location</h2>
+        <div class="slide-divider">
+          <span class="line"></span>
+          <i class="fa-solid fa-map-location-dot"></i>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <div class="venue-grid-layout">
+        <div class="venue-info-col">
+          <h3 class="venue-hall-title gold-text">PVR Function Hall</h3>
+          <div class="venue-city-pill">
+            <i class="fa-solid fa-city"></i>
+            <span>Gudur, Andhra Pradesh</span>
+          </div>
+
+          <div class="venue-address-panel">
+            <p>
+              <strong>Near the RTC Bus Stand</strong>,<br>
+              New Balaji Nagar, East Gudur Rural,<br>
+              Andhra Pradesh – <strong>524101</strong>
+            </p>
+            <div class="venue-landmarks">
+              <i class="fa-solid fa-bus"></i> Located conveniently near RTC Bus Stand with ample parking.
+            </div>
+          </div>
+
+          <div class="venue-actions">
+            <a href="https://maps.google.com/?q=PVR+Function+Hall+Gudur+Andhra+Pradesh" target="_blank"
+              rel="noopener noreferrer" class="btn-primary">
+              <i class="fa-solid fa-location-arrow"></i> Google Maps
+            </a>
+            <button class="btn-secondary" onclick="copyAddress()">
+              <i class="fa-solid fa-copy"></i> Copy Address
+            </button>
+          </div>
+        </div>
+
+        <div class="map-frame-box">
+          <iframe
+            src="https://maps.google.com/maps?q=PVR%20Function%20Hall%20Gudur%20Andhra%20Pradesh&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="PVR Function Hall Location Map">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+
+    <a href="#family" class="slide-down-hint" aria-label="Scroll to next section">
+      <span>Next</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- ==========================================
+       WINDOW 6: COMPLIMENTS & BLESSINGS
+       ========================================== -->
+  <section class="window-slide" id="family">
+    <div class="slide-content-box">
+
+      <div class="slide-header">
+        <span class="slide-eyebrow">With Warm Regards</span>
+        <h2 class="slide-title">Best Compliments</h2>
+        <div class="slide-divider">
+          <span class="line"></span>
+          <i class="fa-solid fa-hands-holding-heart"></i>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <div class="compliments-layout">
+        <div class="compliments-grid">
+          <div class="compliment-box">
+            <i class="fa-solid fa-house-chimney-user"></i>
+            <h4 class="compliment-title">Gracious Hosts</h4>
+            <ul class="compliment-names">
+              <li>Mr. Shaik Mannur Ibrahim</li>
+              <li>&amp; Mrs. Shaik Meherunisa Begam</li>
+            </ul>
+          </div>
+
+          <div class="compliment-box">
+            <i class="fa-solid fa-people-roof"></i>
+            <h4 class="compliment-title">Best Compliments</h4>
+            <ul class="compliment-names">
+              <li>Mr. &amp; Mrs. Rahul</li>
+              <li>Mr. &amp; Mrs. Ahmed</li>
+              <li>Mr. &amp; Mrs. Aziz</li>
+            </ul>
+          </div>
+
+          <div class="compliment-box">
+            <i class="fa-solid fa-heart-circle-check"></i>
+            <h4 class="compliment-title">Near &amp; Dear</h4>
+            <ul class="compliment-names">
+              <li>All Relatives &amp; Well-Wishers</li>
+              <li>Friends &amp; Family</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="blessings-quote-card">
+          <p>"Your gracious presence and blessings will make our joyous occasion truly memorable."</p>
+        </div>
+
+        <div class="closing-footer">
+          <div class="closing-monogram">
+            <span>K</span> <i class="fa-solid fa-heart" style="color: var(--gold-primary); font-size: 0.85rem;"></i>
+            <span>R</span>
+          </div>
+          <h3 class="closing-names">Shaik Mannur Kaleem &amp; Shaik Roshni</h3>
+          <p class="closing-date">SEPTEMBER 26 &amp; 27, 2026 • PVR FUNCTION HALL, GUDUR</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>

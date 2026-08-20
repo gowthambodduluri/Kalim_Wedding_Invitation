@@ -426,40 +426,53 @@ function initNavigation() {
 
   // Mobile Menu Drawer Handlers
   function openMobileDrawer(e) {
-    if (e) e.preventDefault();
+    if (e) e.stopPropagation();
     if (mobileDrawer) mobileDrawer.classList.add('active');
     if (navBackdrop) navBackdrop.classList.add('active');
-    document.body.style.overflow = 'hidden';
   }
 
   function closeMobileDrawer(e) {
-    if (e) e.preventDefault();
+    if (e) e.stopPropagation();
     if (mobileDrawer) mobileDrawer.classList.remove('active');
     if (navBackdrop) navBackdrop.classList.remove('active');
-    document.body.style.overflow = '';
   }
 
   if (mobileToggle) {
-    mobileToggle.addEventListener('click', openMobileDrawer);
-    mobileToggle.addEventListener('touchstart', openMobileDrawer, { passive: false });
+    mobileToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      openMobileDrawer(e);
+    });
   }
 
   if (mobileClose) {
-    mobileClose.addEventListener('click', closeMobileDrawer);
-    mobileClose.addEventListener('touchstart', closeMobileDrawer, { passive: false });
+    mobileClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeMobileDrawer(e);
+    });
   }
 
   if (navBackdrop) {
-    navBackdrop.addEventListener('click', closeMobileDrawer);
-    navBackdrop.addEventListener('touchstart', closeMobileDrawer, { passive: false });
+    navBackdrop.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeMobileDrawer(e);
+    });
   }
 
-  // Close drawer on clicking any drawer link
+  // Close drawer on clicking any drawer link & smooth scroll
   document.querySelectorAll('.drawer-links a').forEach((link) => {
-    link.addEventListener('click', () => {
-      closeMobileDrawer();
-      const targetId = link.getAttribute('href').replace('#', '');
+    link.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href').replace('#', '');
+      closeMobileDrawer(e);
       updateActiveNav(targetId);
+
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        targetEl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     });
   });
 }

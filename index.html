@@ -4,472 +4,534 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Shaik Mannur Kaleem &amp; Shaik Roshni — Wedding Celebration</title>
-  <meta name="description"
-    content="Cordially inviting you to the wedding celebration of Shaik Mannur Kaleem & Shaik Roshni on September 26 & 27, 2026 at PVR Function Hall, Gudur.">
-  <meta name="theme-color" content="#041411">
+  <title>The Celestial Story of Kaleem &amp; Roshni — A Royal Union</title>
+  <meta name="description" content="An artistic story of love, destiny, and timeless vows. The wedding celebration of Shaik Mannur Kaleem & Shaik Roshni. September 26 & 27, 2026.">
+  <meta name="theme-color" content="#020806">
 
-  <!-- Open Graph / WhatsApp Preview -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Kaleem &amp; Roshni — Wedding Invitation">
-  <meta property="og:description"
-    content="September 26 & 27, 2026 • PVR Function Hall, Gudur. Click to open invitation.">
+  <meta property="og:title" content="👑 The Story of Kaleem &amp; Roshni — Royal Wedding Invitation">
+  <meta property="og:description" content="Step into the artistic story of our union. September 26 & 27, 2026 • PVR Function Hall, Gudur.">
   <meta property="og:image" content="assets/images/couple.jpg">
 
-  <!-- Google Fonts: Luxury Editorial Collection -->
+  <!-- Typography Suite: Royal Editorial & Calligraphy -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome 6 -->
+  <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/animations.css">
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/style.css?v=70.0">
+  <link rel="stylesheet" href="css/animations.css?v=70.0">
 </head>
 
-<body>
+<body class="story-canvas-body">
 
-  <!-- Floating Golden Stardust Canvas -->
-  <canvas id="ambient-canvas"></canvas>
+  <!-- 3D Cosmic Particle Universe, Rose Petals & Light Streams -->
+  <canvas id="storyCanvas"></canvas>
 
-  <!-- Mobile Navigation Backdrop -->
-  <div class="nav-backdrop" id="navBackdrop"></div>
+  <!-- Interactive Story Cursor Aura -->
+  <div class="story-cursor-aura" id="cursorAura"></div>
 
-  <!-- Mobile Drawer Menu -->
-  <div class="mobile-drawer" id="mobileDrawer">
-    <div class="drawer-header">
-      <div class="drawer-brand">
-        <i class="fa-solid fa-infinity" style="color: var(--gold-primary);"></i>
-        <span>Kaleem &amp; Roshni</span>
-      </div>
-      <button class="mobile-close" id="mobileClose" aria-label="Close Navigation Menu">
-        <i class="fa-solid fa-xmark"></i>
+  <!-- Royal Luxury Color Theme Switcher -->
+  <div class="theme-floating-switcher" id="themeSwitcher">
+    <button class="theme-toggle-btn" id="themeToggleBtn" title="Change Color Palette">
+      <i class="fa-solid fa-palette"></i>
+      <span class="theme-btn-text">Themes</span>
+    </button>
+    <div class="theme-palette-dropdown" id="themeDropdown">
+      <button class="theme-chip-btn active" data-theme="emerald" title="Royal Obsidian Emerald & Gold">
+        <span class="theme-preview-dot dot-emerald"></span> Emerald
       </button>
-    </div>
-
-    <ul class="drawer-links">
-      <li><a href="#hero" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-      <li><a href="#countdown"><i class="fa-solid fa-clock"></i> Countdown</a></li>
-      <li><a href="#couple"><i class="fa-solid fa-heart"></i> The Couple</a></li>
-      <li><a href="#schedule"><i class="fa-solid fa-calendar-days"></i> Itinerary</a></li>
-      <li><a href="#venue"><i class="fa-solid fa-location-dot"></i> Venue &amp; Map</a></li>
-      <li><a href="#family"><i class="fa-solid fa-hands-holding-heart"></i> Compliments &amp; RSVP</a></li>
-    </ul>
-
-    <div class="drawer-share-box">
-      <button onclick="shareInvitation()" class="btn-drawer-share">
-        <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+      <button class="theme-chip-btn" data-theme="ruby" title="Imperial Ruby Velvet & Gold">
+        <span class="theme-preview-dot dot-ruby"></span> Ruby Velvet
       </button>
-    </div>
-
-    <div class="drawer-footer">
-      <p>September 26 &amp; 27, 2026</p>
-      <span>PVR Function Hall, Gudur</span>
-    </div>
-  </div>
-
-  <!-- ==========================================
-       ROYAL ENVELOPE UNSEAL OVERLAY
-       ========================================== -->
-  <div class="invitation-cover" id="invitationCover">
-    <div class="cover-card">
-      <div class="cover-motif-crown"><i class="fa-solid fa-crown"></i></div>
-      <p class="cover-sub-text">Together with their families</p>
-      <h2 class="cover-title-text">WEDDING INVITATION</h2>
-
-      <p class="cover-hosts-text">
-        Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam<br>
-        <span>cordially request your gracious presence to celebrate the wedding of their beloved son</span>
-      </p>
-
-      <h1 class="cover-couple-names">Kaleem &amp; Roshni</h1>
-
-      <p class="cover-event-date">
-        <i class="fa-regular fa-calendar-check" style="color: var(--gold-primary); margin-right: 6px;"></i>
-        SEPTEMBER 26 &amp; 27, 2026 • GUDUR
-      </p>
-
-      <button class="btn-unseal-action" id="btnUnseal">
-        <i class="fa-solid fa-envelope-open-text"></i>
-        <span>UNSEAL INVITATION</span>
+      <button class="theme-chip-btn" data-theme="sapphire" title="Midnight Celestial Sapphire & Gold">
+        <span class="theme-preview-dot dot-sapphire"></span> Sapphire
+      </button>
+      <button class="theme-chip-btn" data-theme="ivory" title="Opulent Pearl Ivory & Gold">
+        <span class="theme-preview-dot dot-ivory"></span> Pearl Ivory
       </button>
     </div>
   </div>
 
-  <!-- ==========================================
-       UNIFIED LUXURY NAVBAR
-       ========================================== -->
-  <nav class="main-navbar" id="mainNavbar">
-    <div class="navbar-container">
-      <a href="#hero" class="nav-brand">
-        <i class="fa-solid fa-infinity"></i>
-        <span>Kaleem &amp; Roshni</span>
-      </a>
-
-      <!-- Desktop Links -->
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="#hero" class="active">Home</a></li>
-        <li><a href="#countdown">Countdown</a></li>
-        <li><a href="#couple">The Couple</a></li>
-        <li><a href="#schedule">Itinerary</a></li>
-        <li><a href="#venue">Venue</a></li>
-        <li><a href="#family">Compliments</a></li>
-      </ul>
-
-      <!-- Right Controls: Audio & Mobile Drawer Toggle -->
-      <div class="nav-right-controls">
-        <button class="nav-music-btn" id="audioToggle" aria-label="Toggle Wedding Melody" title="Play Wedding Melody">
-          <i class="fa-solid fa-music"></i>
-        </button>
-
-        <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Open Navigation Menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
-      </div>
+  <!-- Music Controller Orb -->
+  <div class="music-floating-orb" id="musicOrb" title="Toggle Jashn-E-Bahaaraa">
+    <div class="orb-pulsing-aura"></div>
+    <div class="orb-equalizer-bars">
+      <span></span><span></span><span></span><span></span>
     </div>
+    <i class="fa-solid fa-music orb-icon"></i>
+    <span class="orb-track-text">Jashn-E-Bahaaraa</span>
+  </div>
+
+  <!-- =========================================================================
+       ENTRY PORTAL: 3D ROYAL ENVELOPE & SCULPTED WAX SEAL
+       ========================================================================= -->
+  <div class="story-entry-portal" id="entryPortal">
+    <div class="royal-envelope-3d" id="royalEnvelope" data-tilt>
+      
+      <!-- Envelope Flap & Damask Borders -->
+      <div class="envelope-top-flap"></div>
+      <div class="envelope-ribbon-gold"></div>
+
+      <!-- Essential Preview Info -->
+      <div class="envelope-content-preview">
+        <div class="envelope-eyebrow">ROYAL WEDDING INVITATION</div>
+        <h1 class="envelope-couple-names gold-story-shine">
+          <span>Shaik Mannur Kaleem</span>
+          <span class="envelope-amp">&amp;</span>
+          <span>Shaik Roshni</span>
+        </h1>
+        <p class="envelope-date-venue">26 &amp; 27 September 2026 • PVR Function Hall, Gudur</p>
+      </div>
+
+      <!-- 3D Sculpted Wax Seal Button -->
+      <div class="sculpted-wax-seal-wrap" id="portalSealBtn">
+        <div class="seal-rotating-ring"></div>
+        <div class="seal-wax-disc">
+          <i class="fa-solid fa-crown seal-crown-gem"></i>
+          <span class="seal-monogram-initials">K ✦ R</span>
+          <span class="seal-action-subtext">TAP TO UNSEAL</span>
+        </div>
+        <div class="seal-radiant-flare"></div>
+      </div>
+
+      <p class="envelope-tap-instruction">
+        <i class="fa-solid fa-sparkles"></i> Tap the Royal Seal to unfold our story
+      </p>
+
+    </div>
+  </div>
+
+  <!-- Story Progress Spine (Side Navigation) -->
+  <nav class="story-progress-spine" id="storySpine" aria-label="Story Acts">
+    <a href="#prologue" class="spine-dot active" data-act="prologue" title="Prologue: Written in the Stars">
+      <span class="spine-num">01</span>
+      <span class="spine-label">Prologue</span>
+    </a>
+    <a href="#act-couple" class="spine-dot" data-act="act-couple" title="Act I: The Two Destinies">
+      <span class="spine-num">02</span>
+      <span class="spine-label">The Souls</span>
+    </a>
+    <a href="#act-clock" class="spine-dot" data-act="act-clock" title="Act II: The Auspicious Hour">
+      <span class="spine-num">03</span>
+      <span class="spine-label">Muhurtham</span>
+    </a>
+    <a href="#act-chronicle" class="spine-dot" data-act="act-chronicle" title="Act III: The Two Auspicious Days">
+      <span class="spine-num">04</span>
+      <span class="spine-label">Celebrations</span>
+    </a>
+    <a href="#act-pavilion" class="spine-dot" data-act="act-pavilion" title="Act IV: The Royal Canopy">
+      <span class="spine-num">05</span>
+      <span class="spine-label">Venue</span>
+    </a>
+    <a href="#act-blessings" class="spine-dot" data-act="act-blessings" title="Act V: Wishes &amp; RSVP">
+      <span class="spine-num">06</span>
+      <span class="spine-label">Wishes</span>
+    </a>
   </nav>
 
-  <!-- ==========================================
-       PAGE CONTAINER
-       ========================================== -->
-  <main class="page-container">
+  <!-- =========================================================================
+       MAIN STORY EXPERIENCE
+       ========================================================================= -->
+  <main class="story-experience-container">
 
-    <!-- 1. HERO SECTION -->
-    <section class="section-block" id="hero">
-      <div class="section-inner">
-        <div class="hero-frame-card">
-
-          <div class="hero-crest-badge">
-            <span class="monogram-initials">K &amp; R</span>
+    <!-- PROLOGUE: WRITTEN IN THE STARS -->
+    <section class="story-act-frame active-act" id="prologue">
+      <div class="act-inner-parchment">
+        
+        <div class="story-parchment-card" data-tilt>
+          
+          <div class="act-script-eyebrow" style="font-size: clamp(2.4rem, 5vw, 3.4rem); margin-bottom: 2px; color: var(--gold-secondary);">
+            Together in Love &amp; Harmony
           </div>
 
-          <div class="hero-invitation-tag">THE WEDDING CELEBRATION</div>
+          <div class="royal-crest-seal">
+            <div class="seal-core-medal">
+              <span class="seal-initials">K ✦ R</span>
+            </div>
+            <div class="seal-radiant-glow"></div>
+          </div>
 
-          <p class="hero-hosts-line">
-            Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam<br>
-            <span>cordially invite you to grace the auspicious occasion of the marriage of their beloved son</span>
+          <div class="act-poetic-badge">PROLOGUE • WRITTEN IN DESTINY</div>
+
+          <p class="story-hosts-proclamation">
+            With immense joy and happiness in our hearts,<br>
+            <strong>Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam</strong><br>
+            <span>cordially invite you to share in the joy and celebrations of the wedding of their beloved son</span>
           </p>
 
-          <h1 class="hero-names-title">
-            <span class="gold-text">Shaik Mannur Kaleem</span>
-            <span class="hero-amp">&amp;</span>
-            <span class="gold-text">Shaik Roshni</span>
+          <h1 class="story-couple-title gold-story-shine">
+            <span class="name-span">Shaik Mannur Kaleem</span>
+            <span class="story-amp-cursive">&amp;</span>
+            <span class="name-span">Shaik Roshni</span>
           </h1>
 
-          <p class="hero-romantic-quote">
-            "Two souls united by destiny, embarking on an eternal journey of love, joy, and togetherness."
-          </p>
-
-          <div class="hero-date-banner">
-            <i class="fa-solid fa-calendar-check" style="color: var(--gold-primary);"></i>
-            <span>Saturday 26th &amp; Sunday 27th September 2026</span>
+          <div class="story-poetic-quote">
+            "Where there is love, there is life, laughter, and eternal celebration."
           </div>
 
-          <div class="hero-actions-row">
-            <a href="#schedule" class="btn-royal-primary">
-              <i class="fa-solid fa-calendar-days"></i> Itinerary
+          <div class="story-date-capsule">
+            <i class="fa-solid fa-sparkles" style="color: var(--gold-primary);"></i>
+            <span>Saturday 26th &amp; Sunday 27th September 2026 • Gudur</span>
+          </div>
+
+          <div class="story-actions-row">
+            <a href="#act-couple" class="btn-story-gold">
+              <span>Read The Story</span>
+              <i class="fa-solid fa-arrow-down"></i>
             </a>
-            <a href="#venue" class="btn-royal-secondary">
-              <i class="fa-solid fa-location-dot"></i> Venue &amp; Map
+            <a href="#act-chronicle" class="btn-story-glass">
+              <i class="fa-solid fa-scroll"></i> Itinerary
             </a>
-            <button onclick="shareInvitation()" class="btn-royal-share">
+            <button onclick="shareInvitation()" class="btn-story-wa">
               <i class="fa-brands fa-whatsapp"></i> Share
             </button>
           </div>
 
         </div>
+
       </div>
     </section>
 
-    <!-- 2. COUNTDOWN SECTION -->
-    <section class="section-block" id="countdown">
-      <div class="section-inner">
-        <div class="royal-card text-center">
+    <!-- ACT I: THE TWO DESTINIES (THE ARCHITECT & THE SCHOLAR) -->
+    <section class="story-act-frame" id="act-couple">
+      <div class="act-inner-parchment">
+        
+        <div class="story-parchment-card" data-tilt>
+          
+          <header class="act-editorial-heading text-center">
+            <span class="act-script-eyebrow">Act I • The Two Destinies</span>
+            <h2 class="act-title gold-story-shine">The Bride &amp; Groom</h2>
+            <div class="act-gold-divider"><i class="fa-solid fa-gem"></i></div>
+            <p class="act-narrative-lead">"Two distinct journeys guided by fate, converging into a single shared dream."</p>
+          </header>
 
-          <div class="block-header">
-            <span class="block-eyebrow">The Auspicious Moment</span>
-            <h2 class="block-title">Wedding Countdown</h2>
-            <div class="gold-bar"></div>
-            <p class="block-sub">Sunday, 27th September 2026 • 11:30 AM (Nikah Ceremony)</p>
+          <div class="couple-artistic-layout">
+            
+            <!-- Ornate Mughal Jharokha Arch -->
+            <div class="mughal-jharokha-art-frame">
+              <div class="jharokha-crown-seal"><i class="fa-solid fa-crown"></i></div>
+              <img src="assets/images/couple.jpg" alt="Shaik Mannur Kaleem & Shaik Roshni" loading="lazy" class="couple-art-portrait">
+              <div class="jharokha-name-plaque">Kaleem &amp; Roshni</div>
+            </div>
+
+            <!-- Couple Stories -->
+            <div class="couple-pedestal-narratives">
+              
+              <!-- Groom Profile -->
+              <article class="soul-narrative-box" data-tilt>
+                <div class="soul-role-badge"><i class="fa-solid fa-user-tie"></i> The Groom</div>
+                <h3 class="soul-name gold-story-shine">Shaik Mannur Kaleem</h3>
+                <div class="soul-degree-pill">M.Tech., Structural Engineer</div>
+                <p class="soul-lineage-text">Son of Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam</p>
+                
+                <div class="soul-firm-showcase">
+                  <div class="firm-badge-header">
+                    <i class="fa-solid fa-building-columns firm-icon"></i>
+                    <strong class="firm-brand-name">Co-founder, Dream House Constructions &amp; Interiors</strong>
+                  </div>
+                  <div class="firm-locations-pill">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Nellore • Gudur • Naidupeta</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Bride Profile -->
+              <article class="soul-narrative-box" data-tilt>
+                <div class="soul-role-badge"><i class="fa-solid fa-heart"></i> The Bride</div>
+                <h3 class="soul-name gold-story-shine">Shaik Roshni</h3>
+                <div class="soul-degree-pill">B.Sc., D.El.Ed.</div>
+                <p class="soul-lineage-text">Daughter of Mr. Shaik Gulam Gouse &amp; Mrs. Shaik Safoora</p>
+              </article>
+
+            </div>
+
           </div>
 
-          <div class="countdown-boxes-wrap">
-            <div class="cd-box">
-              <span class="cd-val" id="t-days">00</span>
-              <span class="cd-lbl">Days</span>
-            </div>
-            <div class="cd-box">
-              <span class="cd-val" id="t-hours">00</span>
-              <span class="cd-lbl">Hours</span>
-            </div>
-            <div class="cd-box">
-              <span class="cd-val" id="t-mins">00</span>
-              <span class="cd-lbl">Minutes</span>
-            </div>
-            <div class="cd-box">
-              <span class="cd-val" id="t-secs">00</span>
-              <span class="cd-lbl">Seconds</span>
-            </div>
+          <div class="act-scripture-stripe">
+            <p>"Hand in hand, building a lifetime of cherished moments and boundless joy."</p>
           </div>
 
-          <div class="calendar-btn-row">
-            <button onclick="openGoogleCalendar()" class="btn-royal-secondary">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ACT II: THE AUSPICIOUS HOURGLASS (MUHURTHAM COUNTDOWN) -->
+    <section class="story-act-frame" id="act-clock">
+      <div class="act-inner-parchment">
+        
+        <div class="story-parchment-card text-center" data-tilt>
+          
+          <header class="act-editorial-heading">
+            <span class="act-script-eyebrow">Act II • The Auspicious Hour</span>
+            <h2 class="act-title gold-story-shine">The Muhurtham Countdown</h2>
+            <div class="act-gold-divider"><i class="fa-solid fa-hourglass-half"></i></div>
+            <p class="act-narrative-lead">Sunday, 27th September 2026 • 11:30 AM (Wedding Ceremony)</p>
+          </header>
+
+          <div class="astronomical-clock-container">
+            
+            <div class="time-pod-orb">
+              <div class="pod-inner-glass">
+                <span class="time-digit-val" id="t-days">00</span>
+                <span class="time-unit-label">Days</span>
+              </div>
+            </div>
+
+            <div class="time-pod-orb">
+              <div class="pod-inner-glass">
+                <span class="time-digit-val" id="t-hours">00</span>
+                <span class="time-unit-label">Hours</span>
+              </div>
+            </div>
+
+            <div class="time-pod-orb">
+              <div class="pod-inner-glass">
+                <span class="time-digit-val" id="t-mins">00</span>
+                <span class="time-unit-label">Minutes</span>
+              </div>
+            </div>
+
+            <div class="time-pod-orb">
+              <div class="pod-inner-glass">
+                <span class="time-digit-val" id="t-secs">00</span>
+                <span class="time-unit-label">Seconds</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="calendar-story-buttons">
+            <button onclick="openGoogleCalendar()" class="btn-story-gold">
               <i class="fa-brands fa-google"></i> Google Calendar
             </button>
-            <button onclick="downloadICS()" class="btn-royal-secondary">
+            <button onclick="downloadICS()" class="btn-story-glass">
               <i class="fa-solid fa-calendar-plus"></i> Apple / Outlook (.ics)
             </button>
           </div>
 
         </div>
+
       </div>
     </section>
 
-    <!-- 3. THE COUPLE SECTION -->
-    <section class="section-block" id="couple">
-      <div class="section-inner">
-        <div class="royal-card">
+    <!-- ACT III: THE TWO AUSPICIOUS DAYS (THE CELEBRATION CHRONICLE) -->
+    <section class="story-act-frame" id="act-chronicle">
+      <div class="act-inner-parchment">
+        
+        <div class="story-parchment-card" data-tilt>
+          
+          <header class="act-editorial-heading text-center">
+            <span class="act-script-eyebrow">Act III • Order of Celebrations</span>
+            <h2 class="act-title gold-story-shine">The Royal Chronicle</h2>
+            <div class="act-gold-divider"><i class="fa-solid fa-scroll"></i></div>
+            <p class="act-narrative-lead">"Every tradition brings its own radiance to illuminate our celebration."</p>
+          </header>
 
-          <div class="block-header text-center">
-            <span class="block-eyebrow">A Celebration of Love</span>
-            <h2 class="block-title">The Bride &amp; Groom</h2>
-            <div class="gold-bar"></div>
-          </div>
-
-          <div class="couple-split-layout">
-            <!-- Photo Frame -->
-            <div class="couple-photo-holder">
-              <img src="assets/images/couple.jpg" alt="Shaik Mannur Kaleem & Shaik Roshni" loading="lazy">
-              <div class="photo-floating-tag">Kaleem &amp; Roshni</div>
-            </div>
-
-            <!-- Bios -->
-            <div class="couple-bio-stack">
-              <!-- Groom -->
-              <div class="bio-entry-card">
-                <div class="bio-role-tag"><i class="fa-solid fa-user-tie"></i> The Groom</div>
-                <h3 class="bio-person-title gold-text">Shaik Mannur Kaleem</h3>
-                <span class="bio-degree-badge">M.Tech., Structural Engineer</span>
-                <p class="bio-parents-desc">Son of Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam</p>
-                <p class="bio-profession-desc">
-                  <strong>Co-founder</strong>, Dream House Constructions &amp; Interiors<br>
-                  <span class="bio-locations-text">Nellore • Gudur • Naidupeta</span>
-                </p>
+          <div class="story-timeline-stream">
+            
+            <!-- DAY 1: Sunset Haldi -->
+            <div class="story-day-epoch">
+              <div class="epoch-badge-tag day-1-tag">
+                <i class="fa-solid fa-sun"></i> DAY 01 — SATURDAY, 26TH SEPTEMBER 2026
               </div>
 
-              <!-- Bride -->
-              <div class="bio-entry-card">
-                <div class="bio-role-tag"><i class="fa-solid fa-heart"></i> The Bride</div>
-                <h3 class="bio-person-title gold-text">Shaik Roshni</h3>
-                <span class="bio-degree-badge">B.Sc., D.El.Ed.</span>
-                <p class="bio-parents-desc">Daughter of Mr. Shaik Gulam Gouse &amp; Mrs. Shaik Safoora</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="couple-quote-stripe">
-            <p>"Two souls with but a single thought, two hearts that beat as one."</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. CELEBRATIONS ITINERARY -->
-    <section class="section-block" id="schedule">
-      <div class="section-inner">
-        <div class="royal-card">
-
-          <div class="block-header text-center">
-            <span class="block-eyebrow">Order of Celebrations</span>
-            <h2 class="block-title">Wedding Itinerary</h2>
-            <div class="gold-bar"></div>
-            <p class="block-sub">Join us in celebrating every precious milestone across two auspicious days</p>
-          </div>
-
-          <div class="itinerary-days-container">
-
-            <!-- DAY 1 -->
-            <div class="itinerary-day-group">
-              <div class="day-header-pill">
-                <i class="fa-solid fa-calendar-day"></i>
-                <span>DAY 01 — SATURDAY, 26TH SEPTEMBER 2026</span>
-              </div>
-
-              <div class="day-events-grid">
-                <!-- Event 1: Haldi & Dinner -->
-                <div class="ceremony-card">
-                  <div class="ceremony-top-bar">
-                    <span class="ceremony-tag">SHUKRANA</span>
-                    <div class="ceremony-time-badge"><i class="fa-regular fa-clock"></i> 8:30 PM</div>
+              <div class="epoch-events-wrap">
+                <article class="story-event-capsule" data-tilt>
+                  <div class="event-capsule-header">
+                    <span class="event-ritual-label">EVENING CELEBRATION</span>
+                    <div class="event-time-pill"><i class="fa-regular fa-clock"></i> 8:30 PM</div>
                   </div>
-                  <div class="ceremony-main">
-                    <div class="ceremony-icon-box"><i class="fa-solid fa-sun"></i></div>
-                    <div class="ceremony-text">
-                      <h3 class="ceremony-title">Haldi &amp; Dinner</h3>
-                      <p class="ceremony-venue"><i class="fa-solid fa-location-dot"></i> PVR Function Hall, Gudur</p>
-                      <p class="ceremony-desc">"An auspicious evening of traditional Haldi rituals followed by a celebratory dinner."</p>
+                  <div class="event-capsule-content">
+                    <div class="event-orb-emblem"><i class="fa-solid fa-sun-bright"></i></div>
+                    <div class="event-story-text">
+                      <h3 class="event-title">Haldi &amp; Dinner</h3>
+                      <p class="event-venue-meta"><i class="fa-solid fa-location-dot"></i> PVR Function Hall, Gudur</p>
+                      <p class="event-poetic-desc">"An auspicious evening of traditional Haldi rituals, warm blessings, and a festive dinner."</p>
                     </div>
                   </div>
-                </div>
+                </article>
               </div>
             </div>
 
-            <!-- DAY 2 (THE WEDDING DAY) -->
-            <div class="itinerary-day-group">
-              <div class="day-header-pill day-main-pill">
-                <i class="fa-solid fa-crown"></i>
-                <span>DAY 02 — SUNDAY, 27TH SEPTEMBER 2026 (WEDDING DAY)</span>
+            <!-- DAY 2: The Wedding Ceremony -->
+            <div class="story-day-epoch">
+              <div class="epoch-badge-tag day-2-tag">
+                <i class="fa-solid fa-crown"></i> DAY 02 — SUNDAY, 27TH SEPTEMBER 2026 (WEDDING DAY)
               </div>
 
-              <div class="day-events-grid day-2-grid">
-                <!-- Event 2: Nikah (Main Ceremony) -->
-                <div class="ceremony-card featured-ceremony">
-                  <div class="ceremony-top-bar">
-                    <span class="ceremony-tag main-tag"><i class="fa-solid fa-gem"></i> THE SACRED UNION</span>
-                    <div class="ceremony-time-badge gold-time"><i class="fa-solid fa-clock"></i> 11:30 AM</div>
+              <div class="epoch-events-wrap epoch-split-wrap">
+                
+                <!-- Event 2: Wedding -->
+                <article class="story-event-capsule sacred-nikah-highlight" data-tilt>
+                  <div class="event-capsule-header">
+                    <span class="event-ritual-label sacred-glow-label"><i class="fa-solid fa-gem"></i> WEDDING CEREMONY</span>
+                    <div class="event-time-pill gold-time-pill"><i class="fa-solid fa-clock"></i> 11:30 AM</div>
                   </div>
-                  <div class="ceremony-main">
-                    <div class="ceremony-icon-box gold-glow-icon"><i class="fa-solid fa-ring"></i></div>
-                    <div class="ceremony-text">
-                      <h3 class="ceremony-title gold-text">Nikah (Muhurtham)</h3>
-                      <p class="ceremony-venue"><i class="fa-solid fa-location-dot"></i> PVR Function Hall, Gudur</p>
-                      <p class="ceremony-desc">"The auspicious Nikah ceremony uniting Kaleem &amp; Roshni in eternal companionship and love."</p>
+                  <div class="event-capsule-content">
+                    <div class="event-orb-emblem gold-radiant-emblem"><i class="fa-solid fa-ring"></i></div>
+                    <div class="event-story-text">
+                      <h3 class="event-title gold-story-shine">Wedding Ceremony (Muhurtham)</h3>
+                      <p class="event-venue-meta"><i class="fa-solid fa-location-dot"></i> PVR Function Hall, Gudur</p>
+                      <p class="event-poetic-desc">"The auspicious ceremony uniting Kaleem &amp; Roshni in a lifetime of shared love, happiness, and companionship."</p>
                     </div>
                   </div>
-                </div>
+                </article>
 
-                <!-- Event 3: Lunch Feast -->
-                <div class="ceremony-card">
-                  <div class="ceremony-top-bar">
-                    <span class="ceremony-tag">CELEBRATION FEAST</span>
-                    <div class="ceremony-time-badge"><i class="fa-regular fa-clock"></i> 12:30 PM</div>
+                <!-- Event 3: Feast -->
+                <article class="story-event-capsule" data-tilt>
+                  <div class="event-capsule-header">
+                    <span class="event-ritual-label">CELEBRATION FEAST</span>
+                    <div class="event-time-pill"><i class="fa-regular fa-clock"></i> 12:30 PM</div>
                   </div>
-                  <div class="ceremony-main">
-                    <div class="ceremony-icon-box"><i class="fa-solid fa-utensils"></i></div>
-                    <div class="ceremony-text">
-                      <h3 class="ceremony-title">Grand Lunch</h3>
-                      <p class="ceremony-venue"><i class="fa-solid fa-location-dot"></i> PVR Function Hall, Gudur</p>
-                      <p class="ceremony-desc">"A lavish celebratory feast with family, relatives, and esteemed guests."</p>
+                  <div class="event-capsule-content">
+                    <div class="event-orb-emblem"><i class="fa-solid fa-utensils"></i></div>
+                    <div class="event-story-text">
+                      <h3 class="event-title">Grand Lunch</h3>
+                      <p class="event-venue-meta"><i class="fa-solid fa-location-dot"></i> PVR Function Hall, Gudur</p>
+                      <p class="event-poetic-desc">"A royal culinary celebration with beloved family, cherished relatives, and honored guests."</p>
                     </div>
                   </div>
-                </div>
+                </article>
+
               </div>
             </div>
 
           </div>
 
         </div>
+
       </div>
     </section>
 
-    <!-- 5. VENUE & LOCATION -->
-    <section class="section-block" id="venue">
-      <div class="section-inner">
-        <div class="royal-card text-center">
+    <!-- ACT IV: THE ROYAL CANOPY (VENUE & NAVIGATION) -->
+    <section class="story-act-frame" id="act-pavilion">
+      <div class="act-inner-parchment">
+        
+        <div class="story-parchment-card text-center" data-tilt>
+          
+          <header class="act-editorial-heading">
+            <span class="act-script-eyebrow">Act IV • The Royal Canopy</span>
+            <h2 class="act-title gold-story-shine">Wedding Venue</h2>
+            <div class="act-gold-divider"><i class="fa-solid fa-compass"></i></div>
+          </header>
 
-          <div class="block-header">
-            <span class="block-eyebrow">Destination</span>
-            <h2 class="block-title">Venue &amp; Location</h2>
-            <div class="gold-bar"></div>
-          </div>
-
-          <div class="venue-content-wrapper">
-            <h3 class="venue-hall-name gold-text">PVR Function Hall</h3>
-            <div class="venue-city-badge">
-              <i class="fa-solid fa-location-dot"></i> Gudur, Andhra Pradesh – 524101
+          <div class="pavilion-guide-hub">
+            <h3 class="pavilion-hall-heading gold-story-shine">PVR Function Hall</h3>
+            <div class="pavilion-geo-tag">
+              <i class="fa-solid fa-map-pin"></i> East Gudur Rural, Andhra Pradesh
             </div>
 
-            <div class="venue-address-panel">
-              <p>Near the RTC Bus Stand, New Balaji Nagar, East Gudur Rural, Andhra Pradesh</p>
+            <div class="pavilion-address-stone">
+              <p>
+                <strong>Address:</strong> Near RTC Bus Stand, New Balaji Nagar,<br>
+                East Gudur Rural, Andhra Pradesh – 524101
+              </p>
             </div>
 
-            <div class="map-frame-holder">
+            <!-- Embedded Google Map -->
+            <div class="pavilion-map-canvas">
               <iframe
-                src="https://maps.google.com/maps?q=PVR%20Function%20Hall%20Gudur%20Andhra%20Pradesh&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="PVR Function Hall Map">
+                title="PVR Function Hall Gudur Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3868.528359495085!2d79.851944!3d14.148889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4ce2585f67fa4b%3A0x6b44f2b963b651ea!2sPVR%20Function%20Hall!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
               </iframe>
             </div>
 
-            <div class="venue-actions-row">
-              <a href="https://maps.google.com/?q=PVR+Function+Hall+Gudur+Andhra+Pradesh" target="_blank"
-                rel="noopener noreferrer" class="btn-royal-primary">
-                <i class="fa-solid fa-location-arrow"></i> Google Maps Directions
+            <div class="pavilion-action-links">
+              <a href="https://maps.google.com/?q=PVR+Function+Hall+Gudur+Andhra+Pradesh" target="_blank" rel="noopener" class="btn-story-gold">
+                <i class="fa-solid fa-diamond-turn-right"></i> Open in Google Maps
               </a>
-              <button onclick="copyAddress()" class="btn-royal-secondary">
+              <button onclick="copyAddress()" class="btn-story-glass">
                 <i class="fa-solid fa-copy"></i> Copy Address
               </button>
             </div>
           </div>
 
         </div>
+
       </div>
     </section>
 
-    <!-- 6. BEST COMPLIMENTS & RSVP -->
-    <section class="section-block" id="family">
-      <div class="section-inner">
-        <div class="royal-card text-center">
+    <!-- ACT V: WISHES & COMPLIMENTS (RSVP & WISH GENERATOR) -->
+    <section class="story-act-frame" id="act-blessings">
+      <div class="act-inner-parchment">
+        
+        <div class="story-parchment-card text-center act-v-compact-card" data-tilt>
+          
+          <header class="act-editorial-heading">
+            <span class="act-script-eyebrow">Act V • Warm Regards &amp; RSVP</span>
+            <h2 class="act-title gold-story-shine">With Best Compliments</h2>
+            <div class="act-gold-divider"><i class="fa-solid fa-feather-pointed"></i></div>
+          </header>
 
-          <div class="block-header">
-            <span class="block-eyebrow">With Warm Regards</span>
-            <h2 class="block-title">Compliments &amp; RSVP</h2>
-            <div class="gold-bar"></div>
+          <!-- Ultra-Compact Wishes Bar -->
+          <div class="wishes-mini-dock">
+            <span class="wishes-mini-title"><i class="fa-solid fa-wand-magic-sparkles" style="color: var(--gold-primary);"></i> 1-Tap Wishes:</span>
+            <div class="wishes-mini-pills">
+              <button class="btn-wish-mini" onclick="sendCustomWish('Hearty Congratulations Kaleem & Roshni! Wishing you both a lifetime of love, joy, and endless happiness.')">
+                ✨ Endless Happiness
+              </button>
+              <button class="btn-wish-mini" onclick="sendCustomWish('Heartiest Congratulations Kaleem & Roshni! Wishing you a blessed and joyful marriage together!')">
+                🥂 Love &amp; Joy
+              </button>
+              <button class="btn-wish-mini" onclick="sendCustomWish('Congratulations Kaleem bhai & Roshni! Excited to celebrate with you at PVR Function Hall, Gudur!')">
+                🎉 Excited to Celebrate
+              </button>
+            </div>
           </div>
 
-          <div class="compliments-grid-layout">
-            <div class="compliment-card">
-              <i class="fa-solid fa-house-chimney-user"></i>
-              <h4>Gracious Hosts</h4>
-              <p>Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam</p>
-            </div>
+          <!-- Compact Single-Row Compliments -->
+          <div class="compliments-compact-strip">
+            <span class="compliment-item"><i class="fa-solid fa-heart" style="color: var(--gold-primary); font-size: 0.75rem;"></i> Mr. &amp; Mrs. Rahul</span>
+            <span class="compliment-sep">•</span>
+            <span class="compliment-item"><i class="fa-solid fa-heart" style="color: var(--gold-primary); font-size: 0.75rem;"></i> Mr. &amp; Mrs. Hamad</span>
+            <span class="compliment-sep">•</span>
+            <span class="compliment-item"><i class="fa-solid fa-heart" style="color: var(--gold-primary); font-size: 0.75rem;"></i> Mr. &amp; Mrs. Azeez</span>
+          </div>
 
-            <div class="compliment-card">
-              <i class="fa-solid fa-people-roof"></i>
-              <h4>Best Compliments From</h4>
-              <p>Mr. &amp; Mrs. Rahul • Mr. &amp; Mrs. Hamad • Mr. &amp; Mrs. Azeez</p>
-            </div>
-
-            <div class="compliment-card rsvp-card-highlight">
-              <i class="fa-solid fa-phone-volume"></i>
-              <h4>RSVP &amp; Enquiries</h4>
-              <div class="rsvp-contacts-list">
-                <div class="rsvp-contact-item">
-                  <a href="tel:9014360108" class="btn-rsvp-phone"><i class="fa-solid fa-phone"></i> 9014360108</a>
-                  <a href="https://wa.me/919014360108?text=Congratulations%20Kaleem%20%26%20Roshni!" target="_blank"
-                    class="btn-rsvp-whatsapp" title="WhatsApp Message"><i class="fa-brands fa-whatsapp"></i></a>
-                </div>
-                <div class="rsvp-contact-item">
-                  <a href="tel:8341382089" class="btn-rsvp-phone"><i class="fa-solid fa-phone"></i> 83413 82089</a>
-                  <a href="https://wa.me/918341382089?text=Congratulations%20Kaleem%20%26%20Roshni!" target="_blank"
-                    class="btn-rsvp-whatsapp" title="WhatsApp Message"><i class="fa-brands fa-whatsapp"></i></a>
-                </div>
+          <!-- Ultra-Compact RSVP & Contact Hub -->
+          <div class="rsvp-compact-bar">
+            <span class="rsvp-bar-label"><i class="fa-solid fa-phone-volume" style="color: var(--gold-primary);"></i> Inquiries:</span>
+            <div class="rsvp-buttons-group">
+              <div class="rsvp-chip">
+                <a href="tel:+919014360108" class="rsvp-phone-num">+91 90143 60108</a>
+                <a href="https://wa.me/919014360108?text=Hello%2C%20congratulations%20on%20the%20wedding%20of%20Kaleem%20%26%20Roshni%21" target="_blank" rel="noopener" class="rsvp-wa-icon" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+              </div>
+              <div class="rsvp-chip">
+                <a href="tel:+918341382089" class="rsvp-phone-num">+91 83413 82089</a>
+                <a href="https://wa.me/918341382089?text=Hello%2C%20congratulations%20on%20the%20wedding%20of%20Kaleem%20%26%20Roshni%21" target="_blank" rel="noopener" class="rsvp-wa-icon" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
               </div>
             </div>
           </div>
 
-          <!-- Share on WhatsApp Bar -->
-          <div class="share-invitation-wrap">
-            <button onclick="shareInvitation()" class="btn-share-large">
-              <i class="fa-brands fa-whatsapp"></i> Share Invitation with Friends &amp; Family
+          <!-- Compact Share Button -->
+          <div class="share-mini-wrap">
+            <button onclick="shareInvitation()" class="btn-share-mini">
+              <i class="fa-brands fa-whatsapp"></i> Forward Royal Invitation
             </button>
           </div>
 
-          <div class="blessings-quote-box">
-            <p>"Your gracious presence, prayers, and blessings will make our celebration truly memorable."</p>
+          <div class="story-closing-blessing compact-blessing">
+            <p>"Your gracious presence, warm wishes, and blessings will make our celebration truly memorable."</p>
           </div>
 
-          <footer class="closing-footer-box">
-            <div class="closing-monogram-text">K &amp; R</div>
-            <p class="closing-couple-names">Shaik Mannur Kaleem &amp; Shaik Roshni</p>
-            <span class="closing-date-info">September 26 &amp; 27, 2026 • PVR Function Hall, Gudur</span>
+          <footer class="story-grand-footer compact-footer">
+            <div class="footer-monogram-crest">K ✦ R</div>
+            <p class="footer-names-label">Shaik Mannur Kaleem &amp; Shaik Roshni</p>
+            <span class="footer-venue-date">September 26 &amp; 27, 2026 • PVR Function Hall, Gudur</span>
           </footer>
 
         </div>
+
       </div>
     </section>
 
@@ -478,13 +540,13 @@
   <!-- Toast Notification -->
   <div id="toastAlert" class="toast-alert"></div>
 
-  <!-- YouTube Player for Jashn-E-Bahaaraa (cr4Tz4JEP40) -->
+  <!-- Hidden YouTube Audio Player for Jashn-E-Bahaaraa (cr4Tz4JEP40) -->
   <div id="youtube-audio-container" style="position: fixed; width: 200px; height: 200px; bottom: -500px; right: -500px; pointer-events: none; z-index: -1;">
     <iframe id="ytIframe" width="200" height="200" src="https://www.youtube.com/embed/cr4Tz4JEP40?enablejsapi=1&autoplay=0&loop=1&playlist=cr4Tz4JEP40&playsinline=1" frameborder="0" allow="autoplay"></iframe>
   </div>
 
   <!-- Scripts -->
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=70.0"></script>
 </body>
 
 </html>

@@ -1,72 +1,168 @@
 /**
- * KALEEM & ROSHNI — WEDDING INVITATION
- * Balanced Desktop & Mobile Interaction Engine
+ * THE CELESTIAL STORY OF KALEEM & ROSHNI — JAVASCRIPT ENGINE
+ * 3D Cosmic Canvas, Story Spine Tracker, Audio Engine & Wish Generator
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Prevent browser jumping on refresh
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
   }
 
-  initAmbientParticles();
-  initUnsealCover();
-  initNavigation();
+  initThemeSwitcher();
+  initStoryCosmicCanvas();
+  initEntryPortalExperience();
+  initStorySpineTracker();
   initCountdownTimer();
-  initWeddingAudio();
+  initFloatingAudio();
+  init3DParallax();
+  initCursorAura();
 });
 
 /* ==========================================================================
-   1. AMBIENT PARTICLES (GPU Optimized Canvas)
+   1. 3D COSMIC CANVAS & VELVET ROSE PETALS
    ========================================================================== */
-function initAmbientParticles() {
-  const canvas = document.getElementById('ambient-canvas');
+function initStoryCosmicCanvas() {
+  const canvas = document.getElementById('storyCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
+  let mouse = { x: width / 2, y: height / 2, active: false };
 
   window.addEventListener('resize', () => {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   });
 
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    mouse.active = true;
+  });
+
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+      mouse.x = e.touches[0].clientX;
+      mouse.y = e.touches[0].clientY;
+      mouse.active = true;
+    }
+  }, { passive: true });
+
   const particles = [];
-  const count = window.innerWidth < 768 ? 25 : 55;
+  const count = window.innerWidth < 768 ? 40 : 80;
 
   for (let i = 0; i < count; i++) {
+    const isPetal = i % 5 === 0;
     particles.push({
+      isPetal,
       x: Math.random() * width,
       y: Math.random() * height,
-      size: Math.random() * 2.2 + 0.8,
-      speedX: (Math.random() - 0.5) * 0.4,
-      speedY: Math.random() * 0.5 + 0.2,
-      opacity: Math.random() * 0.6 + 0.2,
-      color: Math.random() > 0.4 ? 'rgba(212, 175, 55,' : 'rgba(250, 226, 156,'
+      z: Math.random() * 2 + 0.6,
+      size: isPetal ? Math.random() * 5 + 4 : Math.random() * 2.2 + 0.8,
+      speedX: isPetal ? (Math.random() - 0.5) * 0.8 : (Math.random() - 0.5) * 0.3,
+      speedY: isPetal ? Math.random() * 0.8 + 0.4 : Math.random() * 0.5 + 0.2,
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.03,
+      opacity: Math.random() * 0.6 + 0.3,
+      hue: Math.random() > 0.4 ? '212, 175, 55' : '250, 226, 156',
+      pulse: Math.random() * Math.PI
     });
   }
+
+  // Sparkles on click
+  const sparkles = [];
+  window.triggerSparkleBurst = function(x, y) {
+    for (let i = 0; i < 45; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 5 + 2;
+      sparkles.push({
+        x,
+        y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        size: Math.random() * 3 + 1.2,
+        alpha: 1,
+        decay: Math.random() * 0.025 + 0.015,
+        color: Math.random() > 0.5 ? '#d4af37' : '#fae29c'
+      });
+    }
+  };
+
+  window.addEventListener('click', (e) => {
+    window.triggerSparkleBurst(e.clientX, e.clientY);
+  });
 
   function render() {
     ctx.clearRect(0, 0, width, height);
 
     for (let p of particles) {
-      p.x += p.speedX;
-      p.y += p.speedY;
+      p.pulse += 0.025;
+      const currentOpacity = p.opacity + Math.sin(p.pulse) * 0.15;
 
-      if (p.y > height) {
-        p.y = -10;
+      if (mouse.active) {
+        const dx = mouse.x - p.x;
+        const dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140) {
+          const force = (140 - dist) / 140;
+          p.x -= (dx / dist) * force * 1.8;
+          p.y -= (dy / dist) * force * 1.8;
+        }
+      }
+
+      p.x += p.speedX * p.z;
+      p.y += p.speedY * p.z;
+      p.rotation += p.rotSpeed;
+
+      if (p.y > height + 20) {
+        p.y = -20;
         p.x = Math.random() * width;
       }
-      if (p.x > width) p.x = 0;
-      if (p.x < 0) p.x = width;
+      if (p.x > width + 20) p.x = -20;
+      if (p.x < -20) p.x = width + 20;
 
       ctx.save();
-      ctx.fillStyle = `${p.color} ${p.opacity})`;
-      ctx.shadowBlur = 6;
-      ctx.shadowColor = '#d4af37';
+      if (p.isPetal) {
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.fillStyle = `rgba(122, 27, 50, ${Math.max(0.1, currentOpacity * 0.85)})`;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size * 1.2, p.size * 0.6, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = `rgba(212, 175, 55, 0.4)`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      } else {
+        ctx.fillStyle = `rgba(${p.hue}, ${Math.max(0.1, currentOpacity)})`;
+        ctx.shadowBlur = 10 * p.z;
+        ctx.shadowColor = '#d4af37';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * p.z, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    for (let i = sparkles.length - 1; i >= 0; i--) {
+      const s = sparkles[i];
+      s.x += s.vx;
+      s.y += s.vy;
+      s.vy += 0.12;
+      s.alpha -= s.decay;
+
+      if (s.alpha <= 0) {
+        sparkles.splice(i, 1);
+        continue;
+      }
+
+      ctx.save();
+      ctx.globalAlpha = s.alpha;
+      ctx.fillStyle = s.color;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = s.color;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
       ctx.fill();
       ctx.restore();
     }
@@ -78,99 +174,90 @@ function initAmbientParticles() {
 }
 
 /* ==========================================================================
-   2. ROYAL ENVELOPE UNSEAL OVERLAY
+   2. ENTRY PORTAL UNVEIL (BASIC INFO -> FULL STORY)
    ========================================================================== */
-function initUnsealCover() {
-  const cover = document.getElementById('invitationCover');
-  const btn = document.getElementById('btnUnseal');
-  if (!cover || !btn) return;
+function initEntryPortalExperience() {
+  const portal = document.getElementById('entryPortal');
+  const seal = document.getElementById('portalSealBtn');
+  const env = document.getElementById('royalEnvelope');
+  if (!portal) return;
 
-  btn.addEventListener('click', () => {
-    cover.classList.add('opened');
-    
-    if (window.location.hash) {
-      history.replaceState(null, null, window.location.pathname);
+  function openStory(e) {
+    const rect = (seal || env || portal).getBoundingClientRect();
+    const clickX = e?.clientX || rect.left + rect.width / 2;
+    const clickY = e?.clientY || rect.top + rect.height / 2;
+
+    if (window.triggerSparkleBurst) {
+      window.triggerSparkleBurst(clickX, clickY);
+      setTimeout(() => window.triggerSparkleBurst(clickX - 60, clickY - 40), 140);
+      setTimeout(() => window.triggerSparkleBurst(clickX + 60, clickY + 40), 260);
     }
-    window.scrollTo({ top: 0, behavior: 'instant' });
 
-    // Initialize audio synchronously on direct user gesture
+    portal.classList.add('opened');
     playWeddingMusic();
 
     setTimeout(() => {
-      cover.style.display = 'none';
-    }, 650);
-  });
+      portal.style.display = 'none';
+    }, 850);
+  }
+
+  if (seal) seal.addEventListener('click', openStory);
+  if (env) {
+    env.addEventListener('click', (e) => {
+      if (e.target.closest('#portalSealBtn') || e.target.classList.contains('envelope-tap-instruction')) {
+        openStory(e);
+      }
+    });
+  }
 }
 
 /* ==========================================================================
-   3. NAVIGATION & MOBILE DRAWER
+   3. STORY PROGRESS SPINE TRACKER & SMOOTH TRANSITIONS
    ========================================================================== */
-function initNavigation() {
-  const mobileToggle = document.getElementById('mobileToggle');
-  const mobileClose = document.getElementById('mobileClose');
-  const mobileDrawer = document.getElementById('mobileDrawer');
-  const navBackdrop = document.getElementById('navBackdrop');
-  const navLinks = document.querySelectorAll('#navMenu a, .drawer-links a');
+function initStorySpineTracker() {
+  const dots = document.querySelectorAll('.spine-dot, .story-actions-row a');
+  const acts = document.querySelectorAll('.story-act-frame');
 
-  function openDrawer() {
-    mobileDrawer.classList.add('active');
-    navBackdrop.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeDrawer() {
-    mobileDrawer.classList.remove('active');
-    navBackdrop.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  if (mobileToggle) mobileToggle.addEventListener('click', openDrawer);
-  if (mobileClose) mobileClose.addEventListener('click', closeDrawer);
-  if (navBackdrop) navBackdrop.addEventListener('click', closeDrawer);
-
-  // Smooth scroll and active state tracking with navbar offset
-  navLinks.forEach((link) => {
-    link.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href').substring(1);
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) {
+  dots.forEach((dot) => {
+    dot.addEventListener('click', function(e) {
+      const targetHref = this.getAttribute('href');
+      if (targetHref && targetHref.startsWith('#')) {
         e.preventDefault();
-        closeDrawer();
-        const navbarHeight = document.querySelector('.main-navbar')?.offsetHeight || 75;
-        const targetPosition = targetEl.offsetTop - navbarHeight;
-        window.scrollTo({
-          top: Math.max(0, targetPosition),
-          behavior: 'smooth'
-        });
+        const targetId = targetHref.substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          window.scrollTo({
+            top: targetEl.offsetTop,
+            behavior: 'smooth'
+          });
+        }
       }
     });
   });
 
-  // ScrollSpy for Desktop Navbar
-  const sections = document.querySelectorAll('section.section-block');
   window.addEventListener('scroll', () => {
-    let current = '';
-    const scrollPosition = window.pageYOffset + 150;
+    let currentId = '';
+    const scrollPos = window.pageYOffset + window.innerHeight / 2;
 
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        current = section.getAttribute('id');
+    acts.forEach((act) => {
+      const top = act.offsetTop;
+      const height = act.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = act.getAttribute('id');
       }
     });
 
-    navLinks.forEach((link) => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
+    document.querySelectorAll('.spine-dot').forEach((dot) => {
+      dot.classList.remove('active');
+      if (dot.getAttribute('data-act') === currentId) {
+        dot.classList.add('active');
       }
     });
   }, { passive: true });
 }
 
 /* ==========================================================================
-   4. COUNTDOWN TIMER (Sept 27, 2026, 11:30 AM IST)
+   4. COUNTDOWN (Sept 27, 2026, 11:30 AM IST)
    ========================================================================== */
 function initCountdownTimer() {
   const targetDate = new Date('2026-09-27T11:30:00+05:30').getTime();
@@ -210,32 +297,30 @@ function initCountdownTimer() {
 }
 
 /* ==========================================================================
-   5. WEDDING MUSIC: JASHN-E-BAHAARAA (YouTube Video ID: cr4Tz4JEP40)
+   5. FLOATING MUSIC ENGINE: JASHN-E-BAHAARAA
    ========================================================================== */
-let isAudioPlaying = false;
+let isMusicPlaying = false;
 
-function setMusicUIState(playing) {
-  isAudioPlaying = playing;
-  const toggleBtn = document.getElementById('audioToggle');
-  if (!toggleBtn) return;
+function setMusicUI(playing) {
+  isMusicPlaying = playing;
+  const orb = document.getElementById('musicOrb');
+  if (!orb) return;
   if (playing) {
-    toggleBtn.classList.add('playing');
-    toggleBtn.title = 'Mute Music';
-    toggleBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+    orb.classList.add('playing');
+    orb.title = 'Mute Jashn-E-Bahaaraa';
   } else {
-    toggleBtn.classList.remove('playing');
-    toggleBtn.title = 'Play Music';
-    toggleBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
+    orb.classList.remove('playing');
+    orb.title = 'Play Jashn-E-Bahaaraa';
   }
 }
 
-function initWeddingAudio() {
-  const toggleBtn = document.getElementById('audioToggle');
-  if (!toggleBtn) return;
+function initFloatingAudio() {
+  const orb = document.getElementById('musicOrb');
+  if (!orb) return;
 
-  toggleBtn.addEventListener('click', (e) => {
+  orb.addEventListener('click', (e) => {
     e.preventDefault();
-    if (isAudioPlaying) {
+    if (isMusicPlaying) {
       pauseWeddingMusic();
     } else {
       playWeddingMusic();
@@ -250,7 +335,7 @@ function playWeddingMusic() {
       ytIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
     } catch (e) {}
   }
-  setMusicUIState(true);
+  setMusicUI(true);
 }
 
 function pauseWeddingMusic() {
@@ -260,23 +345,70 @@ function pauseWeddingMusic() {
       ytIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
     } catch (e) {}
   }
-  setMusicUIState(false);
+  setMusicUI(false);
 }
 
 /* ==========================================================================
-   6. UTILITIES: TOAST, SHARE, COPY & CALENDAR
+   6. 3D INTERACTIVE TILT & PARALLAX
    ========================================================================== */
+function init3DParallax() {
+  const tiltCards = document.querySelectorAll(
+    '.portal-card-3d, .story-parchment-card, .soul-narrative-box, .story-event-capsule, .story-compliment-stone, .mughal-jharokha-art-frame'
+  );
+
+  tiltCards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      if (window.innerWidth < 768) return;
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -4;
+      const rotateY = ((x - centerX) / centerX) * 4;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(8px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
+
+/* ==========================================================================
+   7. CURSOR AURA
+   ========================================================================== */
+function initCursorAura() {
+  const aura = document.getElementById('cursorAura');
+  if (!aura) return;
+
+  window.addEventListener('mousemove', (e) => {
+    aura.style.left = e.clientX + 'px';
+    aura.style.top = e.clientY + 'px';
+  }, { passive: true });
+}
+
+/* ==========================================================================
+   8. WISH GENERATOR & GUEST UTILITIES
+   ========================================================================== */
+window.sendCustomWish = function(msg) {
+  const phone = '919014360108';
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+};
+
 function showToast(msg) {
   const toast = document.getElementById('toastAlert');
   if (!toast) return;
-  toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #d4af37;"></i> <span>${msg}</span>`;
+  toast.innerHTML = `<i class="fa-solid fa-crown" style="color: #d4af37;"></i> <span>${msg}</span>`;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 3200);
 }
 
 function shareInvitation() {
-  const title = 'Wedding Invitation: Kaleem & Roshni';
-  const text = 'You are cordially invited to celebrate the wedding union of Shaik Mannur Kaleem & Shaik Roshni on September 26 & 27, 2026 at PVR Function Hall, Gudur.\n\nView Invitation: ';
+  const title = '👑 Royal Wedding Story: Kaleem & Roshni';
+  const text = 'You are cordially invited to celebrate the royal wedding of Shaik Mannur Kaleem & Shaik Roshni on September 26 & 27, 2026 at PVR Function Hall, Gudur.\n\nExperience Our Wedding Story: ';
   const url = window.location.href;
 
   if (navigator.share) {
@@ -332,4 +464,49 @@ function downloadICS() {
   document.body.removeChild(a);
   window.URL.revokeObjectURL(url);
   showToast('Calendar event downloaded (.ics)');
+}
+
+/* ==========================================================================
+   9. ROYAL THEME SWITCHER CONTROLLER
+   ========================================================================== */
+function initThemeSwitcher() {
+  const switcher = document.getElementById('themeSwitcher');
+  const toggleBtn = document.getElementById('themeToggleBtn');
+  const chips = document.querySelectorAll('.theme-chip-btn');
+  if (!switcher || !toggleBtn) return;
+
+  const savedTheme = localStorage.getItem('royalTheme') || 'emerald';
+  applyTheme(savedTheme);
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    switcher.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!switcher.contains(e.target)) {
+      switcher.classList.remove('open');
+    }
+  });
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', function() {
+      const theme = this.getAttribute('data-theme');
+      applyTheme(theme);
+      localStorage.setItem('royalTheme', theme);
+      switcher.classList.remove('open');
+      showToast(`Palette switched to ${theme.toUpperCase()}!`);
+    });
+  });
+
+  function applyTheme(theme) {
+    if (theme === 'emerald') {
+      document.documentElement.removeAttribute('data-theme');
+    } else {
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+    chips.forEach((c) => {
+      c.classList.toggle('active', c.getAttribute('data-theme') === theme);
+    });
+  }
 }

@@ -1,65 +1,96 @@
 /* ==========================================================================
-   ANIMATIONS & DYNAMIC VISUAL EFFECTS
+   THE ROYAL CELESTIAL REALM — ANIMATIONS & 3D DYNAMICS
    ========================================================================== */
 
-/* Shimmering Gold Text Effect */
-@keyframes goldShimmer {
+/* Shimmering Gold Extrusion & Light Glint */
+@keyframes royalGoldShimmer {
   0% {
-    background-position: -200% center;
+    background-position: -250% center;
   }
   100% {
-    background-position: 200% center;
+    background-position: 250% center;
   }
 }
 
-.shimmer-text {
+.gold-metal-shine {
   background: linear-gradient(
-    90deg,
+    115deg,
     #ffffff 0%,
-    #fae29c 25%,
-    #d4af37 50%,
-    #ffffff 75%,
-    #d4af37 100%
+    #fae29c 20%,
+    #d4af37 40%,
+    #ffffff 50%,
+    #d4af37 60%,
+    #aa820a 80%,
+    #ffffff 100%
   );
-  background-size: 200% auto;
+  background-size: 250% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: goldShimmer 6s linear infinite;
+  animation: royalGoldShimmer 7s linear infinite;
 }
 
-/* Floating animation for subtle elements */
-@keyframes gentleFloat {
+/* 3D Floating Oscillations */
+@keyframes celestialFloat3D {
   0%, 100% {
-    transform: translateY(0);
+    transform: translateY(0) rotateX(0deg) rotateY(0deg) translateZ(0);
   }
   50% {
-    transform: translateY(-5px);
+    transform: translateY(-8px) rotateX(3.5deg) rotateY(-3.5deg) translateZ(12px);
   }
 }
 
-.float-slow {
-  animation: gentleFloat 4s ease-in-out infinite;
+.float-celestial {
+  animation: celestialFloat3D 6s ease-in-out infinite;
+  transform-style: preserve-3d;
 }
 
-/* Pulsing Golden Glow */
-@keyframes pulseGlow {
+/* 3D Wax Seal Pulse & Radiance */
+@keyframes waxSealRadiance {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    box-shadow:
+      0 14px 30px rgba(0, 0, 0, 0.9),
+      0 0 25px rgba(212, 175, 55, 0.5),
+      inset 0 2px 4px rgba(255, 255, 255, 0.9),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.85);
+    transform: perspective(600px) scale(1) translateZ(25px);
   }
   50% {
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.45);
+    box-shadow:
+      0 20px 45px rgba(0, 0, 0, 0.98),
+      0 0 45px rgba(250, 226, 156, 0.85),
+      inset 0 2px 4px rgba(255, 255, 255, 0.95),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.9);
+    transform: perspective(600px) scale(1.05) translateZ(35px);
   }
 }
 
-.glow-box {
-  animation: pulseGlow 3s infinite ease-in-out;
+.vault-seal-trigger {
+  animation: waxSealRadiance 3.2s infinite ease-in-out;
+  transform-style: preserve-3d;
 }
 
-/* Active Button Tap Micro-Interaction */
+/* Nikah Sacred Union Ring Pulse */
+@keyframes nikahRingGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.35);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.75), 0 0 50px rgba(250, 226, 156, 0.4);
+  }
+}
+
+.event-icon-circle.gold-ring-circle {
+  animation: nikahRingGlow 3s infinite ease-in-out;
+}
+
+/* Button Active Taps */
 button:active,
-.btn-royal-primary:active,
-.btn-royal-secondary:active,
-.btn-royal-share:active,
-.btn-unseal-action:active {
-  transform: scale(0.98);
+.btn-unlock-realm:active,
+.btn-royal-gold:active,
+.btn-royal-glass:active,
+.btn-launch-wa:active,
+.btn-launch-glass:active {
+  transform: scale(0.96) translateY(1px);
 }

@@ -210,12 +210,9 @@ function initCountdownTimer() {
 }
 
 /* ==========================================================================
-   5. WEDDING MUSIC: JASHN-E-BAHAARAA (Jodhaa Akbar Melody)
+   5. WEDDING MUSIC: JASHN-E-BAHAARAA (YouTube Video ID: cr4Tz4JEP40)
    ========================================================================== */
 let isAudioPlaying = false;
-let audioCtx = null;
-let melodyTimer = null;
-let droneOscs = [];
 
 function setMusicUIState(playing) {
   isAudioPlaying = playing;
@@ -223,11 +220,11 @@ function setMusicUIState(playing) {
   if (!toggleBtn) return;
   if (playing) {
     toggleBtn.classList.add('playing');
-    toggleBtn.title = 'Mute Jashn-E-Bahaaraa';
+    toggleBtn.title = 'Mute Music';
     toggleBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
   } else {
     toggleBtn.classList.remove('playing');
-    toggleBtn.title = 'Play Jashn-E-Bahaaraa';
+    toggleBtn.title = 'Play Music';
     toggleBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
   }
 }
@@ -247,15 +244,13 @@ function initWeddingAudio() {
 }
 
 function playWeddingMusic() {
-  // Send postMessage to YouTube IFrame
   const ytIframe = document.getElementById('ytIframe');
   if (ytIframe && ytIframe.contentWindow) {
     try {
       ytIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
     } catch (e) {}
   }
-
-  startSynthesizedJashnEBahaaraa();
+  setMusicUIState(true);
 }
 
 function pauseWeddingMusic() {
@@ -265,211 +260,7 @@ function pauseWeddingMusic() {
       ytIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
     } catch (e) {}
   }
-
-  stopSynthesizedMelody();
   setMusicUIState(false);
-}
-
-/* Authentic Jashn-E-Bahaaraa Royal Melody Synthesis */
-function startSynthesizedJashnEBahaaraa() {
-  try {
-    if (!audioCtx) {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      audioCtx = new AudioContext();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-
-    setMusicUIState(true);
-    startDrone();
-
-    // The iconic melody phrases of Jashn-E-Bahaaraa (A.R. Rahman)
-    const jashnPhrases = [
-      // "Kehne Ko Jashn-E-Bahaaraa Hai..."
-      [ { f: 440.00, d: 0.55 }, { f: 369.99, d: 0.38 }, { f: 329.63, d: 0.38 }, { f: 293.66, d: 0.45 }, { f: 329.63, d: 0.38 }, { f: 369.99, d: 0.55 }, { f: 293.66, d: 0.85 } ],
-      // "Ishq Yeh Dekhke Hairaan Hai..."
-      [ { f: 440.00, d: 0.38 }, { f: 493.88, d: 0.38 }, { f: 587.33, d: 0.55 }, { f: 554.37, d: 0.38 }, { f: 493.88, d: 0.38 }, { f: 440.00, d: 0.45 }, { f: 369.99, d: 0.85 } ],
-      // "Phool Se Khushboo Khafaa Khafaa..."
-      [ { f: 440.00, d: 0.55 }, { f: 369.99, d: 0.38 }, { f: 329.63, d: 0.38 }, { f: 293.66, d: 0.45 }, { f: 329.63, d: 0.38 }, { f: 369.99, d: 0.55 }, { f: 293.66, d: 0.85 } ],
-      // "Baagh Mein Jaise Sabaa Sabaa..."
-      [ { f: 329.63, d: 0.35 }, { f: 369.99, d: 0.35 }, { f: 392.00, d: 0.48 }, { f: 369.99, d: 0.35 }, { f: 329.63, d: 0.38 }, { f: 293.66, d: 0.35 }, { f: 277.18, d: 0.38 }, { f: 293.66, d: 1.0 } ],
-      // Royal Instrumental Flute & Sitar Interlude
-      [ { f: 587.33, d: 0.35 }, { f: 659.25, d: 0.35 }, { f: 739.99, d: 0.55 }, { f: 659.25, d: 0.35 }, { f: 587.33, d: 0.38 }, { f: 554.37, d: 0.35 }, { f: 493.88, d: 0.35 }, { f: 440.00, d: 0.48 }, { f: 493.88, d: 0.38 }, { f: 554.37, d: 0.38 }, { f: 587.33, d: 0.95 } ]
-    ];
-
-    let pIdx = 0;
-    let nIdx = 0;
-
-    function playNote() {
-      if (!isAudioPlaying || !audioCtx) return;
-      const p = jashnPhrases[pIdx];
-      const note = p[nIdx];
-      playAcousticInstrument(note.f, note.d);
-
-      nIdx++;
-      if (nIdx >= p.length) {
-        nIdx = 0;
-        pIdx = (pIdx + 1) % jashnPhrases.length;
-        melodyTimer = setTimeout(playNote, (note.d * 1000) + 500);
-      } else {
-        melodyTimer = setTimeout(playNote, (note.d * 1000) + 50);
-      }
-    }
-
-    playNote();
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-function stopSynthesizedMelody() {
-  if (melodyTimer) clearTimeout(melodyTimer);
-  stopDrone();
-
-  if (audioCtx && audioCtx.state === 'running') {
-    audioCtx.suspend();
-  }
-}
-
-function startDrone() {
-  if (!audioCtx) return;
-  stopDrone();
-  [146.83, 220.00, 293.66].forEach((freq, idx) => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = idx === 0 ? 'sine' : 'triangle';
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    gain.gain.setValueAtTime(0.012 / (idx + 1), audioCtx.currentTime);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    droneOscs.push({ osc, gain });
-  });
-}
-
-function stopDrone() {
-  droneOscs.forEach(({ osc, gain }) => {
-    try {
-      gain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
-      osc.stop(audioCtx.currentTime + 0.2);
-    } catch (e) {}
-  });
-  droneOscs = [];
-}
-
-function playAcousticInstrument(freq, duration) {
-  if (!audioCtx || audioCtx.state !== 'running') return;
-  const now = audioCtx.currentTime;
-
-  const osc1 = audioCtx.createOscillator();
-  const osc2 = audioCtx.createOscillator();
-  const vib = audioCtx.createOscillator();
-  const vibGain = audioCtx.createGain();
-  const gain = audioCtx.createGain();
-  const filter = audioCtx.createBiquadFilter();
-
-  osc1.type = 'sawtooth';
-  osc2.type = 'sine';
-  osc1.frequency.setValueAtTime(freq, now);
-  osc2.frequency.setValueAtTime(freq * 1.002, now);
-
-  vib.frequency.setValueAtTime(5.2, now);
-  vibGain.gain.setValueAtTime(freq * 0.012, now);
-  vib.connect(osc1.frequency);
-  vib.connect(osc2.frequency);
-
-  filter.type = 'lowpass';
-  filter.frequency.setValueAtTime(freq * 3.2, now);
-  filter.Q.setValueAtTime(2.2, now);
-
-  gain.gain.setValueAtTime(0.0001, now);
-  gain.gain.linearRampToValueAtTime(0.048, now + 0.07);
-  gain.gain.setValueAtTime(0.048, now + duration - 0.08);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration + 0.12);
-
-  osc1.connect(filter);
-  osc2.connect(filter);
-  filter.connect(gain);
-  gain.connect(audioCtx.destination);
-
-  vib.start(now);
-  osc1.start(now);
-  osc2.start(now);
-
-  vib.stop(now + duration + 0.18);
-  osc1.stop(now + duration + 0.18);
-  osc2.stop(now + duration + 0.18);
-}
-
-function startDrone() {
-  if (!audioCtx) return;
-  stopDrone();
-  [146.83, 220.00, 293.66].forEach((freq, idx) => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = idx === 0 ? 'sine' : 'triangle';
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    gain.gain.setValueAtTime(0.012 / (idx + 1), audioCtx.currentTime);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    droneOscs.push({ osc, gain });
-  });
-}
-
-function stopDrone() {
-  droneOscs.forEach(({ osc, gain }) => {
-    try {
-      gain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.2);
-      osc.stop(audioCtx.currentTime + 0.2);
-    } catch (e) {}
-  });
-  droneOscs = [];
-}
-
-function playShehnaiSound(freq, duration) {
-  if (!audioCtx || audioCtx.state !== 'running') return;
-  const now = audioCtx.currentTime;
-
-  const osc1 = audioCtx.createOscillator();
-  const osc2 = audioCtx.createOscillator();
-  const vib = audioCtx.createOscillator();
-  const vibGain = audioCtx.createGain();
-  const gain = audioCtx.createGain();
-  const filter = audioCtx.createBiquadFilter();
-
-  osc1.type = 'sawtooth';
-  osc2.type = 'triangle';
-  osc1.frequency.setValueAtTime(freq, now);
-  osc2.frequency.setValueAtTime(freq * 1.002, now);
-
-  vib.frequency.setValueAtTime(5.5, now);
-  vibGain.gain.setValueAtTime(freq * 0.015, now);
-  vib.connect(osc1.frequency);
-  vib.connect(osc2.frequency);
-
-  filter.type = 'bandpass';
-  filter.frequency.setValueAtTime(freq * 2.2, now);
-  filter.Q.setValueAtTime(2.5, now);
-
-  gain.gain.setValueAtTime(0.0001, now);
-  gain.gain.linearRampToValueAtTime(0.045, now + 0.08);
-  gain.gain.setValueAtTime(0.045, now + duration - 0.1);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration + 0.15);
-
-  osc1.connect(filter);
-  osc2.connect(filter);
-  filter.connect(gain);
-  gain.connect(audioCtx.destination);
-
-  vib.start(now);
-  osc1.start(now);
-  osc2.start(now);
-
-  vib.stop(now + duration + 0.2);
-  osc1.stop(now + duration + 0.2);
-  osc2.stop(now + duration + 0.2);
 }
 
 /* ==========================================================================

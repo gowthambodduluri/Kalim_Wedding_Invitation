@@ -40,6 +40,29 @@
   <!-- Mobile Nav Backdrop -->
   <div class="nav-backdrop" id="navBackdrop"></div>
 
+  <!-- Mobile Drawer Menu (Global Top-Level for iOS/Android) -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <button class="mobile-close" id="mobileClose" aria-label="Close Navigation Menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="drawer-brand">
+      <i class="fa-solid fa-infinity" style="color: var(--gold-primary);"></i>
+      <span>Kaleem &amp; Roshni</span>
+    </div>
+    <ul class="drawer-links">
+      <li><a href="#hero" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a href="#countdown"><i class="fa-solid fa-clock"></i> Countdown</a></li>
+      <li><a href="#couple"><i class="fa-solid fa-heart"></i> The Couple</a></li>
+      <li><a href="#schedule"><i class="fa-solid fa-calendar-days"></i> Celebrations</a></li>
+      <li><a href="#venue"><i class="fa-solid fa-location-dot"></i> Venue</a></li>
+      <li><a href="#family"><i class="fa-solid fa-hands-holding-heart"></i> Compliments &amp; RSVP</a></li>
+    </ul>
+    <div class="drawer-footer">
+      <p>September 26 &amp; 27, 2026</p>
+      <span>PVR Function Hall, Gudur</span>
+    </div>
+  </div>
+
   <!-- ==========================================
        1. ROYAL INVITATION COVER OVERLAY
        ========================================== -->
@@ -73,7 +96,14 @@
   </div>
 
   <!-- ==========================================
-       2. NAVIGATION BAR
+       2. FLOATING MUSIC TOGGLE
+       ========================================== -->
+  <button class="music-toggle" id="musicToggle" aria-label="Toggle Wedding Music" title="Play Celebration Music">
+    <i class="fa-solid fa-volume-xmark"></i>
+  </button>
+
+  <!-- ==========================================
+       3. DESKTOP / TABLET NAVBAR
        ========================================== -->
   <nav class="navbar" id="mainNavbar">
     <div class="nav-container">
@@ -82,14 +112,13 @@
         <span>Kaleem &amp; Roshni</span>
       </a>
 
+      <!-- Mobile Hamburger Toggle -->
       <button class="mobile-toggle" id="mobileToggle" aria-label="Open Navigation Menu">
         <i class="fa-solid fa-bars"></i>
       </button>
 
-      <ul class="nav-links" id="navLinks">
-        <button class="mobile-close" id="mobileClose" aria-label="Close Navigation Menu">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+      <!-- Desktop Links -->
+      <ul class="nav-links" id="desktopNavLinks">
         <li><a href="#hero" class="active">Home</a></li>
         <li><a href="#countdown">Countdown</a></li>
         <li><a href="#couple">The Couple</a></li>
@@ -160,7 +189,7 @@
             <i class="fa-solid fa-clock"></i>
             <span class="line"></span>
           </div>
-          <p class="slide-subtitle">Sunday, 27th September 2026 • 11:30 A.M. (Muhurtham)</p>
+          <p class="slide-subtitle">Sunday, 27th September 2026 • 11:30 A.M. (Nikah Ceremony)</p>
         </div>
 
         <div class="countdown-grid">
@@ -232,12 +261,13 @@
               <div>
                 <span class="bio-role">The Groom</span>
                 <h3 class="bio-name gold-text">Shaik Mannur Kaleem</h3>
+                <span class="bio-qualification">M.Tech., Structural Engineer</span>
               </div>
             </div>
-            <p class="bio-parents">Younger Son of Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam</p>
+            <p class="bio-parents">Son of Mr. Shaik Mannur Ibrahim &amp; Mrs. Shaik Meherunisa Begam</p>
             <p class="bio-detail">
               <strong>Co-founder</strong>, Dream House Constructions &amp; Interiors
-              <span class="bio-locations">• Nellore • Gudur • Naidupeta • Sullurpeta</span>
+              <span class="bio-locations">• Nellore • Gudur • Naidupeta</span>
             </p>
           </div>
 
@@ -248,12 +278,10 @@
               <div>
                 <span class="bio-role">The Bride</span>
                 <h3 class="bio-name gold-text">Shaik Roshni</h3>
+                <span class="bio-qualification">B.Sc., D.EI.ED.</span>
               </div>
             </div>
-            <p class="bio-parents">Daughter of Mr. Shaik Gouse Basha &amp; Mrs. Shaik Shakeela</p>
-            <p class="bio-detail">
-              <strong>Family:</strong> RTC Conductor
-            </p>
+            <p class="bio-parents">Daughter of Mr. Shaik Gulam Gouse &amp; Mrs. Shaik Safoora</p>
           </div>
         </div>
       </div>
@@ -293,7 +321,7 @@
             <div class="itinerary-icon-row">
               <div class="itinerary-badge"><i class="fa-solid fa-sun"></i></div>
               <div>
-                <span class="itinerary-tag">EVENING CELEBRATION</span>
+                <span class="itinerary-tag">SHUKRANA</span>
                 <h3 class="itinerary-event-title">Haldi &amp; Dinner</h3>
               </div>
             </div>
@@ -303,7 +331,7 @@
               <li><i class="fa-solid fa-location-dot"></i> <strong>Venue:</strong> PVR Function Hall</li>
             </ul>
           </div>
-          <p class="itinerary-note">"An evening of traditional Haldi ceremonies, melodies, and banquet."</p>
+          <p class="itinerary-note">"Shukrana evening of traditional Haldi ceremonies &amp; celebratory dinner."</p>
         </div>
 
         <!-- Event 2 (Featured) -->
@@ -313,7 +341,7 @@
               <div class="itinerary-badge"><i class="fa-solid fa-ring"></i></div>
               <div>
                 <span class="main-event-badge"><i class="fa-solid fa-crown"></i> MAIN EVENT</span>
-                <h3 class="itinerary-event-title gold-text">Nikah &amp; Muhurtham</h3>
+                <h3 class="itinerary-event-title gold-text">Nikah</h3>
               </div>
             </div>
             <ul class="itinerary-list">
@@ -332,7 +360,7 @@
               <div class="itinerary-badge"><i class="fa-solid fa-utensils"></i></div>
               <div>
                 <span class="itinerary-tag">CELEBRATION FEAST</span>
-                <h3 class="itinerary-event-title">Grand Lunch</h3>
+                <h3 class="itinerary-event-title">Lunch</h3>
               </div>
             </div>
             <ul class="itinerary-list">
@@ -341,7 +369,7 @@
               <li><i class="fa-solid fa-location-dot"></i> <strong>Venue:</strong> PVR Function Hall</li>
             </ul>
           </div>
-          <p class="itinerary-note">"Celebratory feast featuring delicious cuisine with family &amp; friends."</p>
+          <p class="itinerary-note">"Celebratory wedding feast with family &amp; friends."</p>
         </div>
       </div>
 
@@ -416,14 +444,14 @@
   </section>
 
   <!-- ==========================================
-       WINDOW 6: COMPLIMENTS & BLESSINGS
+       WINDOW 6: COMPLIMENTS & RSVP
        ========================================== -->
   <section class="window-slide" id="family">
     <div class="slide-content-box">
 
       <div class="slide-header">
         <span class="slide-eyebrow">With Warm Regards</span>
-        <h2 class="slide-title">Best Compliments</h2>
+        <h2 class="slide-title">Best Compliments &amp; RSVP</h2>
         <div class="slide-divider">
           <span class="line"></span>
           <i class="fa-solid fa-hands-holding-heart"></i>
@@ -444,20 +472,22 @@
 
           <div class="compliment-box">
             <i class="fa-solid fa-people-roof"></i>
-            <h4 class="compliment-title">Best Compliments</h4>
+            <h4 class="compliment-title">Best Compliments From</h4>
             <ul class="compliment-names">
               <li>Mr. &amp; Mrs. Rahul</li>
-              <li>Mr. &amp; Mrs. Ahmed</li>
-              <li>Mr. &amp; Mrs. Aziz</li>
+              <li>Mr. &amp; Mrs. Hamad</li>
+              <li>Mr. &amp; Mrs. Azeez</li>
             </ul>
           </div>
 
           <div class="compliment-box">
-            <i class="fa-solid fa-heart-circle-check"></i>
-            <h4 class="compliment-title">Near &amp; Dear</h4>
+            <i class="fa-solid fa-phone-volume"></i>
+            <h4 class="compliment-title">RSVP &amp; Enquiries</h4>
             <ul class="compliment-names">
-              <li>All Relatives &amp; Well-Wishers</li>
-              <li>Friends &amp; Family</li>
+              <li><a href="tel:9014360108" style="color: var(--gold-light); text-decoration: none;"><i
+                    class="fa-solid fa-phone" style="font-size: 0.85rem;"></i> 9014360108</a></li>
+              <li><a href="tel:8341382089" style="color: var(--gold-light); text-decoration: none;"><i
+                    class="fa-solid fa-phone" style="font-size: 0.85rem;"></i> 83413 82089</a></li>
             </ul>
           </div>
         </div>

@@ -4,8 +4,9 @@
  * - Particle & Golden Petal Ambient Animation
  * - Royal Envelope Unseal Experience
  * - Live Wedding Countdown Timer (Sept 27, 2026, 11:30 AM IST)
+ * - 100% Mobile & Desktop Navigation + Drawer Controller
  * - Smooth Window Slide Navigation & "Next" Button Transitions
- * - Real-Time Active Navbar Underline (IntersectionObserver & ScrollSpy)
+ * - Real-Time Active Underline Tracking
  * - Add to Calendar (.ics & Google Calendar)
  * - Directions & Address Copy helper
  */
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initParticles();
   initUnsealCover();
   initCountdown();
+  initWeddingMusic();
   initNavigation();
   initSmoothScrollLinks();
   initScrollAnimations();
@@ -35,15 +37,15 @@ function initParticles() {
   });
 
   const particles = [];
-  const particleCount = window.innerWidth < 768 ? 35 : 70;
+  const particleCount = window.innerWidth < 768 ? 30 : 65;
 
   for (let i = 0; i < particleCount; i++) {
     particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
       size: Math.random() * 3 + 1,
-      speedX: (Math.random() - 0.5) * 0.6,
-      speedY: Math.random() * 0.8 + 0.3,
+      speedX: (Math.random() - 0.5) * 0.5,
+      speedY: Math.random() * 0.7 + 0.3,
       opacity: Math.random() * 0.7 + 0.2,
       isPetal: Math.random() > 0.6,
       rotation: Math.random() * 360,
@@ -93,6 +95,11 @@ function initParticles() {
   render();
 }
 
+// Ensure browser starts at the top and doesn't auto-jump to cached scroll or hashes
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 /* ==========================================================================
    2. ROYAL ENVELOPE UNSEAL EXPERIENCE
    ========================================================================== */
@@ -101,12 +108,223 @@ function initUnsealCover() {
   const btnUnseal = document.getElementById('btnUnseal');
   if (!cover || !btnUnseal) return;
 
+  // Ensure scroll is at 0 initially
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+
   btnUnseal.addEventListener('click', () => {
     cover.classList.add('opened');
+    
+    // Clear any hash if present in URL
+    if (window.location.hash) {
+      history.replaceState(null, null, window.location.pathname);
+    }
+    
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    const hero = document.getElementById('hero');
+    if (hero) {
+      hero.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }
+
     setTimeout(() => {
       cover.style.display = 'none';
-    }, 800);
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      if (hero) {
+        hero.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
+
+      // Explicitly highlight Home
+      const allNavLinks = document.querySelectorAll('#desktopNavLinks a, .drawer-links a');
+      allNavLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#hero') {
+          link.classList.add('active');
+        }
+      });
+
+      // Start celebration melody
+      startWeddingMelody();
+    }, 600);
   });
+}
+
+/* ==========================================================================
+   3. TRADITIONAL WEDDING SHEHNAI & TANPURA MELODY (Web Audio API)
+   ========================================================================== */
+let audioCtx = null;
+let isMusicPlaying = false;
+let shehnaiSequenceTimer = null;
+let droneNodes = [];
+
+function initWeddingMusic() {
+  const toggleBtn = document.getElementById('musicToggle');
+  if (!toggleBtn) return;
+
+  toggleBtn.addEventListener('click', () => {
+    if (isMusicPlaying) {
+      stopWeddingMelody();
+    } else {
+      startWeddingMelody();
+    }
+  });
+}
+
+function startWeddingMelody() {
+  const toggleBtn = document.getElementById('musicToggle');
+  try {
+    if (!audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    isMusicPlaying = true;
+    if (toggleBtn) {
+      toggleBtn.classList.add('playing');
+      toggleBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+      toggleBtn.title = 'Mute Wedding Music';
+    }
+
+    // Start Tanpura Drone
+    startTanpuraDrone();
+
+    // Traditional Auspicious Wedding Shehnai Raga Phrases
+    const weddingPhrases = [
+      [ { f: 277.18, d: 0.4 }, { f: 329.63, d: 0.4 }, { f: 369.99, d: 0.6 }, { f: 329.63, d: 0.4 }, { f: 293.66, d: 0.9 } ],
+      [ { f: 369.99, d: 0.35 }, { f: 415.30, d: 0.35 }, { f: 493.88, d: 0.5 }, { f: 440.00, d: 0.4 }, { f: 369.99, d: 0.35 }, { f: 329.63, d: 0.35 }, { f: 293.66, d: 0.9 } ],
+      [ { f: 440.00, d: 0.4 }, { f: 493.88, d: 0.4 }, { f: 554.37, d: 0.5 }, { f: 587.33, d: 0.8 }, { f: 554.37, d: 0.4 }, { f: 493.88, d: 0.4 }, { f: 440.00, d: 0.8 } ],
+      [ { f: 369.99, d: 0.3 }, { f: 440.00, d: 0.3 }, { f: 493.88, d: 0.4 }, { f: 554.37, d: 0.4 }, { f: 493.88, d: 0.35 }, { f: 440.00, d: 0.35 }, { f: 369.99, d: 0.35 }, { f: 329.63, d: 0.35 }, { f: 293.66, d: 1.1 } ]
+    ];
+
+    let currentPhraseIdx = 0;
+    let noteIdx = 0;
+
+    function playNextWeddingNote() {
+      if (!isMusicPlaying || !audioCtx) return;
+
+      const phrase = weddingPhrases[currentPhraseIdx];
+      const note = phrase[noteIdx];
+
+      playShehnaiNote(note.f, note.d);
+
+      noteIdx++;
+      if (noteIdx >= phrase.length) {
+        noteIdx = 0;
+        currentPhraseIdx = (currentPhraseIdx + 1) % weddingPhrases.length;
+        shehnaiSequenceTimer = setTimeout(playNextWeddingNote, (note.d * 1000) + 600);
+      } else {
+        shehnaiSequenceTimer = setTimeout(playNextWeddingNote, (note.d * 1000) + 60);
+      }
+    }
+
+    playNextWeddingNote();
+
+  } catch (e) {
+    console.log('Audio autoplay policy:', e);
+  }
+}
+
+function stopWeddingMelody() {
+  isMusicPlaying = false;
+  if (shehnaiSequenceTimer) clearTimeout(shehnaiSequenceTimer);
+
+  stopTanpuraDrone();
+
+  if (audioCtx && audioCtx.state === 'running') {
+    audioCtx.suspend();
+  }
+  const toggleBtn = document.getElementById('musicToggle');
+  if (toggleBtn) {
+    toggleBtn.classList.remove('playing');
+    toggleBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+    toggleBtn.title = 'Play Wedding Music';
+  }
+}
+
+function startTanpuraDrone() {
+  if (!audioCtx) return;
+  stopTanpuraDrone();
+
+  const droneFreqs = [146.83, 220.00, 293.66];
+
+  droneFreqs.forEach((freq, idx) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = idx === 0 ? 'sine' : 'triangle';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.012 / (idx + 1), audioCtx.currentTime);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    droneNodes.push({ osc, gain });
+  });
+}
+
+function stopTanpuraDrone() {
+  droneNodes.forEach(({ osc, gain }) => {
+    try {
+      gain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.3);
+      osc.stop(audioCtx.currentTime + 0.3);
+    } catch (e) {}
+  });
+  droneNodes = [];
+}
+
+function playShehnaiNote(freq, duration) {
+  if (!audioCtx || audioCtx.state !== 'running') return;
+
+  const now = audioCtx.currentTime;
+  const osc1 = audioCtx.createOscillator();
+  const osc2 = audioCtx.createOscillator();
+  const vibrato = audioCtx.createOscillator();
+  const vibratoGain = audioCtx.createGain();
+
+  const mainGain = audioCtx.createGain();
+  const biquadFilter = audioCtx.createBiquadFilter();
+
+  osc1.type = 'sawtooth';
+  osc2.type = 'triangle';
+
+  osc1.frequency.setValueAtTime(freq, now);
+  osc2.frequency.setValueAtTime(freq * 1.002, now);
+
+  vibrato.frequency.setValueAtTime(5.5, now);
+  vibratoGain.gain.setValueAtTime(freq * 0.015, now);
+
+  vibrato.connect(osc1.frequency);
+  vibrato.connect(osc2.frequency);
+
+  biquadFilter.type = 'bandpass';
+  biquadFilter.frequency.setValueAtTime(freq * 2.2, now);
+  biquadFilter.Q.setValueAtTime(2.5, now);
+
+  mainGain.gain.setValueAtTime(0.0001, now);
+  mainGain.gain.linearRampToValueAtTime(0.045, now + 0.08);
+  mainGain.gain.setValueAtTime(0.045, now + duration - 0.1);
+  mainGain.gain.exponentialRampToValueAtTime(0.0001, now + duration + 0.15);
+
+  osc1.connect(biquadFilter);
+  osc2.connect(biquadFilter);
+  biquadFilter.connect(mainGain);
+  mainGain.connect(audioCtx.destination);
+
+  vibrato.start(now);
+  osc1.start(now);
+  osc2.start(now);
+
+  vibrato.stop(now + duration + 0.2);
+  osc1.stop(now + duration + 0.2);
+  osc2.stop(now + duration + 0.2);
 }
 
 /* ==========================================================================
@@ -150,37 +368,21 @@ function initCountdown() {
 }
 
 /* ==========================================================================
-   4. NAVIGATION & REAL-TIME ACTIVE UNDERLINE
+   4. NAVIGATION & REAL-TIME ACTIVE TRACKER (DESKTOP & MOBILE)
    ========================================================================== */
 function initNavigation() {
   const navbar = document.getElementById('mainNavbar');
   const mobileToggle = document.getElementById('mobileToggle');
   const mobileClose = document.getElementById('mobileClose');
-  const navLinks = document.getElementById('navLinks');
+  const mobileDrawer = document.getElementById('mobileDrawer');
   const navBackdrop = document.getElementById('navBackdrop');
-  const navItems = document.querySelectorAll('.nav-links a');
+  
+  const allNavLinks = document.querySelectorAll('#desktopNavLinks a, .drawer-links a');
   const sections = document.querySelectorAll('.window-slide');
 
-  // Real-Time Active Underline based on IntersectionObserver
-  const navObserverOptions = {
-    root: null,
-    rootMargin: '-20% 0px -20% 0px',
-    threshold: 0.35
-  };
-
-  const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        updateActiveNav(id);
-      }
-    });
-  }, navObserverOptions);
-
-  sections.forEach((sec) => navObserver.observe(sec));
-
   function updateActiveNav(activeId) {
-    navItems.forEach((link) => {
+    if (!activeId) activeId = 'hero';
+    allNavLinks.forEach((link) => {
       link.classList.remove('active');
       const href = link.getAttribute('href');
       if (href === `#${activeId}`) {
@@ -189,56 +391,81 @@ function initNavigation() {
     });
   }
 
-  // Backup fallback on scroll
-  window.addEventListener('scroll', () => {
+  // Force default to Home on load
+  updateActiveNav('hero');
+
+  function determineActiveSection() {
     if (window.scrollY > 30) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
 
-    let currentSectionId = '';
-    const scrollPos = window.scrollY + window.innerHeight / 2.5;
+    // If near the top, always make Home active
+    if (window.scrollY < 150) {
+      updateActiveNav('hero');
+      return;
+    }
+
+    let currentSectionId = 'hero';
+    const scrollMiddle = window.scrollY + (window.innerHeight / 2);
 
     sections.forEach((section) => {
       const top = section.offsetTop;
       const height = section.offsetHeight;
-      if (scrollPos >= top && scrollPos < top + height) {
+      if (scrollMiddle >= top && scrollMiddle < top + height) {
         currentSectionId = section.getAttribute('id');
       }
     });
 
-    if (currentSectionId) {
-      updateActiveNav(currentSectionId);
-    }
-  });
+    updateActiveNav(currentSectionId);
+  }
 
-  // Mobile Menu Drawer
-  function openNav() {
-    navLinks.classList.add('active');
-    navBackdrop.classList.add('active');
+  window.addEventListener('scroll', determineActiveSection, { passive: true });
+  window.addEventListener('resize', determineActiveSection, { passive: true });
+
+  // Mobile Menu Drawer Handlers
+  function openMobileDrawer(e) {
+    if (e) e.preventDefault();
+    if (mobileDrawer) mobileDrawer.classList.add('active');
+    if (navBackdrop) navBackdrop.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeNav() {
-    navLinks.classList.remove('active');
-    navBackdrop.classList.remove('active');
+  function closeMobileDrawer(e) {
+    if (e) e.preventDefault();
+    if (mobileDrawer) mobileDrawer.classList.remove('active');
+    if (navBackdrop) navBackdrop.classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  if (mobileToggle) mobileToggle.addEventListener('click', openNav);
-  if (mobileClose) mobileClose.addEventListener('click', closeNav);
-  if (navBackdrop) navBackdrop.addEventListener('click', closeNav);
+  if (mobileToggle) {
+    mobileToggle.addEventListener('click', openMobileDrawer);
+    mobileToggle.addEventListener('touchstart', openMobileDrawer, { passive: false });
+  }
 
-  navItems.forEach((link) => {
+  if (mobileClose) {
+    mobileClose.addEventListener('click', closeMobileDrawer);
+    mobileClose.addEventListener('touchstart', closeMobileDrawer, { passive: false });
+  }
+
+  if (navBackdrop) {
+    navBackdrop.addEventListener('click', closeMobileDrawer);
+    navBackdrop.addEventListener('touchstart', closeMobileDrawer, { passive: false });
+  }
+
+  // Close drawer on clicking any drawer link
+  document.querySelectorAll('.drawer-links a').forEach((link) => {
     link.addEventListener('click', () => {
-      closeNav();
+      closeMobileDrawer();
+      const targetId = link.getAttribute('href').replace('#', '');
+      updateActiveNav(targetId);
     });
   });
 }
 
 /* ==========================================================================
-   5. SMOOTH SCROLL FOR "NEXT", "SCROLL", AND ANCHOR LINKS
+   5. SMOOTH SCROLL FOR ALL ANCHOR LINKS ("NEXT", "SCROLL", NAV)
    ========================================================================== */
 function initSmoothScrollLinks() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {

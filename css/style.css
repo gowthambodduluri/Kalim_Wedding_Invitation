@@ -1132,112 +1132,397 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   MOBILE & RESPONSIVE ADJUSTMENTS
+   MOBILE & RESPONSIVE DESIGN (100% Mobile Compliant)
    ========================================================================== */
 @media (max-width: 768px) {
   html {
     scroll-snap-type: none;
     height: auto;
+    overflow-x: hidden;
   }
   body {
     height: auto;
+    overflow-x: hidden;
   }
+
+  /* Section Sizing on Mobile */
   .window-slide {
     height: auto;
     min-height: 100vh;
     min-height: 100dvh;
     max-height: none;
-    padding: 60px 14px 30px;
+    padding: 70px 16px 40px;
+    overflow: visible;
   }
+
   .slide-content-box {
     max-height: none;
     height: auto;
+    width: 100%;
   }
+
+  .slide-header {
+    margin-bottom: 1.2rem;
+  }
+
+  .slide-eyebrow {
+    font-size: 1.8rem;
+  }
+
+  .slide-title {
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+  }
+
+  .slide-subtitle {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+
+  /* Hero Section on Mobile */
   .hero-frame {
-    min-height: auto;
     width: 100%;
-    padding: 2.2rem 1.4rem;
+    min-height: auto;
+    padding: 2.2rem 1.2rem;
+    border-radius: var(--radius-md);
   }
+
+  .hero-invitation-badge {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-hosts {
+    font-size: 1.05rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.45;
+  }
+
+  .hero-hosts span {
+    font-size: 0.88rem;
+  }
+
+  .hero-names {
+    font-size: clamp(1.7rem, 6.5vw, 2.3rem);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-names .amp {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    margin: 0 4px;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+
+  .hero-date-badge {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    margin-bottom: 1.4rem;
+    line-height: 1.35;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+    font-size: 0.95rem;
+  }
+
+  /* Countdown on Mobile */
   .countdown-frame {
-    min-height: auto;
     width: 100%;
+    min-height: auto;
+    padding: 1.8rem 1.2rem;
+    border-radius: var(--radius-md);
   }
+
   .countdown-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
+    margin: 1.2rem 0;
   }
+
+  .countdown-box {
+    padding: 1.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .countdown-number {
+    font-size: 2.5rem;
+  }
+
+  .countdown-label {
+    font-size: 0.8rem;
+  }
+
+  .countdown-btn-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .countdown-btn-group .btn-calendar {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+    font-size: 0.92rem;
+  }
+
+  /* The Couple on Mobile */
   .couple-grid-layout {
     grid-template-columns: 1fr;
     gap: 1.4rem;
+    width: 100%;
   }
+
+  .couple-photo-wrapper {
+    max-width: 320px;
+    margin-bottom: 0.5rem;
+  }
+
+  .couple-photo-wrapper img {
+    max-height: 240px;
+  }
+
+  .couple-photo-tag {
+    font-size: 1.35rem;
+    padding: 4px 18px;
+    bottom: -10px;
+  }
+
+  .couple-bios-col {
+    gap: 1rem;
+  }
+
+  .bio-card {
+    padding: 1.2rem 1rem;
+  }
+
+  .bio-name {
+    font-size: 1.3rem;
+  }
+
+  .bio-parents {
+    font-size: 0.98rem;
+  }
+
+  .bio-detail {
+    font-size: 0.9rem;
+  }
+
+  .couple-quote-bar {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 8px 12px;
+  }
+
+  .couple-quote-bar p {
+    font-size: 1rem;
+  }
+
+  /* Itinerary on Mobile */
   .itinerary-3col-grid {
     grid-template-columns: 1fr;
-    gap: 1.2rem;
+    gap: 1rem;
+    width: 100%;
   }
+
+  .itinerary-card {
+    padding: 1.4rem 1.2rem;
+  }
+
+  .itinerary-event-title {
+    font-size: 1.25rem;
+  }
+
+  .itinerary-list li {
+    font-size: 0.92rem;
+  }
+
+  /* Venue on Mobile */
   .venue-grid-layout {
     grid-template-columns: 1fr;
     gap: 1.4rem;
+    width: 100%;
+    padding: 1.4rem 1.2rem;
   }
-  .compliments-grid {
-    grid-template-columns: 1fr;
+
+  .venue-hall-title {
+    font-size: 1.5rem;
+  }
+
+  .venue-address-panel p {
+    font-size: 0.95rem;
+  }
+
+  .venue-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+  }
+
+  .venue-actions .btn-primary,
+  .venue-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .map-frame-box {
+    min-height: 220px;
+    width: 100%;
+  }
+
+  .map-frame-box iframe {
+    min-height: 220px;
+  }
+
+  /* Compliments on Mobile */
+  .compliments-layout {
+    width: 100%;
     gap: 1.2rem;
   }
+
+  .compliments-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .compliment-box {
+    padding: 1.2rem 1rem;
+  }
+
+  .compliment-title {
+    font-size: 1.05rem;
+  }
+
+  .compliment-names li {
+    font-size: 1.05rem;
+  }
+
+  .blessings-quote-card {
+    padding: 1rem 12px;
+  }
+
+  .blessings-quote-card p {
+    font-size: 1.05rem;
+  }
+
+  .closing-names {
+    font-size: 1.15rem;
+  }
+
   .slide-down-hint {
     display: none;
   }
 
-  /* Mobile Drawer Menu */
+  /* Mobile Drawer Navigation */
   .mobile-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
   }
+
   .nav-links {
     position: fixed;
     top: 0;
     right: -100%;
-    width: min(75vw, 280px);
+    width: min(80vw, 290px);
     height: 100vh;
     height: 100dvh;
     background: #030f0d;
-    border-left: 1px solid rgba(212, 175, 55, 0.3);
+    border-left: 1px solid rgba(212, 175, 55, 0.35);
     flex-direction: column;
     align-items: flex-start;
-    padding: 65px 24px 35px;
+    padding: 70px 24px 35px;
     gap: 1.4rem;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
-    transition: var(--transition);
-    z-index: 995;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.85);
+    transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10005;
     overflow-y: auto;
   }
+
   .nav-links.active {
     right: 0;
   }
+
+  .nav-links a {
+    font-size: 1rem;
+    width: 100%;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+  }
+
   .mobile-close {
-    display: block;
+    display: flex;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 16px;
+    right: 16px;
     background: none;
     border: none;
     color: var(--gold-primary);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     cursor: pointer;
     width: 44px;
     height: 44px;
-    display: flex;
     align-items: center;
     justify-content: center;
   }
+
   .nav-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
     opacity: 0;
     visibility: hidden;
-    transition: var(--transition);
-    z-index: 994;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    z-index: 10004;
   }
+
   .nav-backdrop.active {
     opacity: 1;
     visibility: visible;
+  }
+}
+
+/* Small Smartphone Screen Optimizations (<= 400px) */
+@media (max-width: 400px) {
+  .hero-names {
+    font-size: 1.6rem;
+  }
+  .hero-names .amp {
+    font-size: 1.9rem;
+  }
+  .countdown-number {
+    font-size: 2rem;
+  }
+  .countdown-box {
+    padding: 0.9rem 0.4rem;
+  }
+  .cover-card {
+    padding: 1.8rem 1rem;
+  }
+  .cover-names {
+    font-size: 2rem;
   }
 }

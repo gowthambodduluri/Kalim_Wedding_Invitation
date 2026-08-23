@@ -3035,7 +3035,33 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
   .story-act-frame {
     min-height: auto;
-    padding: 1.8rem 12px;
+    padding: 2rem 14px;
+  }
+
+  .story-parchment-card {
+    padding: 2.2rem 20px !important;
+    border-radius: 20px !important;
+    outline-offset: -6px !important;
+  }
+
+  .soul-narrative-box {
+    padding: 1.4rem 16px !important;
+  }
+
+  .countdown-side-card {
+    padding: 1.4rem 16px !important;
+  }
+
+  .story-event-capsule {
+    padding: 1.3rem 16px !important;
+  }
+
+  .prologue-proclamation-card {
+    padding: 1.6rem 16px !important;
+  }
+
+  .scene-hero-stage {
+    padding: 0 4px !important;
   }
 
   .royal-envelope-3d {
@@ -3094,7 +3120,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .compliments-compact-strip {
     border-radius: var(--radius-md);
-    padding: 10px 12px;
+    padding: 10px 14px;
     gap: 8px;
     font-size: 0.95rem;
   }
@@ -3111,8 +3137,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 480px) {
+  .story-act-frame {
+    padding: 1.6rem 10px;
+  }
+
   .story-parchment-card {
-    padding: 1.6rem 12px;
+    padding: 1.8rem 18px !important;
+    border-radius: 18px !important;
+    outline-offset: -5px !important;
   }
 
   .compliments-compact-strip {

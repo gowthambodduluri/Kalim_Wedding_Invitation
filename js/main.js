@@ -219,7 +219,7 @@ function initEntryPortalExperience() {
     showToast('✨ Welcome to Kaleem & Roshni’s Wedding Story');
 
     // 5. Hold enlarged card open for 3 seconds before zooming into the storybook
-    let secondsLeft = 4;
+    let secondsLeft = 2;
     if (pillText) {
       pillText.innerHTML = `✨ Opening full invitation in <strong>${secondsLeft}s</strong> (or Tap to Enter Now) ✨`;
     }

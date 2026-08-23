@@ -350,56 +350,33 @@
   border-color: rgba(133, 91, 5, 0.8) !important;
 }
 
-/* UNSEALED 2-SECOND HOLD LETTER CARD (RADIANT FOREGROUND 3D SEPARATION) */
-.envelope-stage-container.unsealed {
-  background: radial-gradient(circle at 50% 45%, rgba(240, 232, 218, 0.98) 0%, rgba(222, 208, 188, 0.98) 60%, rgba(200, 180, 155, 0.98) 100%) !important;
-}
-
-.envelope-stage-container.unsealed .envelope-body-base,
-.envelope-stage-container.unsealed .envelope-front-pocket {
-  filter: brightness(0.85) contrast(1.08) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.25)) !important;
-  transform: scale(0.96) translateZ(-40px);
-  transition: filter 0.8s ease, transform 0.8s ease;
-}
-
+/* UNSEALED 2-SECOND HOLD LETTER CARD (PRISTINE WHITE & GOLD, NO DARK SHADE) */
 [data-theme="whitenavy"] .envelope-letter-card,
 [data-theme="whitegold"] .envelope-letter-card {
   background: #ffffff !important;
-  border: 2.5px solid #a47508 !important;
-  box-shadow: 0 45px 100px rgba(40, 20, 0, 0.65), 0 20px 45px rgba(0, 0, 0, 0.3), 0 0 60px rgba(212, 175, 55, 0.45), inset 0 2px 4px rgba(255, 255, 255, 1) !important;
-}
-
-.envelope-stage-container.unsealed .envelope-letter-card {
-  transform: translateY(-58%) scale(1.22) translateZ(80px) !important;
+  border: 2px solid #d4af37 !important;
+  box-shadow: 0 25px 65px rgba(180, 140, 60, 0.28), 0 0 35px rgba(212, 175, 55, 0.25) !important;
 }
 
 [data-theme="whitenavy"] .letter-card-content,
 [data-theme="whitegold"] .letter-card-content {
-  background: linear-gradient(160deg, #ffffff 0%, #faf6ec 100%) !important;
-  border: 1px solid rgba(184, 134, 11, 0.35);
-  margin: 6px;
-  border-radius: 8px;
+  background: transparent !important;
 }
 
 [data-theme="whitenavy"] .letter-emblem,
 [data-theme="whitegold"] .letter-emblem {
   color: #7a5200 !important;
-  font-size: 1.3rem !important;
-  text-shadow: 0 2px 4px rgba(212, 175, 55, 0.5);
 }
 
 [data-theme="whitenavy"] .letter-kicker,
 [data-theme="whitegold"] .letter-kicker {
   color: #5a3c00 !important;
   font-weight: 700 !important;
-  letter-spacing: 2.5px !important;
 }
 
 [data-theme="whitenavy"] .letter-couple-name,
 [data-theme="whitegold"] .letter-couple-name {
   color: #181512 !important;
-  font-size: clamp(1.4rem, 4vw, 1.85rem) !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08) !important;
 }
 
 [data-theme="whitenavy"] .letter-couple-name em,
@@ -411,13 +388,11 @@
 [data-theme="whitegold"] .letter-date {
   color: #382500 !important;
   font-weight: 700 !important;
-  letter-spacing: 1.5px !important;
 }
 
 [data-theme="whitenavy"] .letter-venue,
 [data-theme="whitegold"] .letter-venue {
   color: #4e463e !important;
-  font-weight: 600 !important;
 }
 
 [data-theme="whitenavy"] .letter-divider .d-gem,

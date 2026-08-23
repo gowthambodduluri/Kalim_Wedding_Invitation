@@ -239,24 +239,47 @@
 [data-theme="whitenavy"] .pocket-fold-left,
 [data-theme="whitegold"] .pocket-fold-left,
 [data-theme="whitenavy"] .pocket-fold-right,
-[data-theme="whitegold"] .pocket-fold-right,
+[data-theme="whitegold"] .pocket-fold-right {
+  background: linear-gradient(145deg, #ffffff 0%, #faf6eb 100%) !important;
+  border-color: rgba(212, 175, 55, 0.45) !important;
+}
+
 [data-theme="whitenavy"] .pocket-fold-bottom,
 [data-theme="whitegold"] .pocket-fold-bottom {
-  background: linear-gradient(145deg, #ffffff 0%, #f9f4e8 100%) !important;
-  border-color: #d4af37 !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f0df 100%) !important;
+  border-bottom: 2px solid #855b05 !important;
 }
 
 [data-theme="whitenavy"] .envelope-top-flap .flap-outer-face,
 [data-theme="whitegold"] .envelope-top-flap .flap-outer-face {
-  background: linear-gradient(145deg, #ffffff 0%, #fcf8f0 100%) !important;
-  border: 2px solid #d4af37 !important;
-  box-shadow: 0 10px 30px rgba(180, 140, 60, 0.15) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f5eedb 100%) !important;
+  border-top: 2px solid #855b05 !important;
+  filter: drop-shadow(0 12px 24px rgba(160, 130, 70, 0.32)) !important;
+}
+
+[data-theme="whitenavy"] .flap-gold-edge-piping,
+[data-theme="whitegold"] .flap-gold-edge-piping {
+  border-bottom: 2.5px solid #855b05 !important;
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4)) !important;
+}
+
+[data-theme="whitenavy"] .fold-gold-piping.bottom-piping,
+[data-theme="whitegold"] .fold-gold-piping.bottom-piping {
+  border-top: 2px solid #855b05 !important;
 }
 
 [data-theme="whitenavy"] .envelope-top-flap .flap-gold-crest,
 [data-theme="whitegold"] .envelope-top-flap .flap-gold-crest {
   color: #7a5200 !important;
+  font-size: 1.2rem !important;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+}
+
+[data-theme="whitenavy"] .pocket-gold-filigree-center,
+[data-theme="whitegold"] .pocket-gold-filigree-center {
+  color: #7a5200 !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
 }
 
 [data-theme="whitenavy"] .pocket-damask-texture,
@@ -687,9 +710,20 @@
 [data-theme="whitenavy"] .envelope-caption-box .open-seal-pill-btn,
 [data-theme="whitegold"] .envelope-caption-box .open-seal-pill-btn {
   background: #ffffff !important;
-  border-color: #d4af37 !important;
+  border: 1.5px solid #855b05 !important;
   color: #181512 !important;
-  box-shadow: 0 8px 30px rgba(180, 140, 60, 0.18) !important;
+  box-shadow: 0 8px 30px rgba(180, 140, 60, 0.22) !important;
+}
+
+[data-theme="whitenavy"] .pill-action-text,
+[data-theme="whitegold"] .pill-action-text {
+  color: #181512 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .pill-sparkle,
+[data-theme="whitegold"] .pill-sparkle {
+  color: #7a5200 !important;
 }
 
 [data-theme="whitenavy"] .toast-alert,

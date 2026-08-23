@@ -72,7 +72,7 @@ function initStoryCosmicCanvas() {
 
   // Sparkles on click
   const sparkles = [];
-  window.triggerSparkleBurst = function(x, y) {
+  window.triggerSparkleBurst = function (x, y) {
     for (let i = 0; i < 45; i++) {
       const angle = Math.random() * Math.PI * 2;
       const speed = Math.random() * 5 + 2;
@@ -174,41 +174,180 @@ function initStoryCosmicCanvas() {
 }
 
 /* ==========================================================================
-   2. ENTRY PORTAL UNVEIL (BASIC INFO -> FULL STORY)
+   2. ACT 0: REALISTIC 3D ENVELOPE OPENING CEREMONY (10-SEC HOLD -> FULL OPEN)
    ========================================================================== */
+let isEnvelopeUnsealed = false;
+let isEnvelopeFullyOpened = false;
+let envelopeTimerInterval = null;
+let royalAudioCtx = null;
+
 function initEntryPortalExperience() {
-  const portal = document.getElementById('entryPortal');
-  const seal = document.getElementById('portalSealBtn');
-  const env = document.getElementById('royalEnvelope');
-  if (!portal) return;
+  const overlay = document.getElementById('envelopeOverlay');
+  const openBtn = document.getElementById('openEnvelopeBtn');
+  const letterCard = document.getElementById('envelopeLetter');
+  const captionBtn = document.getElementById('openSealPillBtn');
+  const pillText = document.getElementById('pillActionText');
+  if (!overlay) return;
 
-  function openStory(e) {
-    const rect = (seal || env || portal).getBoundingClientRect();
-    const clickX = e?.clientX || rect.left + rect.width / 2;
-    const clickY = e?.clientY || rect.top + rect.height / 2;
+  function unsealEnvelope(e) {
+    if (isEnvelopeUnsealed) {
+      // If already unsealed, clicking again proceeds immediately!
+      fullyOpenStory();
+      return;
+    }
+    isEnvelopeUnsealed = true;
 
-    if (window.triggerSparkleBurst) {
-      window.triggerSparkleBurst(clickX, clickY);
-      setTimeout(() => window.triggerSparkleBurst(clickX - 60, clickY - 40), 140);
-      setTimeout(() => window.triggerSparkleBurst(clickX + 60, clickY + 40), 260);
+    // Haptic feedback
+    if (navigator.vibrate) {
+      try { navigator.vibrate([25, 40, 25]); } catch (err) { }
     }
 
-    portal.classList.add('opened');
+    // 1. Play Royal Harp Chord progression
+    playRoyalChimeSequence();
+
+    // 2. Start Wedding Music (assets/Audio/Background_music.mp3)
     playWeddingMusic();
 
+    // 3. Trigger celebratory confetti shower
     setTimeout(() => {
-      portal.style.display = 'none';
-    }, 850);
+      triggerCelebrationConfetti();
+    }, 600);
+
+    // 4. Unseal animation: Flap lifts up in 3D (240ms), Letter card slides up (800ms)
+    overlay.classList.add('unsealed');
+
+    showToast('✨ Welcome to Kaleem & Roshni’s Wedding Story');
+
+    // 5. Hold enlarged card open for 3 seconds before zooming into the storybook
+    let secondsLeft = 4;
+    if (pillText) {
+      pillText.innerHTML = `✨ Opening full invitation in <strong>${secondsLeft}s</strong> (or Tap to Enter Now) ✨`;
+    }
+
+    envelopeTimerInterval = setInterval(() => {
+      secondsLeft--;
+      if (secondsLeft > 0) {
+        if (pillText) {
+          pillText.innerHTML = `✨ Opening full invitation in <strong>${secondsLeft}s</strong> (or Tap to Enter Now) ✨`;
+        }
+      } else {
+        clearInterval(envelopeTimerInterval);
+        fullyOpenStory();
+      }
+    }, 1000);
   }
 
-  if (seal) seal.addEventListener('click', openStory);
-  if (env) {
-    env.addEventListener('click', (e) => {
-      if (e.target.closest('#portalSealBtn') || e.target.classList.contains('envelope-tap-instruction')) {
-        openStory(e);
-      }
+  function fullyOpenStory() {
+    if (isEnvelopeFullyOpened || !overlay) return;
+    isEnvelopeFullyOpened = true;
+    if (envelopeTimerInterval) clearInterval(envelopeTimerInterval);
+
+    overlay.classList.add('opened');
+    setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 1400);
+  }
+
+  if (openBtn) openBtn.addEventListener('click', unsealEnvelope);
+  if (captionBtn) captionBtn.addEventListener('click', unsealEnvelope);
+  if (letterCard) letterCard.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fullyOpenStory();
+  });
+
+  initEnvelope3DTilt();
+}
+
+/* 3D Cursor / Device Tilt on Envelope */
+function initEnvelope3DTilt() {
+  const assembly = document.querySelector('.envelope-3d-assembly');
+  if (!assembly) return;
+
+  document.addEventListener('mousemove', (e) => {
+    if (isEnvelopeFullyOpened) return;
+    const x = (e.clientX / window.innerWidth - 0.5) * 16;
+    const y = (e.clientY / window.innerHeight - 0.5) * -16;
+    assembly.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+  });
+
+  if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== 'function') {
+    window.addEventListener('deviceorientation', (e) => {
+      if (isEnvelopeFullyOpened || !e.gamma || !e.beta) return;
+      const gamma = Math.max(-20, Math.min(20, e.gamma)) * 0.4;
+      const beta = Math.max(-20, Math.min(20, e.beta - 45)) * -0.4;
+      assembly.style.transform = `rotateX(${beta}deg) rotateY(${gamma}deg)`;
     });
   }
+}
+
+function playRoyalChime(freq, duration = 1.0) {
+  try {
+    if (!royalAudioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      royalAudioCtx = new AudioContext();
+    }
+    if (royalAudioCtx.state === 'suspended') {
+      royalAudioCtx.resume();
+    }
+
+    const osc = royalAudioCtx.createOscillator();
+    const gain = royalAudioCtx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, royalAudioCtx.currentTime);
+
+    gain.gain.setValueAtTime(0.001, royalAudioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.35, royalAudioCtx.currentTime + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.0001, royalAudioCtx.currentTime + duration);
+
+    osc.connect(gain);
+    gain.connect(royalAudioCtx.destination);
+
+    osc.start();
+    osc.stop(royalAudioCtx.currentTime + duration);
+  } catch (e) {
+    console.log('Chime error:', e);
+  }
+}
+
+function playRoyalChimeSequence() {
+  try {
+    setTimeout(() => playRoyalChime(392.00, 1.2), 100);  // G4
+    setTimeout(() => playRoyalChime(523.25, 1.3), 350);  // C5
+    setTimeout(() => playRoyalChime(659.25, 1.4), 650);  // E5
+    setTimeout(() => playRoyalChime(783.99, 1.8), 950);  // G5
+  } catch (e) {
+    console.log('Audio chord exception:', e);
+  }
+}
+
+/* Multi-angle Celebration Confetti Shower */
+function triggerCelebrationConfetti() {
+  if (typeof confetti !== 'function') return;
+
+  confetti({
+    particleCount: 65,
+    spread: 80,
+    origin: { y: 0.6 },
+    colors: ['#fae084', '#d4af37', '#ffffff', '#ffd1dc', '#93c5fd']
+  });
+
+  setTimeout(() => {
+    confetti({
+      particleCount: 45,
+      angle: 60,
+      spread: 60,
+      origin: { x: 0 },
+      colors: ['#fae084', '#d4af37', '#ffffff']
+    });
+    confetti({
+      particleCount: 45,
+      angle: 120,
+      spread: 60,
+      origin: { x: 1 },
+      colors: ['#fae084', '#d4af37', '#ffffff']
+    });
+  }, 250);
 }
 
 /* ==========================================================================
@@ -219,7 +358,7 @@ function initStorySpineTracker() {
   const acts = document.querySelectorAll('.story-act-frame');
 
   dots.forEach((dot) => {
-    dot.addEventListener('click', function(e) {
+    dot.addEventListener('click', function (e) {
       const targetHref = this.getAttribute('href');
       if (targetHref && targetHref.startsWith('#')) {
         e.preventDefault();
@@ -329,23 +468,22 @@ function initFloatingAudio() {
 }
 
 function playWeddingMusic() {
-  const ytIframe = document.getElementById('ytIframe');
-  if (ytIframe && ytIframe.contentWindow) {
-    try {
-      ytIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-    } catch (e) {}
+  const bgAudio = document.getElementById('bgAudio');
+  if (bgAudio) {
+    bgAudio.play().then(() => {
+      setMusicUI(true);
+    }).catch((e) => {
+      console.log('Autoplay waiting for user gesture:', e);
+    });
   }
-  setMusicUI(true);
 }
 
 function pauseWeddingMusic() {
-  const ytIframe = document.getElementById('ytIframe');
-  if (ytIframe && ytIframe.contentWindow) {
-    try {
-      ytIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-    } catch (e) {}
+  const bgAudio = document.getElementById('bgAudio');
+  if (bgAudio) {
+    bgAudio.pause();
+    setMusicUI(false);
   }
-  setMusicUI(false);
 }
 
 /* ==========================================================================
@@ -392,7 +530,7 @@ function initCursorAura() {
 /* ==========================================================================
    8. WISH GENERATOR & GUEST UTILITIES
    ========================================================================== */
-window.sendCustomWish = function(msg) {
+window.sendCustomWish = function (msg) {
   const phone = '919014360108';
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
   window.open(url, '_blank');
@@ -412,7 +550,7 @@ function shareInvitation() {
   const url = window.location.href;
 
   if (navigator.share) {
-    navigator.share({ title, text, url }).catch(() => {});
+    navigator.share({ title, text, url }).catch(() => { });
   } else {
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text + url)}`, '_blank');
   }
@@ -490,7 +628,7 @@ function initThemeSwitcher() {
   });
 
   chips.forEach((chip) => {
-    chip.addEventListener('click', function() {
+    chip.addEventListener('click', function () {
       const theme = this.getAttribute('data-theme');
       applyTheme(theme);
       localStorage.setItem('royalTheme', theme);
@@ -510,3 +648,33 @@ function initThemeSwitcher() {
     });
   }
 }
+
+/* ==========================================================================
+   10. HD COUPLE PHOTO LIGHTBOX CONTROLLER
+   ========================================================================== */
+function openPhotoLightbox() {
+  const modal = document.getElementById('photoLightboxModal');
+  if (!modal) return;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (navigator.vibrate) navigator.vibrate(20);
+}
+
+function closePhotoLightbox() {
+  const modal = document.getElementById('photoLightboxModal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleLightboxBackdropClick(e) {
+  if (e.target.id === 'photoLightboxModal') {
+    closePhotoLightbox();
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closePhotoLightbox();
+  }
+});

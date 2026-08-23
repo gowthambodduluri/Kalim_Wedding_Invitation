@@ -146,12 +146,12 @@
 /* Theme 8: Opulent Pearl White & Imperial Gold Foil (Supreme Light Luxury) */
 [data-theme="whitenavy"],
 [data-theme="whitegold"] {
-  --bg-deep-void: #faf8f5;
-  --bg-emerald-palace: #f5f0e6;
+  --bg-deep-void: #e8dccb;
+  --bg-emerald-palace: #eee4d4;
   --bg-parchment-card: #ffffff;
   --bg-parchment-elevated: #ffffff;
-  --bg-radial-1: rgba(184, 134, 11, 0.08);
-  --bg-radial-2: rgba(184, 134, 11, 0.05);
+  --bg-radial-1: rgba(184, 134, 11, 0.12);
+  --bg-radial-2: rgba(184, 134, 11, 0.08);
 
   --gold-primary: #855b05;
   --gold-secondary: #6e4a02;
@@ -163,16 +163,25 @@
   --text-muted: #4e463e;
   --text-dim: #6b6257;
 
-  --border-gold-ornate: 1.5px solid rgba(184, 134, 11, 0.4);
-  --border-gold-subtle: 1px solid rgba(184, 134, 11, 0.25);
-  --shadow-parchment-3d: 0 25px 70px rgba(160, 130, 70, 0.12), 0 0 35px rgba(255, 255, 255, 0.8);
+  --border-gold-ornate: 1.5px solid rgba(184, 134, 11, 0.45);
+  --border-gold-subtle: 1px solid rgba(184, 134, 11, 0.3);
+  --shadow-parchment-3d: 0 35px 85px -15px rgba(90, 60, 15, 0.28), 0 15px 35px -8px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(212, 175, 55, 0.35);
+}
+
+[data-theme="whitenavy"] body.story-canvas-body,
+[data-theme="whitegold"] body.story-canvas-body {
+  background: radial-gradient(circle at 50% 25%, #f6f0e4 0%, #eee3d2 50%, #e4d7c2 100%) !important;
+  background-attachment: fixed !important;
 }
 
 [data-theme="whitenavy"] .story-parchment-card,
 [data-theme="whitegold"] .story-parchment-card {
   background: #ffffff !important;
-  border: 1px solid rgba(212, 175, 55, 0.28) !important;
-  box-shadow: 0 25px 70px rgba(180, 140, 60, 0.12), 0 0 40px rgba(255, 255, 255, 0.8) !important;
+  border: 1.5px solid #d4af37 !important;
+  border-radius: 24px !important;
+  box-shadow: 0 40px 95px -15px rgba(80, 50, 10, 0.3), 0 15px 35px -8px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(212, 175, 55, 0.35) !important;
+  outline: 1px dashed rgba(184, 134, 11, 0.3) !important;
+  outline-offset: -8px !important;
 }
 
 [data-theme="whitenavy"] .gold-story-shine,
@@ -449,8 +458,9 @@
 [data-theme="whitenavy"] .soul-narrative-box,
 [data-theme="whitegold"] .soul-narrative-box {
   background: #ffffff !important;
-  border: 1px solid rgba(212, 175, 55, 0.28) !important;
-  box-shadow: 0 8px 24px rgba(160, 130, 70, 0.06) !important;
+  border: 1.5px solid rgba(184, 134, 11, 0.35) !important;
+  box-shadow: 0 16px 40px rgba(100, 65, 15, 0.12), 0 4px 10px rgba(0, 0, 0, 0.04) !important;
+  border-radius: 18px !important;
 }
 
 [data-theme="whitenavy"] .soul-name,
@@ -465,8 +475,10 @@
 
 [data-theme="whitenavy"] .soul-firm-showcase,
 [data-theme="whitegold"] .soul-firm-showcase {
-  background: rgba(250, 248, 245, 0.95) !important;
-  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+  background: linear-gradient(150deg, #fbf7ee 0%, #f5ecdc 100%) !important;
+  border: 1px solid rgba(184, 134, 11, 0.3) !important;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.9), 0 4px 12px rgba(120, 80, 20, 0.06) !important;
+  border-radius: 12px !important;
 }
 
 [data-theme="whitenavy"] .firm-brand-name,
@@ -529,8 +541,9 @@
 [data-theme="whitenavy"] .countdown-side-card,
 [data-theme="whitegold"] .countdown-side-card {
   background: #ffffff !important;
-  border: 1px solid rgba(212, 175, 55, 0.35) !important;
-  box-shadow: 0 8px 24px rgba(160, 130, 70, 0.08) !important;
+  border: 1.5px solid rgba(184, 134, 11, 0.35) !important;
+  box-shadow: 0 16px 40px rgba(100, 65, 15, 0.14), 0 4px 10px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 18px !important;
 }
 
 [data-theme="whitenavy"] .countdown-side-kicker,
@@ -552,9 +565,10 @@
 
 [data-theme="whitenavy"] .time-pod-orb,
 [data-theme="whitegold"] .time-pod-orb {
-  background: #ffffff !important;
-  border: 1px solid rgba(212, 175, 55, 0.3) !important;
-  box-shadow: 0 4px 15px rgba(160, 130, 70, 0.06) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #faf4e6 100%) !important;
+  border: 1.5px solid rgba(184, 134, 11, 0.4) !important;
+  box-shadow: 0 8px 20px rgba(120, 80, 20, 0.12) !important;
+  border-radius: 14px !important;
 }
 
 [data-theme="whitenavy"] .time-digit-val,
@@ -571,15 +585,16 @@
 [data-theme="whitenavy"] .story-event-capsule,
 [data-theme="whitegold"] .story-event-capsule {
   background: #ffffff !important;
-  border: 1px solid rgba(212, 175, 55, 0.28) !important;
-  box-shadow: 0 6px 18px rgba(160, 130, 70, 0.06) !important;
+  border: 1.5px solid rgba(184, 134, 11, 0.35) !important;
+  box-shadow: 0 14px 35px rgba(100, 65, 15, 0.12) !important;
+  border-radius: 16px !important;
 }
 
 [data-theme="whitenavy"] .story-event-capsule.sacred-nikah-highlight,
 [data-theme="whitegold"] .story-event-capsule.sacred-nikah-highlight {
-  background: linear-gradient(145deg, #ffffff 0%, #fffdf5 100%) !important;
-  border: 2px solid #d4af37 !important;
-  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.22) !important;
+  background: linear-gradient(145deg, #ffffff 0%, #fbf6ec 100%) !important;
+  border: 2px solid #b8860b !important;
+  box-shadow: 0 18px 45px rgba(184, 134, 11, 0.25) !important;
 }
 
 [data-theme="whitenavy"] .event-title,

@@ -123,20 +123,25 @@ function initStoryCosmicCanvas() {
       if (p.x < -20) p.x = width + 20;
 
       ctx.save();
+      const isWhiteTheme = document.documentElement.getAttribute('data-theme') === 'whitenavy';
       if (p.isPetal) {
         ctx.translate(p.x, p.y);
         ctx.rotate(p.rotation);
-        ctx.fillStyle = `rgba(122, 27, 50, ${Math.max(0.1, currentOpacity * 0.85)})`;
+        ctx.fillStyle = isWhiteTheme
+          ? `rgba(168, 121, 28, ${Math.max(0.15, currentOpacity * 0.75)})`
+          : `rgba(122, 27, 50, ${Math.max(0.1, currentOpacity * 0.85)})`;
         ctx.beginPath();
         ctx.ellipse(0, 0, p.size * 1.2, p.size * 0.6, 0, 0, Math.PI * 2);
         ctx.fill();
-        ctx.strokeStyle = `rgba(212, 175, 55, 0.4)`;
+        ctx.strokeStyle = isWhiteTheme ? `rgba(10, 27, 63, 0.3)` : `rgba(212, 175, 55, 0.4)`;
         ctx.lineWidth = 0.5;
         ctx.stroke();
       } else {
-        ctx.fillStyle = `rgba(${p.hue}, ${Math.max(0.1, currentOpacity)})`;
-        ctx.shadowBlur = 10 * p.z;
-        ctx.shadowColor = '#d4af37';
+        ctx.fillStyle = isWhiteTheme
+          ? `rgba(168, 121, 28, ${Math.max(0.2, currentOpacity * 0.9)})`
+          : `rgba(${p.hue}, ${Math.max(0.1, currentOpacity)})`;
+        ctx.shadowBlur = isWhiteTheme ? 4 : 10 * p.z;
+        ctx.shadowColor = isWhiteTheme ? '#a8791c' : '#d4af37';
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * p.z, 0, Math.PI * 2);
         ctx.fill();
@@ -439,6 +444,7 @@ function initCountdownTimer() {
    5. FLOATING MUSIC ENGINE: JASHN-E-BAHAARAA
    ========================================================================== */
 let isMusicPlaying = false;
+let wasPlayingBeforeTabHidden = false;
 
 function setMusicUI(playing) {
   isMusicPlaying = playing;
@@ -446,23 +452,49 @@ function setMusicUI(playing) {
   if (!orb) return;
   if (playing) {
     orb.classList.add('playing');
-    orb.title = 'Mute Jashn-E-Bahaaraa';
+    orb.title = 'Mute Wedding Music';
   } else {
     orb.classList.remove('playing');
-    orb.title = 'Play Jashn-E-Bahaaraa';
+    orb.title = 'Play Wedding Music';
   }
 }
 
 function initFloatingAudio() {
   const orb = document.getElementById('musicOrb');
-  if (!orb) return;
+  if (orb) {
+    orb.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (isMusicPlaying) {
+        pauseWeddingMusic();
+      } else {
+        playWeddingMusic();
+      }
+    });
+  }
 
-  orb.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (isMusicPlaying) {
-      pauseWeddingMusic();
+  // Auto-pause when tab/window is hidden or minimized, resume when focused
+  document.addEventListener('visibilitychange', () => {
+    const bgAudio = document.getElementById('bgAudio');
+    if (!bgAudio) return;
+
+    if (document.hidden) {
+      if (isMusicPlaying) {
+        wasPlayingBeforeTabHidden = true;
+        bgAudio.pause();
+        setMusicUI(false);
+      }
     } else {
-      playWeddingMusic();
+      if (wasPlayingBeforeTabHidden) {
+        wasPlayingBeforeTabHidden = false;
+        playWeddingMusic();
+      }
+    }
+  });
+
+  window.addEventListener('pagehide', () => {
+    const bgAudio = document.getElementById('bgAudio');
+    if (bgAudio && isMusicPlaying) {
+      bgAudio.pause();
     }
   });
 }
@@ -613,7 +645,7 @@ function initThemeSwitcher() {
   const chips = document.querySelectorAll('.theme-chip-btn');
   if (!switcher || !toggleBtn) return;
 
-  const savedTheme = localStorage.getItem('royalTheme') || 'navy';
+  const savedTheme = localStorage.getItem('royalTheme') || 'whitegold';
   applyTheme(savedTheme);
 
   toggleBtn.addEventListener('click', (e) => {

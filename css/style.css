@@ -143,6 +143,563 @@
   --text-dim: #b0998d;
 }
 
+/* Theme 8: Opulent Pearl White & Imperial Gold Foil (Supreme Light Luxury) */
+[data-theme="whitenavy"],
+[data-theme="whitegold"] {
+  --bg-deep-void: #faf8f5;
+  --bg-emerald-palace: #f5f0e6;
+  --bg-parchment-card: #ffffff;
+  --bg-parchment-elevated: #ffffff;
+  --bg-radial-1: rgba(184, 134, 11, 0.08);
+  --bg-radial-2: rgba(184, 134, 11, 0.05);
+
+  --gold-primary: #855b05;
+  --gold-secondary: #6e4a02;
+  --gold-light: #523701;
+  --gold-deep: #382500;
+
+  --text-white: #181512;
+  --text-cream: #2a2521;
+  --text-muted: #4e463e;
+  --text-dim: #6b6257;
+
+  --border-gold-ornate: 1.5px solid rgba(184, 134, 11, 0.4);
+  --border-gold-subtle: 1px solid rgba(184, 134, 11, 0.25);
+  --shadow-parchment-3d: 0 25px 70px rgba(160, 130, 70, 0.12), 0 0 35px rgba(255, 255, 255, 0.8);
+}
+
+[data-theme="whitenavy"] .story-parchment-card,
+[data-theme="whitegold"] .story-parchment-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(212, 175, 55, 0.28) !important;
+  box-shadow: 0 25px 70px rgba(180, 140, 60, 0.12), 0 0 40px rgba(255, 255, 255, 0.8) !important;
+}
+
+[data-theme="whitenavy"] .gold-story-shine,
+[data-theme="whitegold"] .gold-story-shine {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: #181512 !important;
+  color: #181512 !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+[data-theme="whitenavy"] .act-script-eyebrow,
+[data-theme="whitegold"] .act-script-eyebrow {
+  color: #7a5200 !important;
+  font-weight: 700 !important;
+}
+
+/* 0. SEALED ENVELOPE CEREMONY (RICH 3D LUXURY) */
+[data-theme="whitenavy"] .royal-crest-mini,
+[data-theme="whitegold"] .royal-crest-mini {
+  color: #7a5200 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="whitenavy"] .royal-invitation-kicker,
+[data-theme="whitegold"] .royal-invitation-kicker {
+  color: #4e463e !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .royal-names-heading,
+[data-theme="whitegold"] .royal-names-heading {
+  color: #181512 !important;
+  text-shadow: none !important;
+}
+
+[data-theme="whitenavy"] .royal-names-heading em,
+[data-theme="whitegold"] .royal-names-heading em {
+  color: #7a5200 !important;
+}
+
+[data-theme="whitenavy"] .royal-dates-badge,
+[data-theme="whitegold"] .royal-dates-badge {
+  background: rgba(184, 134, 11, 0.12) !important;
+  border-color: rgba(184, 134, 11, 0.45) !important;
+  color: #382500 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .envelope-body-base,
+[data-theme="whitegold"] .envelope-body-base {
+  background: linear-gradient(150deg, #ffffff 0%, #faf6eb 100%) !important;
+  border: 2px solid #d4af37 !important;
+  box-shadow: 0 25px 65px rgba(180, 140, 60, 0.22), 0 8px 25px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="whitenavy"] .env-inner-lining,
+[data-theme="whitegold"] .env-inner-lining {
+  background: radial-gradient(circle at center, rgba(212, 175, 55, 0.12) 0%, transparent 80%), #fdfbf7 !important;
+  border-color: rgba(212, 175, 55, 0.4) !important;
+}
+
+[data-theme="whitenavy"] .pocket-fold-left,
+[data-theme="whitegold"] .pocket-fold-left,
+[data-theme="whitenavy"] .pocket-fold-right,
+[data-theme="whitegold"] .pocket-fold-right,
+[data-theme="whitenavy"] .pocket-fold-bottom,
+[data-theme="whitegold"] .pocket-fold-bottom {
+  background: linear-gradient(145deg, #ffffff 0%, #f9f4e8 100%) !important;
+  border-color: #d4af37 !important;
+}
+
+[data-theme="whitenavy"] .envelope-top-flap .flap-outer-face,
+[data-theme="whitegold"] .envelope-top-flap .flap-outer-face {
+  background: linear-gradient(145deg, #ffffff 0%, #fcf8f0 100%) !important;
+  border: 2px solid #d4af37 !important;
+  box-shadow: 0 10px 30px rgba(180, 140, 60, 0.15) !important;
+}
+
+[data-theme="whitenavy"] .envelope-top-flap .flap-gold-crest,
+[data-theme="whitegold"] .envelope-top-flap .flap-gold-crest {
+  color: #7a5200 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+}
+
+[data-theme="whitenavy"] .pocket-damask-texture,
+[data-theme="whitegold"] .pocket-damask-texture,
+[data-theme="whitenavy"] .flap-damask-pattern,
+[data-theme="whitegold"] .flap-damask-pattern {
+  opacity: 0.05 !important;
+}
+
+/* UNSEALED 2-SECOND HOLD LETTER CARD (PRISTINE WHITE & GOLD, NO DARK SHADE) */
+[data-theme="whitenavy"] .envelope-letter-card,
+[data-theme="whitegold"] .envelope-letter-card {
+  background: #ffffff !important;
+  border: 2px solid #d4af37 !important;
+  box-shadow: 0 25px 65px rgba(180, 140, 60, 0.28), 0 0 35px rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-theme="whitenavy"] .letter-card-content,
+[data-theme="whitegold"] .letter-card-content {
+  background: transparent !important;
+}
+
+[data-theme="whitenavy"] .letter-emblem,
+[data-theme="whitegold"] .letter-emblem {
+  color: #7a5200 !important;
+}
+
+[data-theme="whitenavy"] .letter-kicker,
+[data-theme="whitegold"] .letter-kicker {
+  color: #5a3c00 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .letter-couple-name,
+[data-theme="whitegold"] .letter-couple-name {
+  color: #181512 !important;
+}
+
+[data-theme="whitenavy"] .letter-couple-name em,
+[data-theme="whitegold"] .letter-couple-name em {
+  color: #7a5200 !important;
+}
+
+[data-theme="whitenavy"] .letter-date,
+[data-theme="whitegold"] .letter-date {
+  color: #382500 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .letter-venue,
+[data-theme="whitegold"] .letter-venue {
+  color: #4e463e !important;
+}
+
+[data-theme="whitenavy"] .letter-divider .d-gem,
+[data-theme="whitegold"] .letter-divider .d-gem {
+  color: #7a5200 !important;
+}
+
+/* SIDE NAVIGATION SPINE */
+[data-theme="whitenavy"] .spine-num,
+[data-theme="whitegold"] .spine-num {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.5) !important;
+  color: #181512 !important;
+  box-shadow: 0 4px 15px rgba(160, 130, 70, 0.15) !important;
+}
+
+[data-theme="whitenavy"] .spine-dot:hover .spine-num,
+[data-theme="whitegold"] .spine-dot:hover .spine-num,
+[data-theme="whitenavy"] .spine-dot.active .spine-num,
+[data-theme="whitegold"] .spine-dot.active .spine-num {
+  background: var(--gold-fill-gradient) !important;
+  border-color: #d4af37 !important;
+  color: #030f0d !important;
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.7) !important;
+}
+
+[data-theme="whitenavy"] .spine-label,
+[data-theme="whitegold"] .spine-label {
+  color: #382500 !important;
+  font-weight: 700 !important;
+}
+
+/* ACT I: PROLOGUE */
+[data-theme="whitenavy"] .story-hosts-proclamation,
+[data-theme="whitegold"] .story-hosts-proclamation {
+  color: #181512 !important;
+  font-weight: 500 !important;
+}
+
+[data-theme="whitenavy"] .story-poetic-quote,
+[data-theme="whitegold"] .story-poetic-quote {
+  color: #4e463e !important;
+}
+
+[data-theme="whitenavy"] .story-date-capsule,
+[data-theme="whitegold"] .story-date-capsule {
+  background: rgba(184, 134, 11, 0.1) !important;
+  border-color: rgba(184, 134, 11, 0.4) !important;
+  color: #382500 !important;
+  font-weight: 700 !important;
+}
+
+/* ACT II: THE COUPLE */
+[data-theme="whitenavy"] .soul-narrative-box,
+[data-theme="whitegold"] .soul-narrative-box {
+  background: #ffffff !important;
+  border: 1px solid rgba(212, 175, 55, 0.28) !important;
+  box-shadow: 0 8px 24px rgba(160, 130, 70, 0.06) !important;
+}
+
+[data-theme="whitenavy"] .soul-name,
+[data-theme="whitegold"] .soul-name {
+  color: #181512 !important;
+}
+
+[data-theme="whitenavy"] .soul-lineage-text,
+[data-theme="whitegold"] .soul-lineage-text {
+  color: #4e463e !important;
+}
+
+[data-theme="whitenavy"] .soul-firm-showcase,
+[data-theme="whitegold"] .soul-firm-showcase {
+  background: rgba(250, 248, 245, 0.95) !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-theme="whitenavy"] .firm-brand-name,
+[data-theme="whitegold"] .firm-brand-name {
+  color: #181512 !important;
+}
+
+[data-theme="whitenavy"] .firm-role-title,
+[data-theme="whitegold"] .firm-role-title {
+  color: #5a3c00 !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="whitenavy"] .firm-vision-text,
+[data-theme="whitegold"] .firm-vision-text {
+  color: #4e463e !important;
+}
+
+[data-theme="whitenavy"] .act-scripture-stripe p,
+[data-theme="whitegold"] .act-scripture-stripe p {
+  color: #382500 !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="whitenavy"] .firm-icon,
+[data-theme="whitegold"] .firm-icon {
+  color: #7a5200 !important;
+}
+
+[data-theme="whitenavy"] .soul-degree-pill,
+[data-theme="whitegold"] .soul-degree-pill,
+[data-theme="whitenavy"] .soul-role-badge,
+[data-theme="whitegold"] .soul-role-badge,
+[data-theme="whitenavy"] .firm-locations-pill,
+[data-theme="whitegold"] .firm-locations-pill {
+  background: rgba(184, 134, 11, 0.1) !important;
+  border-color: rgba(184, 134, 11, 0.38) !important;
+  color: #382500 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .jharokha-name-plaque,
+[data-theme="whitegold"] .jharokha-name-plaque {
+  background: #ffffff !important;
+  border: 1.5px solid #855b05 !important;
+  color: #181512 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 6px 20px rgba(180, 140, 60, 0.2) !important;
+}
+
+[data-theme="whitenavy"] .photo-expand-badge,
+[data-theme="whitegold"] .photo-expand-badge {
+  background: #ffffff !important;
+  border: 1px solid #855b05 !important;
+  color: #181512 !important;
+  font-weight: 600 !important;
+}
+
+/* ACT III: SCHEDULE & COUNTDOWN */
+[data-theme="whitenavy"] .countdown-side-card,
+[data-theme="whitegold"] .countdown-side-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  box-shadow: 0 8px 24px rgba(160, 130, 70, 0.08) !important;
+}
+
+[data-theme="whitenavy"] .countdown-side-kicker,
+[data-theme="whitegold"] .countdown-side-kicker {
+  color: #5a3c00 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .countdown-side-date,
+[data-theme="whitegold"] .countdown-side-date {
+  color: #181512 !important;
+}
+
+[data-theme="whitenavy"] .countdown-side-time-badge,
+[data-theme="whitegold"] .countdown-side-time-badge {
+  background: var(--gold-fill-gradient) !important;
+  color: #030f0d !important;
+}
+
+[data-theme="whitenavy"] .time-pod-orb,
+[data-theme="whitegold"] .time-pod-orb {
+  background: #ffffff !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  box-shadow: 0 4px 15px rgba(160, 130, 70, 0.06) !important;
+}
+
+[data-theme="whitenavy"] .time-digit-val,
+[data-theme="whitegold"] .time-digit-val {
+  color: #181512 !important;
+}
+
+[data-theme="whitenavy"] .time-unit-label,
+[data-theme="whitegold"] .time-unit-label {
+  color: #523701 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .story-event-capsule,
+[data-theme="whitegold"] .story-event-capsule {
+  background: #ffffff !important;
+  border: 1px solid rgba(212, 175, 55, 0.28) !important;
+  box-shadow: 0 6px 18px rgba(160, 130, 70, 0.06) !important;
+}
+
+[data-theme="whitenavy"] .story-event-capsule.sacred-nikah-highlight,
+[data-theme="whitegold"] .story-event-capsule.sacred-nikah-highlight {
+  background: linear-gradient(145deg, #ffffff 0%, #fffdf5 100%) !important;
+  border: 2px solid #d4af37 !important;
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.22) !important;
+}
+
+[data-theme="whitenavy"] .event-title,
+[data-theme="whitegold"] .event-title {
+  color: #181512 !important;
+}
+
+[data-theme="whitenavy"] .event-venue-meta,
+[data-theme="whitegold"] .event-venue-meta {
+  color: #4e463e !important;
+}
+
+[data-theme="whitenavy"] .event-ritual-label,
+[data-theme="whitegold"] .event-ritual-label {
+  color: #5a3c00 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .event-capsule-header,
+[data-theme="whitegold"] .event-capsule-header {
+  border-bottom-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-theme="whitenavy"] .epoch-badge-tag,
+[data-theme="whitegold"] .epoch-badge-tag {
+  background: rgba(184, 134, 11, 0.1) !important;
+  border-color: rgba(184, 134, 11, 0.38) !important;
+  color: #382500 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .day-2-tag,
+[data-theme="whitegold"] .day-2-tag {
+  background: rgba(184, 134, 11, 0.2) !important;
+  border-color: #855b05 !important;
+  color: #281a00 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .event-time-pill,
+[data-theme="whitegold"] .event-time-pill {
+  background: rgba(184, 134, 11, 0.1) !important;
+  border-color: rgba(184, 134, 11, 0.35) !important;
+  color: #382500 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .event-time-pill.gold-time-pill,
+[data-theme="whitegold"] .event-time-pill.gold-time-pill {
+  background: var(--gold-fill-gradient) !important;
+  color: #030f0d !important;
+}
+
+[data-theme="whitenavy"] .event-orb-emblem,
+[data-theme="whitegold"] .event-orb-emblem {
+  background: rgba(184, 134, 11, 0.1) !important;
+  color: #7a5200 !important;
+}
+
+[data-theme="whitenavy"] .event-orb-emblem.gold-radiant-emblem,
+[data-theme="whitegold"] .event-orb-emblem.gold-radiant-emblem {
+  background: var(--gold-fill-gradient) !important;
+  color: #030f0d !important;
+}
+
+/* ACT IV: VENUE & INQUIRIES (CLEAN, SEAMLESS, NO CLUNKY DOUBLE BOXES) */
+[data-theme="whitenavy"] .venue-info-box,
+[data-theme="whitegold"] .venue-info-box {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+[data-theme="whitenavy"] .pavilion-hall-heading,
+[data-theme="whitegold"] .pavilion-hall-heading {
+  color: #181512 !important;
+}
+
+[data-theme="whitenavy"] .pavilion-geo-tag,
+[data-theme="whitegold"] .pavilion-geo-tag {
+  color: #4e463e !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="whitenavy"] .pavilion-address-stone,
+[data-theme="whitegold"] .pavilion-address-stone {
+  background: rgba(250, 248, 245, 0.95) !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  border-radius: 12px !important;
+  color: #181512 !important;
+  box-shadow: 0 4px 14px rgba(160, 130, 70, 0.05) !important;
+}
+
+[data-theme="whitenavy"] .rsvp-compact-bar,
+[data-theme="whitegold"] .rsvp-compact-bar {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+[data-theme="whitenavy"] .rsvp-bar-label,
+[data-theme="whitegold"] .rsvp-bar-label {
+  color: #382500 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .rsvp-chip,
+[data-theme="whitegold"] .rsvp-chip {
+  background: #ffffff !important;
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+  box-shadow: 0 4px 12px rgba(180, 140, 60, 0.06) !important;
+}
+
+[data-theme="whitenavy"] .rsvp-phone-num,
+[data-theme="whitegold"] .rsvp-phone-num {
+  color: #181512 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="whitenavy"] .footer-monogram-crest,
+[data-theme="whitegold"] .footer-monogram-crest {
+  color: #7a5200 !important;
+}
+
+[data-theme="whitenavy"] .footer-names-label,
+[data-theme="whitegold"] .footer-names-label {
+  color: #181512 !important;
+}
+
+[data-theme="whitenavy"] .footer-venue-date,
+[data-theme="whitegold"] .footer-venue-date {
+  color: #4e463e !important;
+}
+
+/* BUTTONS & CONTROLS */
+[data-theme="whitenavy"] .btn-story-glass,
+[data-theme="whitegold"] .btn-story-glass {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.5) !important;
+  color: #181512 !important;
+  box-shadow: 0 4px 14px rgba(180, 140, 60, 0.1) !important;
+}
+
+[data-theme="whitenavy"] .btn-story-glass:hover,
+[data-theme="whitegold"] .btn-story-glass:hover {
+  background: rgba(212, 175, 55, 0.12) !important;
+  border-color: #b8860b !important;
+  color: #000000 !important;
+}
+
+[data-theme="whitenavy"] .theme-toggle-btn,
+[data-theme="whitegold"] .theme-toggle-btn {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.5) !important;
+  color: #181512 !important;
+  box-shadow: 0 8px 25px rgba(180, 140, 60, 0.12) !important;
+}
+
+[data-theme="whitenavy"] .theme-palette-dropdown,
+[data-theme="whitegold"] .theme-palette-dropdown {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.4) !important;
+  box-shadow: 0 16px 45px rgba(160, 130, 70, 0.18) !important;
+}
+
+[data-theme="whitenavy"] .theme-chip-btn,
+[data-theme="whitegold"] .theme-chip-btn {
+  color: #4e463e !important;
+}
+
+[data-theme="whitenavy"] .theme-chip-btn:hover,
+[data-theme="whitegold"] .theme-chip-btn:hover,
+[data-theme="whitenavy"] .theme-chip-btn.active,
+[data-theme="whitegold"] .theme-chip-btn.active {
+  background: rgba(212, 175, 55, 0.14) !important;
+  border-color: rgba(212, 175, 55, 0.6) !important;
+  color: #181512 !important;
+}
+
+[data-theme="whitenavy"] .music-floating-orb,
+[data-theme="whitegold"] .music-floating-orb {
+  background: #ffffff !important;
+  border: 1.5px solid rgba(212, 175, 55, 0.5) !important;
+  color: #181512 !important;
+  box-shadow: 0 8px 25px rgba(180, 140, 60, 0.12) !important;
+}
+
+[data-theme="whitenavy"] .envelope-caption-box .open-seal-pill-btn,
+[data-theme="whitegold"] .envelope-caption-box .open-seal-pill-btn {
+  background: #ffffff !important;
+  border-color: #d4af37 !important;
+  color: #181512 !important;
+  box-shadow: 0 8px 30px rgba(180, 140, 60, 0.18) !important;
+}
+
+[data-theme="whitenavy"] .toast-alert,
+[data-theme="whitegold"] .toast-alert {
+  background: #ffffff !important;
+  border: 1.5px solid #d4af37 !important;
+  color: #181512 !important;
+  box-shadow: 0 10px 35px rgba(180, 140, 60, 0.2) !important;
+}
+
 /* ==========================================================================
    RESET & FOUNDATIONS
    ========================================================================== */
@@ -281,6 +838,8 @@ body.story-canvas-body {
 .dot-onyx { background: linear-gradient(135deg, #111115, #d4af37); }
 .dot-sage { background: linear-gradient(135deg, #15382b, #c8af6e); }
 .dot-espresso { background: linear-gradient(135deg, #26160e, #fae084); }
+.dot-whitegold { background: linear-gradient(135deg, #ffffff 40%, #d4af37 100%); border: 1.5px solid #d4af37; }
+.dot-whitenavy { background: linear-gradient(135deg, #ffffff, #0a1b3f); }
 
 @media (max-width: 600px) {
   .theme-btn-text { display: none; }

@@ -645,7 +645,7 @@ function initThemeSwitcher() {
   const chips = document.querySelectorAll('.theme-chip-btn');
   if (!switcher || !toggleBtn) return;
 
-  const savedTheme = localStorage.getItem('royalTheme') || 'whitegold';
+  const savedTheme = sessionStorage.getItem('royalTheme') || 'whitegold';
   applyTheme(savedTheme);
 
   toggleBtn.addEventListener('click', (e) => {
@@ -663,7 +663,7 @@ function initThemeSwitcher() {
     chip.addEventListener('click', function () {
       const theme = this.getAttribute('data-theme');
       applyTheme(theme);
-      localStorage.setItem('royalTheme', theme);
+      sessionStorage.setItem('royalTheme', theme);
       switcher.classList.remove('open');
       showToast(`Palette switched to ${theme.toUpperCase()}!`);
     });

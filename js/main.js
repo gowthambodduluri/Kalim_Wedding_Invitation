@@ -613,7 +613,7 @@ function initThemeSwitcher() {
   const chips = document.querySelectorAll('.theme-chip-btn');
   if (!switcher || !toggleBtn) return;
 
-  const savedTheme = localStorage.getItem('royalTheme') || 'emerald';
+  const savedTheme = localStorage.getItem('royalTheme') || 'navy';
   applyTheme(savedTheme);
 
   toggleBtn.addEventListener('click', (e) => {
@@ -638,11 +638,7 @@ function initThemeSwitcher() {
   });
 
   function applyTheme(theme) {
-    if (theme === 'emerald') {
-      document.documentElement.removeAttribute('data-theme');
-    } else {
-      document.documentElement.setAttribute('data-theme', theme);
-    }
+    document.documentElement.setAttribute('data-theme', theme);
     chips.forEach((c) => {
       c.classList.toggle('active', c.getAttribute('data-theme') === theme);
     });

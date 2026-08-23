@@ -4,12 +4,12 @@
    ========================================================================== */
 
 :root {
-  /* Default: Obsidian Emerald Palace & Imperial Gold */
-  --bg-deep-void: #010805;
-  --bg-emerald-palace: #031811;
-  --bg-parchment-card: rgba(4, 25, 18, 0.94);
-  --bg-parchment-elevated: rgba(6, 36, 26, 0.97);
-  --bg-radial-1: rgba(14, 90, 68, 0.48);
+  /* Default: Midnight Royal Navy & Champagne Gold */
+  --bg-deep-void: #04060e;
+  --bg-emerald-palace: #081022;
+  --bg-parchment-card: rgba(10, 18, 38, 0.94);
+  --bg-parchment-elevated: rgba(16, 26, 54, 0.97);
+  --bg-radial-1: rgba(30, 70, 160, 0.45);
   --bg-radial-2: rgba(212, 175, 55, 0.32);
 
   --gold-primary: #d4af37;
@@ -21,9 +21,9 @@
   --ruby-velvet: #7a1b32;
 
   --text-white: #ffffff;
-  --text-cream: #f5efe4;
-  --text-muted: #d2e4de;
-  --text-dim: #90aaa3;
+  --text-cream: #f0f4ff;
+  --text-muted: #d0dcfa;
+  --text-dim: #92a4cc;
 
   /* Typography Suite */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
@@ -44,7 +44,7 @@
   --transition: all 0.32s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Theme 2: Midnight Royal Navy & Champagne Gold */
+/* Theme 1: Midnight Royal Navy & Champagne Gold */
 [data-theme="navy"] {
   --bg-deep-void: #04060e;
   --bg-emerald-palace: #081022;
@@ -56,6 +56,20 @@
   --text-cream: #f0f4ff;
   --text-muted: #d0dcfa;
   --text-dim: #92a4cc;
+}
+
+/* Theme 2: Obsidian Emerald Palace & Imperial Gold */
+[data-theme="emerald"] {
+  --bg-deep-void: #010805;
+  --bg-emerald-palace: #031811;
+  --bg-parchment-card: rgba(4, 25, 18, 0.94);
+  --bg-parchment-elevated: rgba(6, 36, 26, 0.97);
+  --bg-radial-1: rgba(14, 90, 68, 0.48);
+  --bg-radial-2: rgba(212, 175, 55, 0.32);
+  --text-white: #ffffff;
+  --text-cream: #f5efe4;
+  --text-muted: #d2e4de;
+  --text-dim: #90aaa3;
 }
 
 /* Theme 3: Imperial Ruby Velvet & Gold */

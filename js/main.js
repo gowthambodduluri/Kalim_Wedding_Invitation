@@ -269,18 +269,18 @@ function initEnvelope3DTilt() {
   if (!assembly) return;
 
   document.addEventListener('mousemove', (e) => {
-    if (isEnvelopeFullyOpened) return;
-    const x = (e.clientX / window.innerWidth - 0.5) * 16;
-    const y = (e.clientY / window.innerHeight - 0.5) * -16;
-    assembly.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+    if (isEnvelopeUnsealed || isEnvelopeFullyOpened) return;
+    const x = (e.clientX / window.innerWidth - 0.5) * 14;
+    const y = (e.clientY / window.innerHeight - 0.5) * -14;
+    assembly.style.transform = `perspective(1000px) rotateX(${y}deg) rotateY(${x}deg) translateY(-6px)`;
   });
 
   if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== 'function') {
     window.addEventListener('deviceorientation', (e) => {
-      if (isEnvelopeFullyOpened || !e.gamma || !e.beta) return;
+      if (isEnvelopeUnsealed || isEnvelopeFullyOpened || !e.gamma || !e.beta) return;
       const gamma = Math.max(-20, Math.min(20, e.gamma)) * 0.4;
       const beta = Math.max(-20, Math.min(20, e.beta - 45)) * -0.4;
-      assembly.style.transform = `rotateX(${beta}deg) rotateY(${gamma}deg)`;
+      assembly.style.transform = `perspective(1000px) rotateX(${beta}deg) rotateY(${gamma}deg) translateY(-6px)`;
     });
   }
 }
